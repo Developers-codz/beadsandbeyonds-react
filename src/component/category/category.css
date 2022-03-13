@@ -1,0 +1,18 @@
+.category-wrapper {
+  margin: 5rem 0rem;
+  text-align: center;
+}
+.category-header {
+  color: var(--primary);
+  margin: 1rem 0rem;
+}
+.category-item {
+  margin: 1rem 0.2rem;
+  position: relative;
+  box-shadow: 1px 1px 5px black;
+}
+.category-item:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.03, 1.03);
+}
