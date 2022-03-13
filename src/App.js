@@ -3,7 +3,7 @@ import { Navbar, Footer, Carousel, Aside, Category } from "./component";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Navbar />
       <Aside />
       <main>
@@ -11,7 +11,7 @@ function App() {
         <Category />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 
