@@ -1,0 +1,66 @@
+import {
+  image1,
+  image6,
+  image7,
+  image8,
+  image9,
+  image10,
+} from "../assets/images/index";
+const productList = [
+  {
+    id: "b0001",
+    name: "Madhubani Art",
+    image: image7,
+    category: "painting",
+    ratings: 5,
+    price: 399,
+    description: "Exclusively from Bihar",
+  },
+  {
+    id: "b0002",
+    name: "Toy Car",
+    image: image1,
+    category: "toys",
+    ratings: 5,
+    price: 199,
+    description: "Exclusive wooden Toy",
+  },
+  {
+    id: "b0003",
+    name: "Wind Chyme",
+    image: image6,
+    category: "decorations",
+    ratings: 4,
+    price: 299,
+    description: "Exclusively from Gujrat",
+  },
+  {
+    id: "b0004",
+    name: "Basket",
+    image: image8,
+    category: "home",
+    ratings: 4,
+    price: 99,
+    description: "Environment Friendly Baskets",
+  },
+  {
+    id: "b0005",
+    name: "Wind Chyme",
+    image: image9,
+    category: "decorations",
+    ratings: 5,
+    price: 390,
+    description: "For your dream home",
+  },
+  {
+    id: "b0006",
+    name: "Marble Pot",
+    image: image10,
+    category: "decorations",
+    ratings: 5,
+    price: 190,
+    description: "Made from Marbles",
+  },
+];
+
+export { productList };

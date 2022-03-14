@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAside } from "../../context/aside-context";
 import "./navbar.css";
 const Navbar = () => {
@@ -21,14 +22,14 @@ const Navbar = () => {
         <div className="mr-auto page-link-wrapper font3">
           <ul className="style-list-none">
             <li className="inline-block">
-              <a href="index.html" className="page-link decor-none active-item">
+              <Link to="/" className="page-link decor-none active-item">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="inline-block">
-              <a href="shop.html" className="page-link decor-none">
+              <Link to="/products" className="page-link decor-none">
                 Shop
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

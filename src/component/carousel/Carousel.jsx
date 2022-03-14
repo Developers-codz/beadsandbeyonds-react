@@ -1,6 +1,7 @@
 import "./carousel.css";
 import { carouselList } from "../../data/carousel-list";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const SlideSetter = () => {
@@ -41,16 +42,16 @@ const Carousel = () => {
                     <h2 className="mb-lg font1">{item.name}</h2>
                     <p className="font2 text-secondary">
                       Starting at{" "}
-                      <span className="text-vibrant">{item.minPrice}</span>.
+                      <span className="text-vibrant">₹{item.minPrice}</span>.
                     </p>
-                    <strike>{item.originalPrice}</strike>
+                    <strike>₹{item.originalPrice}</strike>
                     <span className="text-success font4 mb-lg">50% off</span>
-                    <a
-                      href="shop.html"
+                    <Link
+                      to="/products"
                       className="reset decor-none bg-secondary light-text padding-sm rm-border"
                     >
                       Shop Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </li>

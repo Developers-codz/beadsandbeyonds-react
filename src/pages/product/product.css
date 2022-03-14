@@ -1,0 +1,118 @@
+.main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "aside shop shop shop";
+}
+
+.filters-wrapper {
+  grid-area: aside;
+}
+
+.shopping-wrapper {
+  grid-area: shop;
+}
+
+.item-price {
+  color: var(--primary);
+}
+
+.filter-header-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.clear-btn {
+  cursor: pointer;
+  border: none;
+  border-bottom: 1.5px solid var(--primary);
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.clear-btn:hover {
+  color: var(--primary);
+  transform: scale(1.05, 1.05);
+}
+
+.sort-section,
+.category-section,
+.rating-section {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem;
+}
+
+.sort-by-price,
+.sort-by-category {
+  margin-bottom: 0.5rem;
+}
+
+.sort-by-ratings {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.slider {
+  margin-top: 1rem;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--bg-off-white);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04aa6d;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  .main {
+    grid-template-areas:
+      "aside aside aside aside"
+      "shop shop shop shop";
+  }
+
+  .filters-wrapper {
+    position: relative;
+  }
+
+  .filter-body-wrapper {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    transform: translateY(-40rem);
+    transition: all 500ms linear;
+  }
+
+  .show-filter-body {
+    transform: translateY(-1rem);
+    transition: all 500ms linear;
+  }
+}
