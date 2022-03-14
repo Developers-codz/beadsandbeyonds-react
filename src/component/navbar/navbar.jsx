@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { useAside } from "../../context/aside-context";
 import "./navbar.css";
 const Navbar = () => {
   const [searchBar, setSearchBar] = useState(false);
+  const { setActiveAside } = useAside();
   return (
     <>
       <header>
-        <div className="hamburger-wrapper" id="hamburger-btn">
+        <div
+          className="hamburger-wrapper"
+          id="hamburger-btn"
+          onClick={() => setActiveAside(true)}
+        >
           <i className="fa fa-bars fa-2x"></i>
         </div>
         <div className="logo">

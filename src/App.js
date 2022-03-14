@@ -1,14 +1,16 @@
 import "./App.css";
-import { Navbar, Footer, Carousel, Aside, Category } from "./component";
-
+import { Navbar, Footer, Aside } from "./component";
+import { Home } from "./pages/index";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
       <Navbar />
       <Aside />
       <main>
-        <Carousel />
-        <Category />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
       </main>
       <Footer />
     </>

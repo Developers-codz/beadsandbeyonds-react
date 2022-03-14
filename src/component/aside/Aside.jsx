@@ -1,15 +1,26 @@
+import { useAside } from "../../context/aside-context";
+import { category1 } from "../../assets/images";
+
 const Aside = () => {
+  const { activeAside, setActiveAside } = useAside();
   return (
     <>
-      <aside className="side-section" id="side-section">
+      <aside
+        className="side-section"
+        style={activeAside ? { left: "0%" } : { left: "-50%" }}
+      >
         <div className="navbar-links">
           <div className="sidebar-head">
-            <i className="fa fa-times" id="sidebar-close"></i>
+            <i
+              className="fa fa-times"
+              id="sidebar-close"
+              onClick={() => setActiveAside(false)}
+            ></i>
           </div>
           <div className="avatar centered mb-lg">
             <img
               className="img-md border-round img-border"
-              src="./assets/toy1.jpg"
+              src={category1}
               alt="Avatar"
             />
           </div>
