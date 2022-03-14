@@ -1,0 +1,85 @@
+@import url("https://beadsui.netlify.app/css/main.css");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+:root {
+  --bg-off-white: #f1e9e7;
+  --primary: #ca2535;
+  --dark: #000;
+}
+body {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-areas:
+    "nav"
+    "main"
+    "footer";
+}
+
+.side-section {
+  display: none;
+}
+
+main {
+  grid-area: main;
+  position: relative;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+}
+
+footer {
+  grid-area: footer;
+  background-color: var(--bg-off-white);
+  padding: 2.5rem 0rem;
+}
+.footer-link {
+  color: var(--primary);
+}
+
+/* media query */
+
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 65%;
+  }
+  .carousel {
+    position: relative;
+  }
+
+  .side-section {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -50%;
+    background-color: var(--bg-off-white);
+    z-index: 3;
+    width: 50%;
+    min-height: 100vh;
+    font-size: 2rem;
+    transition: all 500ms linear;
+  }
+  .navbar-items > li {
+    padding: 1rem;
+    cursor: pointer;
+  }
+  .quick-link {
+    color: var(--dark);
+  }
+  .sidebar-head {
+    text-align: end;
+  }
+  #sidebar-close {
+    margin: auto 0.5rem;
+    cursor: pointer;
+  }
+}

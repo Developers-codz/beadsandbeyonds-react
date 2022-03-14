@@ -1,0 +1,37 @@
+@import url("https://beadsui.netlify.app/css/main.css");
+
+.carousel {
+  min-height: 70vh;
+  position: relative;
+}
+.slide {
+  position: absolute;
+  inset: 0; /*it will make top bottom left right 0 */
+  opacity: 0;
+}
+.data-active {
+  opacity: 1;
+  transition: 200ms opacity ease-in-out;
+  transition-delay: 100ms;
+}
+.owl-carousel-btn {
+  position: absolute;
+  z-index: 2;
+  top: 40%;
+  cursor: pointer;
+  color: black;
+  opacity: 0.7;
+  transition-delay: 0;
+}
+.owl-carousel-btn:hover {
+  opacity: 1;
+}
+.prev {
+  left: 1rem;
+}
+.next {
+  right: 1rem;
+}
+.responsive-img {
+  object-fit: cover;
+}
