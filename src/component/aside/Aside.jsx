@@ -1,5 +1,5 @@
 import { useAside } from "../../context/aside-context";
-import { category1 } from "../../assets/images";
+import { image1 } from "../../assets/images";
 
 const Aside = () => {
   const { activeAside, setActiveAside } = useAside();
@@ -20,7 +20,7 @@ const Aside = () => {
           <div className="avatar centered mb-lg">
             <img
               className="img-md border-round img-border"
-              src={category1}
+              src={image1}
               alt="Avatar"
             />
           </div>
