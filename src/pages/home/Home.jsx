@@ -1,4 +1,4 @@
-import { Carousel, Category } from "../component";
+import { Carousel, Category } from "../../component";
 const Home = () => {
   return (
     <>

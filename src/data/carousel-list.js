@@ -1,9 +1,9 @@
-import { category2, category4, category5 } from "../assets/images/index";
+import { image2, image4, image5 } from "../assets/images/index";
 const carouselList = [
   {
     id: "b0001",
     name: "Toys",
-    image: category5,
+    image: image5,
     minPrice: 299,
     originalPrice: 499,
     discount: 50,
@@ -11,7 +11,7 @@ const carouselList = [
   {
     id: "b0002",
     name: "Wall Decors",
-    image: category4,
+    image: image4,
     minPrice: 199,
     originalPrice: 499,
     discount: 40,
@@ -19,7 +19,7 @@ const carouselList = [
   {
     id: "b0003",
     name: "Beautiful Paintings",
-    image: category2,
+    image: image2,
     minPrice: 499,
     originalPrice: 999,
     discount: 50,

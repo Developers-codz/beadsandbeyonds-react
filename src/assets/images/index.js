@@ -1,6 +1,22 @@
-import category1 from "./toy2.jpg";
-import category2 from "./item4.jpg";
-import category3 from "./metalCraft1.jfif";
-import category4 from "./walldecorHero.jpg";
-import category5 from "./toy1.jpg";
-export { category1, category2, category3, category4, category5 };
+import image1 from "./toy2.jpg";
+import image2 from "./item4.jpg";
+import image3 from "./metalCraft1.jfif";
+import image4 from "./walldecorHero.jpg";
+import image5 from "./toy1.jpg";
+import image6 from "./item1.jpg";
+import image7 from "./painting2.webp";
+import image8 from "./item2.jpg";
+import image9 from "./windchime2.jpeg";
+import image10 from "./item3.jfif";
+export {
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+  image8,
+  image9,
+  image10,
+};
