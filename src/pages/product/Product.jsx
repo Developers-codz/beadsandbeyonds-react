@@ -1,10 +1,16 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import "./product.css";
-import { productList } from "data/product-list";
+import axios from "axios";
 import { productReducer } from "reducer";
 import { getSortedData, getFilteredData } from "functions";
 const Product = () => {
   const [filter, setFilter] = useState(false);
+  const [productList, setProductList] = useState([]);
+  useEffect(async () => {
+    await axios
+      .get("/api/products")
+      .then((res) => setProductList(res.data.products));
+  }, []);
   const [state, dispatch] = useReducer(productReducer, {
     sortBy: null,
     categoryBy: null,

@@ -1,6 +1,6 @@
 import { useAside } from "context/aside-context";
 import { image1 } from "assets/images";
-
+import { Link } from "react-router-dom";
 const Aside = () => {
   const { activeAside, setActiveAside } = useAside();
   return (
@@ -27,15 +27,15 @@ const Aside = () => {
           <hr />
           <ul className="navbar-items">
             <li>
-              <a className="active-item decor-none" href="home.html">
+              <Link className="active-item decor-none" to="/">
                 {" "}
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="shop.html" className="quick-link decor-none">
+              <Link to="/products" className="quick-link decor-none">
                 Shop now
-              </a>
+              </Link>
             </li>
             <li>
               <a href="login.html" className="quick-link decor-none">

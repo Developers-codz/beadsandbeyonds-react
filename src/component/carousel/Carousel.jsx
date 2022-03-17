@@ -1,9 +1,16 @@
 import "./carousel.css";
-import { carouselList } from "data/carousel-list";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [carouselList, setCarouselList] = useState([]);
+  useEffect(async () => {
+    await axios
+      .get("/api/carousels")
+      .then((res) => setCarouselList(res.data.carousels));
+  }, []);
+
   const SlideSetter = () => {
     if (activeIndex === carouselList.length) setActiveIndex(0);
     if (activeIndex !== carouselList.length) setActiveIndex(activeIndex + 1);

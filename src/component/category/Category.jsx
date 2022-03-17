@@ -1,6 +1,13 @@
 import "./category.css";
-import { categoryList } from "data/category-list";
+import axios from "axios";
+import { useEffect, useState } from "react";
 const Category = () => {
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(async () => {
+    await axios
+      .get("./api/categories")
+      .then((res) => setCategoryList(res.data.categories));
+  }, []);
   return (
     <>
       <div className="category-wrapper">
@@ -10,7 +17,7 @@ const Category = () => {
             <img
               src={item.image}
               alt={item.name}
-              key={item.id}
+              key={item._id}
               className="border-square category-item"
             />
           );
