@@ -1,5 +1,5 @@
 import "./carousel.css";
-import { carouselList } from "../../data/carousel-list";
+import { carouselList } from "data/carousel-list";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const Carousel = () => {

@@ -5,7 +5,7 @@ import {
   image8,
   image9,
   image10,
-} from "../assets/images/index";
+} from "assets/images/index";
 const productList = [
   {
     id: "b0001",

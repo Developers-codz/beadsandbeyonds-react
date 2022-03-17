@@ -1,5 +1,5 @@
 import "./category.css";
-import { categoryList } from "../../data/category-list";
+import { categoryList } from "data/category-list";
 const Category = () => {
   return (
     <>

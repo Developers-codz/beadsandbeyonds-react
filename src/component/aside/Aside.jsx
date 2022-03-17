@@ -1,5 +1,5 @@
-import { useAside } from "../../context/aside-context";
-import { image1 } from "../../assets/images";
+import { useAside } from "context/aside-context";
+import { image1 } from "assets/images";
 
 const Aside = () => {
   const { activeAside, setActiveAside } = useAside();

@@ -1,6 +1,6 @@
-import "./App.css";
-import { Navbar, Footer, Aside } from "./component";
-import { Home, Product } from "./pages/index";
+import "App.css";
+import { Navbar, Footer, Aside } from "component";
+import { Home, Product } from "pages/index";
 import { Routes, Route } from "react-router-dom";
 
 function App() {

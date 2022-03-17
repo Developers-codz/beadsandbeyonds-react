@@ -1,8 +1,8 @@
 import { useReducer, useState } from "react";
 import "./product.css";
-import { productList } from "../../data/product-list";
-import { productReducer } from "../../reducer";
-import { getSortedData, getFilteredData } from "../../functions";
+import { productList } from "data/product-list";
+import { productReducer } from "reducer";
+import { getSortedData, getFilteredData } from "functions";
 const Product = () => {
   const [filter, setFilter] = useState(false);
   const [state, dispatch] = useReducer(productReducer, {

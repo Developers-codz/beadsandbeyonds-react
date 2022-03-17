@@ -1,4 +1,4 @@
-import { image2, image4, image5 } from "../assets/images/index";
+import { image2, image4, image5 } from "assets/images/index";
 const carouselList = [
   {
     id: "b0001",

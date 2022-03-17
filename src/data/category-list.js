@@ -1,4 +1,4 @@
-import { image1, image2, image3, image4 } from "../assets/images/index";
+import { image1, image2, image3, image4 } from "assets/images/index";
 const categoryList = [
   {
     id: "0001",
