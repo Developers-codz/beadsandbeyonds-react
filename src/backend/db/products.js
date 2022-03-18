@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import {
   image1,
   image6,
@@ -5,62 +6,61 @@ import {
   image8,
   image9,
   image10,
-} from "../assets/images/index";
-const productList = [
+} from "assets/images/index";
+
+export const products = [
   {
-    id: "b0001",
+    _id: uuid(),
     name: "Madhubani Art",
     image: image7,
-    category: "painting",
     ratings: 5,
     price: 399,
     description: "Exclusively from Bihar",
+    categoryName: "painting",
   },
   {
-    id: "b0002",
+    _id: uuid(),
     name: "Toy Car",
     image: image1,
-    category: "toys",
     ratings: 5,
     price: 199,
     description: "Exclusive wooden Toy",
+    categoryName: "toys",
   },
   {
-    id: "b0003",
+    _id: uuid(),
     name: "Wind Chyme",
     image: image6,
-    category: "decorations",
     ratings: 4,
     price: 299,
     description: "Exclusively from Gujrat",
+    categoryName: "decorations",
   },
   {
-    id: "b0004",
+    _id: uuid(),
     name: "Basket",
     image: image8,
-    category: "home",
     ratings: 4,
     price: 99,
     description: "Environment Friendly Baskets",
+    categoryName: "home",
   },
   {
-    id: "b0005",
+    id: uuid(),
     name: "Wind Chyme",
     image: image9,
-    category: "decorations",
     ratings: 5,
     price: 390,
     description: "For your dream home",
+    categoryName: "decorations",
   },
   {
-    id: "b0006",
+    id: uuid(),
     name: "Marble Pot",
     image: image10,
-    category: "decorations",
     ratings: 5,
     price: 190,
     description: "Made from Marbles",
+    categoryName: "decorations",
   },
 ];
-
-export { productList };

@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.26.1",
+    "dayjs": "^1.11.0",
+    "jwt-decode": "^3.1.2",
+    "jwt-encode": "^1.0.1",
+    "miragejs": "^0.1.43",
+    "mockman-js": "^1.0.5",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",

@@ -1,7 +1,5 @@
-import { Navbar } from "./navbar/navbar";
-import { Footer } from "./footer/Footer";
-import { Carousel } from "./carousel/Carousel";
-import { Aside } from "./aside/Aside";
-import { Category } from "./category/Category";
-
-export { Navbar, Footer, Carousel, Aside, Category };
+export { Navbar } from "./navbar/navbar";
+export { Footer } from "./footer/Footer";
+export { Carousel } from "./carousel/Carousel";
+export { Aside } from "./aside/Aside";
+export { Category } from "./category/Category";
