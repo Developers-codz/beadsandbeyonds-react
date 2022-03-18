@@ -1,6 +1,6 @@
 import "App.css";
 import { Navbar, Footer, Aside } from "component";
-import { Home, Product } from "pages/index";
+import { Home, Product } from "pages";
 import { Routes, Route } from "react-router-dom";
 
 function App() {

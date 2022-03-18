@@ -6,9 +6,8 @@ const ProductContext = createContext();
 const ProductProvider = ({ children }) => {
   const [productList, setProductList] = useState([]);
   useEffect(async () => {
-    await axios
-      .get("/api/products")
-      .then((res) => setProductList(res.data.products));
+    const res = await axios.get("/api/products");
+    setProductList(res.data.products);
   }, []);
   return (
     <ProductContext.Provider value={{ productList }}>

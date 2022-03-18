@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 const Category = () => {
   const [categoryList, setCategoryList] = useState([]);
   useEffect(async () => {
-    await axios
-      .get("./api/categories")
-      .then((res) => setCategoryList(res.data.categories));
+    const res = await axios.get("./api/categories");
+    setCategoryList(res.data.categories);
   }, []);
   return (
     <>
