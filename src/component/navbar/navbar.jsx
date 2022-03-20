@@ -1,7 +1,7 @@
 import { useWishlist } from "context/wishlist-context";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAside } from "../../context/aside-context";
+import { useAside } from "context/aside-context";
 import "./navbar.css";
 const Navbar = () => {
   const [searchBar, setSearchBar] = useState(false);
