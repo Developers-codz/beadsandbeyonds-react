@@ -10,9 +10,12 @@ const Product = () => {
   const [productList, setProductList] = useState([]);
   const { state, dispatch } = useProduct();
   useEffect(async () => {
-    await axios
-      .get("/api/products")
-      .then((res) => setProductList(res.data.products));
+    try {
+      const res = await axios.get("/api/products");
+      setProductList(res.data.products);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   const sortedData = getSortedData(productList, state.sortBy);

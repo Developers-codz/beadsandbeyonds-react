@@ -7,8 +7,12 @@ const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselList, setCarouselList] = useState([]);
   useEffect(async () => {
-    const res = await axios.get("/api/carousels");
-    setCarouselList(res.data.carousels);
+    try {
+      const res = await axios.get("/api/carousels");
+      setCarouselList(res.data.carousels);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   const SlideSetter = () => {

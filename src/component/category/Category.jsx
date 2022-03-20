@@ -8,8 +8,12 @@ const Category = () => {
   const [categoryList, setCategoryList] = useState([]);
   const { dispatch } = useProduct();
   useEffect(async () => {
-    const res = await axios.get("./api/categories");
-    setCategoryList(res.data.categories);
+    try {
+      const res = await axios.get("./api/categories");
+      setCategoryList(res.data.categories);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   return (
     <>
