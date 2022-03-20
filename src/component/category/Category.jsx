@@ -6,7 +6,7 @@ import { useProduct } from "context/product-context";
 
 const Category = () => {
   const [categoryList, setCategoryList] = useState([]);
-  const { state, dispatch } = useProduct();
+  const { dispatch } = useProduct();
   useEffect(async () => {
     const res = await axios.get("./api/categories");
     setCategoryList(res.data.categories);
@@ -27,7 +27,7 @@ const Category = () => {
               }
               style={{ display: "inline-block" }}
             >
-              <Link to={`/products#${state.categoryBy}`}>
+              <Link to={`/products#${item.categoryName}`}>
                 <img
                   src={item.image}
                   alt={item.name}

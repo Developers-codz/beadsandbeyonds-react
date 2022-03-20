@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./product.css";
 import axios from "axios";
 import { useProduct } from "context/product-context";

@@ -12,7 +12,6 @@ const getFilteredData = (data, categoryBy) => {
     return data.filter((item) => item.categoryName === "home");
   }
   if (categoryBy && categoryBy === "CLEAR_ALL_FILTER") {
-    console.log("clicked");
     return data;
   }
   return data;
