@@ -2,6 +2,7 @@ import "./carousel.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselList, setCarouselList] = useState([]);
