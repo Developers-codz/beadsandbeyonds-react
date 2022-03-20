@@ -1,0 +1,78 @@
+.wishlist-head-wrapper {
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+.wishlist-head {
+  border-bottom: 1px solid var(--primary);
+  display: inline-block;
+}
+
+.wishlist-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wishlist-card {
+  position: relative;
+  width: 250px;
+  min-height: 250px;
+  margin: 1rem 3rem;
+}
+
+.wishlist-img {
+  width: inherit;
+}
+
+.del-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 0.7rem;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.del-btn:hover {
+  transform: scale(1.03, 1.03);
+  opacity: 1;
+}
+
+.item-price {
+  color: var(--primary);
+}
+
+.move-to-cart-btn-wrapper {
+  margin: 1rem 0rem;
+  width: inherit;
+}
+
+.btn-to-cart,
+.btn-to-product {
+  width: inherit;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+  background-color: var(--bg-off-white);
+  cursor: pointer;
+  opacity: 0.8;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.btn-to-cart:hover,
+.btn-to-product:hover {
+  opacity: 1;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  transform: scale(1.03, 1.03);
+}
+.btn-to-product {
+  color: var(--dark);
+  font-size: large;
+}
+.btn-to-product-wrapper {
+  height: 25vh;
+  margin: 5rem auto;
+}

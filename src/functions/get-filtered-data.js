@@ -1,4 +1,4 @@
-const getFilteredData = (data, categoryBy, clear) => {
+const getFilteredData = (data, categoryBy) => {
   if (categoryBy && categoryBy === "FILTER_BY_PAINTING") {
     return data.filter((item) => item.categoryName === "painting");
   }

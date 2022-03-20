@@ -1,10 +1,12 @@
+import { useWishlist } from "context/wishlist-context";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAside } from "../../context/aside-context";
+import { useAside } from "context/aside-context";
 import "./navbar.css";
 const Navbar = () => {
   const [searchBar, setSearchBar] = useState(false);
   const { setActiveAside } = useAside();
+  const { wishCount } = useWishlist();
   return (
     <>
       <header>
@@ -44,20 +46,17 @@ const Navbar = () => {
           >
             <i className="fa fa-user fa-lg" id="user-icon"></i>
           </a>
-          <a
-            href="wishlist.html"
+          <Link
+            to="/wishlist"
             className="avatar avatar-badge text-primary reset"
           >
             <i className="fas fa-lg fa-heart cart"> </i>
-            <div className="status-circle icon-top-badge-sm">4</div>
-          </a>
-          <a
-            href="cart.html"
-            className="avatar avatar-badge text-primary reset"
-          >
+            <div className="status-circle icon-top-badge-sm">{wishCount}</div>
+          </Link>
+          <Link to="/cart" className="avatar avatar-badge text-primary reset">
             <i className="fas fa-lg fa-shopping-cart cart"> </i>
-            <div className="status-circle icon-top-badge-sm">4</div>
-          </a>
+            <div className="status-circle icon-top-badge-sm">0</div>
+          </Link>
         </div>
       </header>
       {searchBar && (

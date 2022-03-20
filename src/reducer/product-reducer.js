@@ -5,6 +5,8 @@ const productReducer = (state, action) => {
     }
     case "FILTER":
       return { ...state, categoryBy: action.payload };
+    case "RATINGS":
+      return { ...state, ratings: action.payload };
   }
 };
 export { productReducer };

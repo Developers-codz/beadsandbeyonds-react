@@ -2,7 +2,9 @@ import { useReducer, useState, useEffect } from "react";
 import "./product.css";
 import axios from "axios";
 import { productReducer } from "reducer";
-import { getSortedData, getFilteredData } from "functions";
+import { getSortedData, getFilteredData, getRateFilteredData } from "functions";
+import { Productlisting } from "component";
+
 const Product = () => {
   const [filter, setFilter] = useState(false);
   const [productList, setProductList] = useState([]);
@@ -14,10 +16,12 @@ const Product = () => {
   const [state, dispatch] = useReducer(productReducer, {
     sortBy: null,
     categoryBy: null,
+    ratings: 2,
     clear: null,
   });
   const sortedData = getSortedData(productList, state.sortBy);
-  const filteredData = getFilteredData(sortedData, state.categoryBy);
+  const rateFilteredData = getRateFilteredData(sortedData, state.ratings);
+  const filteredData = getFilteredData(rateFilteredData, state.categoryBy);
 
   return (
     <div className="main">
@@ -129,38 +133,25 @@ const Product = () => {
             <input
               type="range"
               min="1"
-              max="100"
+              max="5"
+              value={state.ratings}
               className="slider"
               id="myRange"
+              onChange={(e) =>
+                dispatch({ type: "RATINGS", payload: e.target.value })
+              }
             />
           </div>
         </div>
       </div>
       <div className="shopping-wrapper centered">
-        {filteredData.map(
-          ({ id, name, image, category, ratings, description, price }) => {
-            return (
-              <div className="card card-simple reset margin-md" key={id}>
-                <img src={image} alt={name} className="card-img" />
-                <div className="card-textarea">
-                  <div className="left-pane evenly-padding-sm">
-                    <h2 className="card-heading">{name}</h2>
-                    <p className="text-secondary">{description}</p>
-                    <div className="stars text-primary">
-                      <i className="far fa-star"></i>
-                      <i className="far fa-star"></i>
-                      <i className="far fa-star"></i>
-                      <i className="far fa-star"></i>
-                      <i className="far fa-star"></i>
-                    </div>
-                    <p className="item-price font3">₹{price}</p>
-                  </div>
-                  <i className="far fa-heart fa-lg evenly-padding-sm card-icon border-round"></i>
-                </div>
-              </div>
-            );
-          }
-        )}
+        {filteredData.map((item) => {
+          return (
+            <>
+              <Productlisting product={item} />
+            </>
+          );
+        })}
       </div>
     </div>
   );
