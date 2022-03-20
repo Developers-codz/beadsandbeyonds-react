@@ -91,6 +91,15 @@ input[type="radio"] {
   background: #04aa6d;
   cursor: pointer;
 }
+.stars {
+  color: var(--primary);
+}
+.stars > span {
+  background-color: var(--bg-off-white);
+  padding: 0.1rem 0.5rem;
+  border-radius: 20px;
+}
+
 @media only screen and (max-width: 768px) {
   .main {
     grid-template-areas:
