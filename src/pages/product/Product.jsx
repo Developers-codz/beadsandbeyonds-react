@@ -1,24 +1,23 @@
-import { useReducer, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./product.css";
 import axios from "axios";
-import { productReducer } from "reducer";
+import { useProduct } from "context/product-context";
 import { getSortedData, getFilteredData, getRateFilteredData } from "functions";
 import { Productlisting } from "component";
 
 const Product = () => {
   const [filter, setFilter] = useState(false);
   const [productList, setProductList] = useState([]);
+  const { state, dispatch } = useProduct();
   useEffect(async () => {
-    await axios
-      .get("/api/products")
-      .then((res) => setProductList(res.data.products));
+    try {
+      const res = await axios.get("/api/products");
+      setProductList(res.data.products);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
-  const [state, dispatch] = useReducer(productReducer, {
-    sortBy: null,
-    categoryBy: null,
-    ratings: 2,
-    clear: null,
-  });
+
   const sortedData = getSortedData(productList, state.sortBy);
   const rateFilteredData = getRateFilteredData(sortedData, state.ratings);
   const filteredData = getFilteredData(rateFilteredData, state.categoryBy);
@@ -92,7 +91,7 @@ const Product = () => {
                 name="category"
                 id="decoration"
                 onClick={() =>
-                  dispatch({ type: "FILTER", payload: "FILTER_BY_DECORATION" })
+                  dispatch({ type: "FILTER", payload: "FILTER_BY_DECORATIONS" })
                 }
               />
               <label htmlFor="decoration">Decorations</label>
@@ -114,7 +113,7 @@ const Product = () => {
                 name="category"
                 id="home-decor"
                 onClick={() =>
-                  dispatch({ type: "FILTER", payload: "FILTER_BY_HOME_DECORS" })
+                  dispatch({ type: "FILTER", payload: "FILTER_BY_HOME" })
                 }
               />
               <label htmlFor="home-decor">Home Decors</label>

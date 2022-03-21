@@ -2,6 +2,7 @@ import "App.css";
 import { Navbar, Footer, Aside } from "component";
 import { Home, Product, Wishlist, Cart, Pagenotfound } from "pages";
 import { Routes, Route } from "react-router-dom";
+import Mockman from "mockman-js";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/products" element={<Product />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/mockman" element={<Mockman />} />
           <Route path="/*" element={<Pagenotfound />} />
         </Routes>
       </main>
