@@ -29,7 +29,7 @@ import {
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
-import {carousels} from "./backend/db/carousels"
+import { carousels } from "./backend/db/carousels";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({

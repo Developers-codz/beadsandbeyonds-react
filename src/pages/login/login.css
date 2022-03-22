@@ -1,0 +1,63 @@
+.Login-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.wishlist-head {
+  border-bottom: 1px solid var(--primary);
+  margin-bottom: 1rem;
+}
+.login-card {
+  width: 30rem;
+  min-height: 300px;
+  border: 1px solid black;
+  margin: 1rem 0rem 3rem 0rem;
+  text-align: center;
+}
+.input-field {
+  width: 25rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--dark);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 1.5rem 0rem 0rem 0rem;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+.input-field::placeholder {
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+.input-field:focus {
+  outline: none;
+  border-bottom: 2px solid var(--primary);
+}
+.demo-login {
+  margin-top: 1.5rem;
+  padding: 0.5rem 6rem;
+  background-color: var(--bg-off-white);
+  border: 2px solid transparent;
+  color: var(--primary);
+  font-size: 1rem;
+}
+.demo-login:hover {
+  transform: scale(1.03, 1.03);
+  border: 2px solid var(--primary);
+}
+.login-btn {
+  margin: 1.5rem 0rem 0rem 0rem;
+  padding: 0.5rem 8rem;
+  background-color: var(--primary);
+  border: 2px solid transparent;
+  color: white;
+  font-size: 1rem;
+}
+.login-btn:hover {
+  transform: scale(1.03, 1.03);
+  font-weight: 500;
+}
+.signin-section {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

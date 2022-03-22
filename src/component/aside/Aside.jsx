@@ -38,9 +38,9 @@ const Aside = () => {
               </Link>
             </li>
             <li>
-              <a href="login.html" className="quick-link decor-none">
+              <Link to="/login" className="quick-link decor-none">
                 Profile
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="quick-link decor-none">

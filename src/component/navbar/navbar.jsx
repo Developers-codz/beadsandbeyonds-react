@@ -40,12 +40,9 @@ const Navbar = () => {
             className="fa fa-search fa-lg"
             onClick={() => setSearchBar(!searchBar)}
           ></i>
-          <a
-            href="login.html"
-            className="avatar avatar-badge text-primary reset"
-          >
+          <Link to="/login" className="avatar avatar-badge text-primary reset">
             <i className="fa fa-user fa-lg" id="user-icon"></i>
-          </a>
+          </Link>
           <Link
             to="/wishlist"
             className="avatar avatar-badge text-primary reset"
