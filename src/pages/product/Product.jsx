@@ -4,8 +4,10 @@ import axios from "axios";
 import { useProduct } from "context/product-context";
 import { getSortedData, getFilteredData, getRateFilteredData } from "functions";
 import { Productlisting } from "component";
+import { useDocumentTitle } from "hooks";
 
 const Product = () => {
+  useDocumentTitle("Products");
   const [filter, setFilter] = useState(false);
   const [productList, setProductList] = useState([]);
   const { state, dispatch } = useProduct();
