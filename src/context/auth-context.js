@@ -15,8 +15,8 @@ const AuthProvider = ({ children }) => {
         e.target.value === "user"
           ? JSON.stringify(formData)
           : {
-              email: "adarshbalika@gmail.com",
-              password: "adarshbalika",
+              email: "kajalkumari@gmail.com",
+              password: "kajalkumari",
             }
       );
       //saving the token in localstorage
@@ -30,7 +30,26 @@ const AuthProvider = ({ children }) => {
         token: encodedToken,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response);
+      const { status, statusText } = err.response;
+      if (status === 404 && statusText === "Not Found") {
+        authDispatch({
+          type: "error",
+          payload: "user not found, please signup :)",
+        });
+      } else if (status === 401 && statusText === "Unauthorized") {
+        authDispatch({
+          type: "error",
+          payload: "Either entered email or password is wrong",
+        });
+      } else if (status === 422 && statusText === "Unprocessable Entity") {
+        authDispatch({
+          type: "error",
+          payload: "Email Already Exist",
+        });
+      } else {
+        authDispatch({ type: "error", payload: "something wrong happened" });
+      }
     }
   };
   //  While signUp

@@ -6,6 +6,7 @@ export const userInitialState = {
   authToken: "",
   cart: [],
   wishlist: [],
+  msg: "",
 };
 
 export const authReducer = (state, action) => {
@@ -34,8 +35,12 @@ export const authReducer = (state, action) => {
         authToken: token,
       };
     }
+    case "error":
+      return { ...state, msg: action.payload };
+
     case "logOut":
       return userInitialState;
+
     default:
       return state;
   }

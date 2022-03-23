@@ -79,7 +79,6 @@ const Signup = () => {
                 setType((type) => (type === "password" ? "text" : "password"))
               }
             ></i>
-            <div id="pass-checker-area"></div>
             <button
               className="signup-btn reset"
               type="submit"

@@ -2,6 +2,7 @@ import "./profile.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 import { useDocumentTitle } from "hooks";
+import { shoppingImage } from "assets/svgs";
 const Profile = () => {
   useDocumentTitle("Profile");
   const {
@@ -11,11 +12,15 @@ const Profile = () => {
 
   return (
     <>
-      <div className="profile-card">
-        <h1 style={{ margin: "3rem" }}>
+      <div className="profile-card shadow-box">
+        <h2 style={{ margin: "1rem" }}>
           <div>Welcome back {firstName}</div>
-          <Link to="/products">Go To shopping</Link>
-        </h1>
+        </h2>
+        <img src={shoppingImage} />
+        <Link to="/products" className="decor-none text-primary font2">
+          Go To shopping
+        </Link>
+
         <button
           className="btn-to-cart margin-md"
           onClick={() => authDispatch({ type: "logOut" })}

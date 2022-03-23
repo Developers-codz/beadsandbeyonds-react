@@ -17,11 +17,15 @@ const Login = () => {
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const { loginHandler } = useAuth();
+  const {
+    loginHandler,
+    authState: { msg },
+  } = useAuth();
   const clickHandler = (e) => {
     e.preventDefault();
     loginHandler(e, formData);
   };
+  console.log(msg);
 
   return (
     <>
@@ -74,6 +78,7 @@ const Login = () => {
             >
               Login{" "}
             </button>
+            <div style={{ color: "red" }}>{msg}</div>
             <div className="signin-section">
               Don't have an account{" "}
               <u className="signin-btn">
