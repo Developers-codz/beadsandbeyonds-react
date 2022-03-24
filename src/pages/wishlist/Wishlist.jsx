@@ -1,7 +1,9 @@
 import "./wishlist.css";
 import { useWishlist } from "context/wishlist-context";
 import { Link } from "react-router-dom";
+import { useDocumentTitle } from "hooks";
 const Wishlist = () => {
+  useDocumentTitle("WishList");
   const { wishList, wishCount, setWishList, setWishCount } = useWishlist();
   if (wishList.length > 0) {
     return (

@@ -1,17 +1,31 @@
 import "./login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { loginHandler } from "hooks/auth";
+import { useAuth } from "context/auth-context";
+import { useDocumentTitle } from "hooks";
 
 const Login = () => {
+  useDocumentTitle("Login");
+  var classNames = require("classnames");
+  const [type, setType] = useState("password");
   const formObj = {
     email: "",
     password: "",
   };
   const [formData, setFormData] = useState(formObj);
+
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const {
+    loginHandler,
+    authState: { msg },
+  } = useAuth();
+  const clickHandler = (e) => {
+    e.preventDefault();
+    loginHandler(e, formData);
+  };
+  console.log(msg);
 
   return (
     <>
@@ -30,7 +44,7 @@ const Login = () => {
               required
             />
             <input
-              type="password"
+              type={type}
               name="password"
               id="login-pass"
               value={formData.password}
@@ -39,12 +53,20 @@ const Login = () => {
               onChange={changeHandler}
               required
             />{" "}
-            <i className="far fa-eye-slash eye reset" id="eye-btn"></i>
+            <i
+              className={classNames(" eye reset", {
+                "fa fa-eye": type === "text",
+                "far fa-eye-slash": type === "password",
+              })}
+              onClick={() =>
+                setType((type) => (type === "password" ? "text" : "password"))
+              }
+            ></i>
             <button
               className="demo-login reset"
               value="test"
               type="submit"
-              onClick={(e) => loginHandler(e, formData)}
+              onClick={(e) => clickHandler(e)}
             >
               Login With Test Credentials
             </button>
@@ -52,10 +74,11 @@ const Login = () => {
               className="login-btn reset"
               type="submit"
               value="user"
-              onClick={(e) => loginHandler(e, formData)}
+              onClick={(e) => clickHandler(e)}
             >
               Login{" "}
             </button>
+            <div style={{ color: "red" }}>{msg}</div>
             <div className="signin-section">
               Don't have an account{" "}
               <u className="signin-btn">

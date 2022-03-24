@@ -1,8 +1,10 @@
 import "./signup.css";
 import { useState } from "react";
-import { signupHandler } from "hooks/auth";
+import { useAuth } from "context/auth-context";
 import { Link } from "react-router-dom";
+import { useDocumentTitle } from "hooks";
 const Signup = () => {
+  useDocumentTitle("Signup");
   var classNames = require("classnames");
   const [type, setType] = useState("password");
   const formObj = {
@@ -16,6 +18,12 @@ const Signup = () => {
   const inputHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const { signupHandler } = useAuth();
+  const clickHandler = (e) => {
+    e.preventDefault();
+    signupHandler(e, formData, setFormData, formObj);
+  };
+
   return (
     <>
       <div className="signup-wrapper">
@@ -71,11 +79,10 @@ const Signup = () => {
                 setType((type) => (type === "password" ? "text" : "password"))
               }
             ></i>
-            <div id="pass-checker-area"></div>
             <button
               className="signup-btn reset"
               type="submit"
-              onClick={(e) => signupHandler(e, formData, setFormData, formObj)}
+              onClick={(e) => clickHandler(e)}
             >
               Sign Up
             </button>

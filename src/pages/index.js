@@ -5,3 +5,4 @@ export { Cart } from "./cart/Cart";
 export { Pagenotfound } from "./pagenotfound/Pagenotfound";
 export { Signup } from "./signup/Signup";
 export { Login } from "./login/Login";
+export { Profile } from "./profile/Profile";
