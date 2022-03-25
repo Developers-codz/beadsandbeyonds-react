@@ -7,5 +7,7 @@ export const cartReducer = (state, action) => {
         ...state,
         cartData: action.payload,
       };
+    default:
+      return { ...state };
   }
 };

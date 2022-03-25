@@ -91,7 +91,7 @@ const Cart = () => {
               <h5 className="">Total Amount</h5>
               <span>
                 {cartData.reduce(
-                  (acc, curr) => acc + curr.price * curr.qty + 99,
+                  (acc, curr) => acc + curr.price * curr.qty - 99,
                   0
                 )}
               </span>
