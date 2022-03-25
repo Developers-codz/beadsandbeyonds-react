@@ -1,10 +1,29 @@
 import { useWishlist } from "context/wishlist-context";
 import { useState } from "react";
+import { useAuth } from "context/auth-context";
+import { useCart } from "context/cart-context";
+import { Link, useNavigate } from "react-router-dom";
 const Productlisting = ({ product }) => {
+  const navigate = useNavigate;
+  const {
+    authState: { isAuthTokenPresent },
+  } = useAuth();
   const [liked, setLiked] = useState(false);
+
+  const {
+    setCartCount,
+    AddToCartHandler,
+    cartState: { cartData },
+  } = useCart();
   const { setWishCount, setWishList, wishList } = useWishlist();
   const isInWishList = (id) => wishList.find(({ _id }) => _id == id);
+  const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   var classNames = require("classnames");
+
+  const clickHandler = (e, product) => {
+    AddToCartHandler(product);
+  };
+
   return (
     <div className="card card-simple reset margin-md" key={product._id}>
       <img src={product.image} alt={product.name} className="card-img" />
@@ -21,6 +40,18 @@ const Productlisting = ({ product }) => {
             </span>
           </div>
           <p className="item-price font3">₹{product.price}</p>
+          {isInCartList(product._id) ? (
+            <Link to="/cart">
+              <button className="reset add-to-cart">Go to cart</button>
+            </Link>
+          ) : (
+            <button
+              className="reset add-to-cart"
+              onClick={(e) => clickHandler(e, product)}
+            >
+              Add to cart
+            </button>
+          )}
         </div>
         <i
           className={classNames(

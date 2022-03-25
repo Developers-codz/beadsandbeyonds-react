@@ -4,8 +4,6 @@ export const userInitialState = {
   lastName: "",
   isAuthTokenPresent: false,
   authToken: "",
-  cart: [],
-  wishlist: [],
   msg: "",
 };
 

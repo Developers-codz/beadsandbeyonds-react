@@ -29,6 +29,7 @@ body {
 }
 
 .cart-items {
+  position: relative;
   margin: 2rem auto 2rem auto;
   max-width: 500px;
   min-height: 200px;
@@ -131,6 +132,20 @@ strike {
   transform: scale(1.03, 1.03);
 }
 
+.del-btn-cart {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 0.7rem;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.del-btn-cart:hover {
+  transform: scale(1.03, 1.03);
+  opacity: 1;
+}
 .coupon-modal {
   position: fixed;
   top: 50%;

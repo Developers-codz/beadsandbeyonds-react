@@ -3,6 +3,7 @@ import { useWishlist } from "context/wishlist-context";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
+import { useCart } from "context/cart-context";
 
 const Wishlist = () => {
   useDocumentTitle("WishList");
