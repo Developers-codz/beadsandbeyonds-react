@@ -31,7 +31,7 @@ const CartProvider = ({ children }) => {
       console.log(err);
     }
   };
-  const removeFromCartHandler = async (_id) => {
+  const removeFromCartHandler = async (_id, qty) => {
     try {
       const response = await axios.delete(`/api/user/cart/${_id}`, {
         headers: {
@@ -39,7 +39,7 @@ const CartProvider = ({ children }) => {
         },
       });
       if (response.status === 200) {
-        setCartCount((count) => count - 1);
+        setCartCount((count) => count - qty);
         cartDispatch({ type: "set_to_cart", payload: response.data.cart });
       }
     } catch (err) {
@@ -63,6 +63,7 @@ const CartProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
+        setCartCount((count) => count + 1);
         cartDispatch({ type: "set_qtty", payload: response.data.cart });
       }
     } catch (err) {
@@ -86,7 +87,7 @@ const CartProvider = ({ children }) => {
       );
       console.log(response);
       if (response.status === 200) {
-        console.log(response.data.cart);
+        setCartCount((count) => count - 1);
         cartDispatch({ type: "set_qtty", payload: response.data.cart });
       }
     } catch (err) {

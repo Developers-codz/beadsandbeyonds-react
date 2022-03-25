@@ -38,7 +38,7 @@ const Cart = () => {
                 <div className="cart-product-detail">
                   <div
                     className="del-btn-cart"
-                    onClick={(e) => removeFromCartHandler(_id)}
+                    onClick={(e) => removeFromCartHandler(_id, qty)}
                   >
                     <i className="fa fa-trash"></i>
                   </div>
@@ -48,7 +48,7 @@ const Cart = () => {
                   <div className="quantity mb-lg">
                     <button
                       onClick={(e) => productQtyDecreaseHandler(_id)}
-                      disabled={qty === 0}
+                      disabled={qty === 1}
                     >
                       -
                     </button>
@@ -66,14 +66,15 @@ const Cart = () => {
       </div>
       <div className="cart-right-pane">
         <div className="bill-card">
-          <h4 className="mb-lg text-vibrant">COUPONS</h4>
-          <button className="mb-lg coupon" id="coupon-btn">
-            <i className="fa fa-tag"></i>Apply Coupon
-          </button>
-          <h4 className="mb-lg text-vibrant">PRICE DETAILS: (3 items)</h4>
+          <h4 className="mb-lg text-vibrant">
+            PRICE DETAILS: ({cartCount} items)
+          </h4>
           <div className="bill-card-body">
             <div className="price-breakdown">
-              <h5 className="mb-lg">Total MRP: </h5> <span> ₹1599</span>
+              <h5 className="mb-lg">Total MRP: </h5>{" "}
+              <span>
+                {cartData.reduce((acc, curr) => acc + curr.price * curr.qty, 0)}
+              </span>
             </div>
             <div className="price-breakdown">
               <h5 className="mb-lg">Discount on MRP: </h5> <span> ₹99</span>
@@ -88,7 +89,12 @@ const Cart = () => {
             </div>
             <div className="price-breakdown bill-amount">
               <h5 className="">Total Amount</h5>
-              <span>₹1500</span>
+              <span>
+                {cartData.reduce(
+                  (acc, curr) => acc + curr.price * curr.qty + 99,
+                  0
+                )}
+              </span>
             </div>
             <button className="mb-lg place-order-btn">Place Order</button>
           </div>
