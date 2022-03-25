@@ -38,7 +38,7 @@ const Cart = () => {
                 <div className="cart-product-detail">
                   <div
                     className="del-btn-cart"
-                    onClick={(e) => removeFromCartHandler(_id, qty)}
+                    onClick={() => removeFromCartHandler(_id, qty)}
                   >
                     <i className="fa fa-trash"></i>
                   </div>
@@ -47,13 +47,13 @@ const Cart = () => {
                   <p className="item-price font3 mb-lg">₹{price} only</p>
                   <div className="quantity mb-lg">
                     <button
-                      onClick={(e) => productQtyDecreaseHandler(_id)}
+                      onClick={() => productQtyDecreaseHandler(_id)}
                       disabled={qty === 1}
                     >
                       -
                     </button>
                     <input type="text" disabled value={qty} />
-                    <button onClick={(e) => productQtyIncreaseHandler(_id)}>
+                    <button onClick={() => productQtyIncreaseHandler(_id)}>
                       +
                     </button>
                   </div>

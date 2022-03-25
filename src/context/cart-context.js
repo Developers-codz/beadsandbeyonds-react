@@ -27,7 +27,7 @@ const CartProvider = ({ children }) => {
       if (response.status === 201) {
         console.log(response.data.cart);
         setCartCount((count) => count + 1);
-        cartDispatch({ type: "set_to_cart", payload: response.data.cart });
+        cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
@@ -43,7 +43,7 @@ const CartProvider = ({ children }) => {
       });
       if (response.status === 200) {
         setCartCount((count) => count - qty);
-        cartDispatch({ type: "set_to_cart", payload: response.data.cart });
+        cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
@@ -68,7 +68,7 @@ const CartProvider = ({ children }) => {
       );
       if (response.status === 200) {
         setCartCount((count) => count + 1);
-        cartDispatch({ type: "set_qtty", payload: response.data.cart });
+        cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
@@ -93,7 +93,7 @@ const CartProvider = ({ children }) => {
       console.log(response);
       if (response.status === 200) {
         setCartCount((count) => count - 1);
-        cartDispatch({ type: "set_qtty", payload: response.data.cart });
+        cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
