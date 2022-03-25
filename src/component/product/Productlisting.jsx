@@ -12,7 +12,7 @@ const Productlisting = ({ product }) => {
 
   const {
     setCartCount,
-    AddToCartHandler,
+    addToCartHandler,
     cartState: { cartData },
   } = useCart();
   const { setWishCount, setWishList, wishList } = useWishlist();
@@ -21,7 +21,7 @@ const Productlisting = ({ product }) => {
   var classNames = require("classnames");
 
   const clickHandler = (e, product) => {
-    AddToCartHandler(product);
+    addToCartHandler(product);
   };
 
   return (

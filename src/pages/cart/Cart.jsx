@@ -7,8 +7,10 @@ const Cart = () => {
   useDocumentTitle("Cart");
   const {
     cartState: { cartData },
-    RemoveFromCartHandler,
+    removeFromCartHandler,
     cartCount,
+    productQtyIncreaseHandler,
+    productQtyDecreaseHandler,
   } = useCart();
   return cartData.length === 0 ? (
     <div style={{ textAlign: "center" }}>
@@ -36,7 +38,7 @@ const Cart = () => {
                 <div className="cart-product-detail">
                   <div
                     className="del-btn-cart"
-                    onClick={(e) => RemoveFromCartHandler(_id)}
+                    onClick={(e) => removeFromCartHandler(_id)}
                   >
                     <i className="fa fa-trash"></i>
                   </div>
@@ -44,9 +46,16 @@ const Cart = () => {
                   <p className="text-secondary ">{description}</p>
                   <p className="item-price font3 mb-lg">₹{price} only</p>
                   <div className="quantity mb-lg">
-                    <button>-</button>
-                    <input type="text" disabled value="2" />
-                    <button>+</button>
+                    <button
+                      onClick={(e) => productQtyDecreaseHandler(_id)}
+                      disabled={qty === 0}
+                    >
+                      -
+                    </button>
+                    <input type="text" disabled value={qty} />
+                    <button onClick={(e) => productQtyIncreaseHandler(_id)}>
+                      +
+                    </button>
                   </div>
                   <button className="wishlist-btn">Move to WishList</button>
                 </div>

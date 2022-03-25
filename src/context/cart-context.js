@@ -6,11 +6,10 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [cartState, cartDispatch] = useReducer(cartReducer, {
-    addToCartFlag: false,
     cartData: [],
   });
   const encodedToken = localStorage.getItem("token");
-  const AddToCartHandler = async (item) => {
+  const addToCartHandler = async (item) => {
     try {
       const response = await axios.post(
         "/api/user/cart",
@@ -32,7 +31,7 @@ const CartProvider = ({ children }) => {
       console.log(err);
     }
   };
-  const RemoveFromCartHandler = async (_id) => {
+  const removeFromCartHandler = async (_id) => {
     try {
       const response = await axios.delete(`/api/user/cart/${_id}`, {
         headers: {
@@ -48,15 +47,63 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  const productQtyIncreaseHandler = async (_id) => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart/${_id}`,
+        {
+          action: {
+            type: "increment",
+          },
+        },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
+      if (response.status === 200) {
+        cartDispatch({ type: "set_qtty", payload: response.data.cart });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const productQtyDecreaseHandler = async (_id) => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart/${_id}`,
+        {
+          action: {
+            type: "decrement",
+          },
+        },
+        {
+          headers: {
+            authorization: encodedToken,
+          },
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        console.log(response.data.cart);
+        cartDispatch({ type: "set_qtty", payload: response.data.cart });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartCount,
-        setCartCount,
         cartState,
         cartDispatch,
-        AddToCartHandler,
-        RemoveFromCartHandler,
+        addToCartHandler,
+        removeFromCartHandler,
+        productQtyIncreaseHandler,
+        productQtyDecreaseHandler,
       }}
     >
       {children}
