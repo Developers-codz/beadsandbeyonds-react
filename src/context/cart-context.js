@@ -9,7 +9,9 @@ const CartProvider = ({ children }) => {
     cartData: [],
   });
   const encodedToken = localStorage.getItem("token");
+
   const addToCartHandler = async (item) => {
+    const encodedToken = localStorage.getItem("token");
     try {
       const response = await axios.post(
         "/api/user/cart",
@@ -32,6 +34,7 @@ const CartProvider = ({ children }) => {
     }
   };
   const removeFromCartHandler = async (_id, qty) => {
+    const encodedToken = localStorage.getItem("token");
     try {
       const response = await axios.delete(`/api/user/cart/${_id}`, {
         headers: {
@@ -48,6 +51,7 @@ const CartProvider = ({ children }) => {
   };
 
   const productQtyIncreaseHandler = async (_id) => {
+    const encodedToken = localStorage.getItem("token");
     try {
       const response = await axios.post(
         `/api/user/cart/${_id}`,
@@ -71,6 +75,7 @@ const CartProvider = ({ children }) => {
     }
   };
   const productQtyDecreaseHandler = async (_id) => {
+    const encodedToken = localStorage.getItem("token");
     try {
       const response = await axios.post(
         `/api/user/cart/${_id}`,
