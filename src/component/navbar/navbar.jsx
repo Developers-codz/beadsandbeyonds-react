@@ -1,4 +1,5 @@
 import { useWishlist } from "context/wishlist-context";
+import { useCart } from "context/cart-context";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAside } from "context/aside-context";
@@ -7,6 +8,7 @@ const Navbar = () => {
   const [searchBar, setSearchBar] = useState(false);
   const { setActiveAside } = useAside();
   const { wishCount } = useWishlist();
+  const { cartCount } = useCart();
   return (
     <>
       <header>
@@ -52,7 +54,7 @@ const Navbar = () => {
           </Link>
           <Link to="/cart" className="avatar avatar-badge text-primary reset">
             <i className="fas fa-lg fa-shopping-cart cart"> </i>
-            <div className="status-circle icon-top-badge-sm">0</div>
+            <div className="status-circle icon-top-badge-sm">{cartCount}</div>
           </Link>
         </div>
       </header>

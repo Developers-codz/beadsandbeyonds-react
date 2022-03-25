@@ -2,6 +2,9 @@ import "./wishlist.css";
 import { useWishlist } from "context/wishlist-context";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
+import { shoppingImage } from "assets/svgs";
+import { useCart } from "context/cart-context";
+
 const Wishlist = () => {
   useDocumentTitle("WishList");
   const { wishList, wishCount, setWishList, setWishCount } = useWishlist();
@@ -51,9 +54,10 @@ const Wishlist = () => {
     return (
       <div style={{ textAlign: "center" }}>
         <h1>Oops, Your WishList is Empty ☹️</h1>
+        <img src={shoppingImage} />
         <div className="btn-to-product-wrapper">
           <Link className="decor-none btn-to-product" to="/products">
-            Go To Products{" "}
+            Go To Products Now{" "}
           </Link>
         </div>
       </div>

@@ -4,8 +4,6 @@ export const userInitialState = {
   lastName: "",
   isAuthTokenPresent: false,
   authToken: "",
-  cart: [],
-  wishlist: [],
   msg: "",
 };
 
@@ -38,8 +36,10 @@ export const authReducer = (state, action) => {
     case "error":
       return { ...state, msg: action.payload };
 
-    case "logOut":
+    case "logOut": {
+      localStorage.setItem("token", "");
       return userInitialState;
+    }
 
     default:
       return state;

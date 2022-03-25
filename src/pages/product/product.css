@@ -99,6 +99,20 @@ input[type="radio"] {
   padding: 0.1rem 0.5rem;
   border-radius: 20px;
 }
+.add-to-cart {
+  font-size: medium;
+  width: inherit;
+  padding: 0.5rem 0;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.8;
+  text-align: center;
+  border: 2px solid transparent;
+}
+.add-to-cart:hover {
+  opacity: 1;
+  color: var(--primary);
+}
 
 @media only screen and (max-width: 768px) {
   .main {
