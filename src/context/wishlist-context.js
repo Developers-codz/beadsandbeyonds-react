@@ -24,7 +24,6 @@ const WishlistProvider = ({ children }) => {
           },
         }
       );
-      console.log(response.data.wishlist);
       if (response.status === 201) {
         setWishCount((count) => count + 1);
         setToastState(true);
