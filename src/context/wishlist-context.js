@@ -28,9 +28,9 @@ const WishlistProvider = ({ children }) => {
       if (response.status === 201) {
         setWishCount((count) => count + 1);
         setToastState(true);
-        setToastMsg("Added to Wishlist");
+        setToastMsg("Successfully added to Wishlist");
         setToastBg("purple");
-        setTimeout(() => setToastState(false), 1000);
+        setTimeout(() => setToastState(false), 1500);
         wishDispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
       }
     } catch (err) {
@@ -50,9 +50,9 @@ const WishlistProvider = ({ children }) => {
         setWishCount((count) => count - 1);
         console.log("abc");
         setToastState(true);
-        setToastMsg("Removed from Wishlist");
+        setToastMsg("Removed from Wishlist successfully");
         setToastBg("red");
-        setTimeout(() => setToastState(false), 1000);
+        setTimeout(() => setToastState(false), 1500);
         wishDispatch({
           type: "SET_WISHLIST",
           payload: response.data.wishlist,

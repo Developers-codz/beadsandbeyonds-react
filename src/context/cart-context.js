@@ -28,9 +28,9 @@ const CartProvider = ({ children }) => {
       if (response.status === 201) {
         setCartCount((count) => count + 1);
         setToastState(true);
-        setToastMsg("Added to cart");
+        setToastMsg("Successfully added to cart");
         setToastBg("green");
-        setTimeout(() => setToastState(false), 1000);
+        setTimeout(() => setToastState(false), 1500);
         cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
@@ -48,9 +48,9 @@ const CartProvider = ({ children }) => {
       if (response.status === 200) {
         setCartCount((count) => count - qty);
         setToastState(true);
-        setToastMsg("Removed from cart");
+        setToastMsg("Removed from cart successfully");
         setToastBg("red");
-        setTimeout(() => setToastState(false), 1000);
+        setTimeout(() => setToastState(false), 1500);
         cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
