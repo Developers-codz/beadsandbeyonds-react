@@ -1,12 +1,15 @@
 import axios from "axios";
 import { createContext, useContext, useState, useReducer } from "react";
 import { wishlistReducer } from "reducer/wishlist-reducer";
+import { useToast } from "./toast-context";
 const WishlistContext = createContext();
 const WishlistProvider = ({ children }) => {
   const [wishCount, setWishCount] = useState(0);
   const [wishlistState, wishDispatch] = useReducer(wishlistReducer, {
     wishlistData: [],
   });
+  const { setToastMsg, setToastState, setToastBg } = useToast();
+
   const addToWishlistHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
     try {
@@ -24,6 +27,10 @@ const WishlistProvider = ({ children }) => {
       console.log(response.data.wishlist);
       if (response.status === 201) {
         setWishCount((count) => count + 1);
+        setToastState(true);
+        setToastMsg("Added to Wishlist");
+        setToastBg("purple");
+        setTimeout(() => setToastState(false), 1000);
         wishDispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
       }
     } catch (err) {
@@ -41,6 +48,11 @@ const WishlistProvider = ({ children }) => {
       console.log(response.data.wishlist);
       if (response.status === 200) {
         setWishCount((count) => count - 1);
+        console.log("abc");
+        setToastState(true);
+        setToastMsg("Removed from Wishlist");
+        setToastBg("red");
+        setTimeout(() => setToastState(false), 1000);
         wishDispatch({
           type: "SET_WISHLIST",
           payload: response.data.wishlist,

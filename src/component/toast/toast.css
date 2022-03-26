@@ -1,0 +1,21 @@
+.snackbar {
+  min-width: 200px;
+  margin-left: -125px;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 5px;
+  position: fixed;
+  z-index: 10;
+  right: 2%;
+  top: 80px;
+  font-size: 17px;
+  border-radius: 8px;
+}
+
+.show {
+  visibility: visible;
+}
+.hide {
+  visibility: hidden;
+}

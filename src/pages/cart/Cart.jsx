@@ -4,6 +4,7 @@ import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
 import { useCart } from "context/cart-context";
 import { useWishlist } from "context/wishlist-context";
+import { Toast } from "component";
 const Cart = () => {
   useDocumentTitle("Cart");
   const {
@@ -15,17 +16,21 @@ const Cart = () => {
   } = useCart();
   const { addToWishlistHandler } = useWishlist();
   return cartData.length === 0 ? (
-    <div style={{ textAlign: "center" }}>
-      <h1>Oops, Your Cart is Empty ☹️</h1>
-      <img src={shoppingImage} />
-      <div className="btn-to-product-wrapper">
-        <Link className="decor-none btn-to-product" to="/products">
-          Go To Products Now{" "}
-        </Link>
+    <>
+      <Toast />
+      <div style={{ textAlign: "center" }}>
+        <h1>Oops, Your Cart is Empty ☹️</h1>
+        <img src={shoppingImage} />
+        <div className="btn-to-product-wrapper">
+          <Link className="decor-none btn-to-product" to="/products">
+            Go To Products Now{" "}
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   ) : (
     <div className="cartmain">
+      <Toast />
       <div className="wishlist-head-wrapper">
         <h3 className="wishlist-head">MY CART : </h3>
         <span className="text-secondary font3"> {cartCount} Items</span>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
 import { useCart } from "context/cart-context";
+import { Toast } from "component";
 
 const Wishlist = () => {
   useDocumentTitle("WishList");
@@ -29,6 +30,7 @@ const Wishlist = () => {
           <span className="text-secondary font3"> {wishCount} Items</span>
         </div>
         <div className="wishlist-wrapper">
+          <Toast />
           {wishlistData.map((item) => {
             return (
               <div className="wishlist-card" key={item._id}>
@@ -71,15 +73,18 @@ const Wishlist = () => {
     );
   } else {
     return (
-      <div style={{ textAlign: "center" }}>
-        <h1>Oops, Your WishList is Empty ☹️</h1>
-        <img src={shoppingImage} />
-        <div className="btn-to-product-wrapper">
-          <Link className="decor-none btn-to-product" to="/products">
-            Go To Products Now{" "}
-          </Link>
+      <>
+        <Toast />
+        <div style={{ textAlign: "center" }}>
+          <h1>Oops, Your WishList is Empty ☹️</h1>
+          <img src={shoppingImage} />
+          <div className="btn-to-product-wrapper">
+            <Link className="decor-none btn-to-product" to="/products">
+              Go To Products Now{" "}
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 };

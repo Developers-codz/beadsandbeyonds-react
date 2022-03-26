@@ -1,9 +1,10 @@
 import { createContext, useContext, useState, useReducer } from "react";
 import { cartReducer } from "reducer";
 import axios from "axios";
-
+import { useToast } from "./toast-context";
 const CartContext = createContext();
 const CartProvider = ({ children }) => {
+  const { setToastMsg, setToastState, setToastBg } = useToast();
   const [cartCount, setCartCount] = useState(0);
   const [cartState, cartDispatch] = useReducer(cartReducer, {
     cartData: [],
@@ -25,8 +26,11 @@ const CartProvider = ({ children }) => {
         }
       );
       if (response.status === 201) {
-        console.log(response.data.cart);
         setCartCount((count) => count + 1);
+        setToastState(true);
+        setToastMsg("Added to cart");
+        setToastBg("green");
+        setTimeout(() => setToastState(false), 1000);
         cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
@@ -43,6 +47,10 @@ const CartProvider = ({ children }) => {
       });
       if (response.status === 200) {
         setCartCount((count) => count - qty);
+        setToastState(true);
+        setToastMsg("Removed from cart");
+        setToastBg("red");
+        setTimeout(() => setToastState(false), 1000);
         cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {

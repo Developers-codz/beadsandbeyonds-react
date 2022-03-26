@@ -1,5 +1,5 @@
 import { useContext, createContext, useReducer, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useToast } from "./toast-context";
 import axios from "axios";
 import { userInitialState, authReducer } from "reducer/auth-reducer";
 
@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [authState, authDispatch] = useReducer(authReducer, userInitialState);
-
+  const { setToastMsg, setToastState, setToastBg } = useToast();
   //  While login
   const loginHandler = async (e, formData) => {
     try {
@@ -25,6 +25,10 @@ const AuthProvider = ({ children }) => {
       console.log(response.data.foundUser);
 
       const { foundUser, encodedToken } = response.data;
+      setToastState(true);
+      setToastMsg("Login Successfully");
+      setToastBg("green");
+      setTimeout(() => setToastState(false), 1000);
       authDispatch({
         type: "loggedIn",
         payload: foundUser,
@@ -66,6 +70,10 @@ const AuthProvider = ({ children }) => {
       console.log(response.data);
 
       const { createdUser, encodedToken } = response.data;
+      setToastState(true);
+      setToastMsg("Signup Successfully");
+      setToastBg("green");
+      setTimeout(() => setToastState(false), 1000);
       authDispatch({
         type: "signup",
         payload: createdUser,
@@ -76,6 +84,15 @@ const AuthProvider = ({ children }) => {
     }
     setFormData(formObj);
   };
+  // While log out
+
+  const logoutHandler = () => {
+    setToastState(true);
+    setToastMsg("Loggedout Successfully");
+    setToastBg("red");
+    setTimeout(() => setToastState(false), 1000);
+    authDispatch({ type: "logOut" });
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -83,6 +100,7 @@ const AuthProvider = ({ children }) => {
         authDispatch,
         loginHandler,
         signupHandler,
+        logoutHandler,
       }}
     >
       {children}
