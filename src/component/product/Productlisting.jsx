@@ -2,9 +2,9 @@ import { useWishlist } from "context/wishlist-context";
 import { useState } from "react";
 import { useAuth } from "context/auth-context";
 import { useCart } from "context/cart-context";
+
 import { Link, useNavigate } from "react-router-dom";
 const Productlisting = ({ product }) => {
-  const navigate = useNavigate;
   const {
     authState: { isAuthTokenPresent },
   } = useAuth();
@@ -15,8 +15,11 @@ const Productlisting = ({ product }) => {
     addToCartHandler,
     cartState: { cartData },
   } = useCart();
-  const { setWishCount, setWishList, wishList } = useWishlist();
-  const isInWishList = (id) => wishList.find(({ _id }) => _id == id);
+  const {
+    wishlistState: { wishlistData },
+    addToWishlistHandler,
+  } = useWishlist();
+  const isInWishList = (id) => wishlistData.find(({ _id }) => _id == id);
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   var classNames = require("classnames");
 
@@ -41,16 +44,18 @@ const Productlisting = ({ product }) => {
           </div>
           <p className="item-price font3">₹{product.price}</p>
           {isInCartList(product._id) ? (
-            <Link to="/cart">
-              <button className="reset add-to-cart">Go to cart</button>
+            <Link to="/cart" className="move-to-cart-btn-wrapper">
+              <button className="reset btn-to-cart">Go to cart</button>
             </Link>
           ) : (
-            <button
-              className="reset add-to-cart"
-              onClick={(e) => clickHandler(e, product)}
-            >
-              Add to cart
-            </button>
+            <div className="move-to-cart-btn-wrapper">
+              <button
+                className="reset btn-to-cart"
+                onClick={(e) => clickHandler(e, product)}
+              >
+                Add to cart
+              </button>
+            </div>
           )}
         </div>
         <i
@@ -61,11 +66,7 @@ const Productlisting = ({ product }) => {
           )}
           onClick={() => {
             setLiked(true);
-            setWishCount((count) => (liked ? count : count + 1));
-            setWishList((wishlist) => [
-              ...wishlist.filter((item) => item._id !== product._id),
-              product,
-            ]);
+            addToWishlistHandler(product);
           }}
         ></i>
       </div>
