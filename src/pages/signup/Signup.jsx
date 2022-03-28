@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "context/auth-context";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
+import { Toast } from "component";
 const Signup = () => {
   useDocumentTitle("Signup");
   var classNames = require("classnames");
@@ -26,6 +27,7 @@ const Signup = () => {
 
   return (
     <>
+      <Toast />
       <div className="signup-wrapper">
         <h3 className="register-head">Register Now : </h3>
         <div className="signup-card">

@@ -5,6 +5,7 @@ import { useProduct } from "context/product-context";
 import { getSortedData, getFilteredData, getRateFilteredData } from "functions";
 import { Productlisting } from "component";
 import { useDocumentTitle } from "hooks";
+import { Toast } from "component";
 
 const Product = () => {
   useDocumentTitle("Products");
@@ -146,6 +147,7 @@ const Product = () => {
         </div>
       </div>
       <div className="shopping-wrapper centered">
+        <Toast />
         {filteredData.map((item) => {
           return (
             <>

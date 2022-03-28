@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
+import { Toast } from "component";
 const Profile = () => {
   useDocumentTitle("Profile");
   const {
-    authDispatch,
+    logoutHandler,
     authState: { firstName },
   } = useAuth();
 
   return (
     <>
+      <Toast />
       <div className="profile-card shadow-box">
         <h2 style={{ margin: "1rem" }}>
           <div>Welcome back {firstName}</div>
@@ -23,7 +25,7 @@ const Profile = () => {
 
         <button
           className="btn-to-cart margin-md"
-          onClick={() => authDispatch({ type: "logOut" })}
+          onClick={() => logoutHandler()}
         >
           Log out
         </button>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 import { useDocumentTitle } from "hooks";
+import { Toast } from "component";
 
 const Login = () => {
   useDocumentTitle("Login");
@@ -29,6 +30,7 @@ const Login = () => {
 
   return (
     <>
+      <Toast />
       <div className="Login-wrapper">
         <h3 className="wishlist-head">Login Now : </h3>
         <div className="login-card">

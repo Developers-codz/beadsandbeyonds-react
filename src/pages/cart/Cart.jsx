@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
 import { useCart } from "context/cart-context";
+import { useWishlist } from "context/wishlist-context";
+import { Toast } from "component";
 const Cart = () => {
   useDocumentTitle("Cart");
   const {
@@ -12,57 +14,69 @@ const Cart = () => {
     productQtyIncreaseHandler,
     productQtyDecreaseHandler,
   } = useCart();
+  const { addToWishlistHandler } = useWishlist();
   return cartData.length === 0 ? (
-    <div style={{ textAlign: "center" }}>
-      <h1>Oops, Your Cart is Empty ☹️</h1>
-      <img src={shoppingImage} />
-      <div className="btn-to-product-wrapper">
-        <Link className="decor-none btn-to-product" to="/products">
-          Go To Products Now{" "}
-        </Link>
+    <>
+      <Toast />
+      <div style={{ textAlign: "center" }}>
+        <h1>Oops, Your Cart is Empty ☹️</h1>
+        <img src={shoppingImage} />
+        <div className="btn-to-product-wrapper">
+          <Link className="decor-none btn-to-product" to="/products">
+            Go To Products Now{" "}
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   ) : (
     <div className="cartmain">
+      <Toast />
       <div className="wishlist-head-wrapper">
         <h3 className="wishlist-head">MY CART : </h3>
         <span className="text-secondary font3"> {cartCount} Items</span>
       </div>
       <div className="cart-left-pane">
-        {cartData.map(
-          ({ _id, image, name, price, qty, rating, description }) => {
-            return (
-              <div className="cart-items" key={_id}>
-                <img src={image} alt={name} />
+        {cartData.map((item) => {
+          return (
+            <div className="cart-items" key={item._id}>
+              <img src={item.image} alt={item.name} />
 
-                <div className="cart-product-detail">
-                  <div
-                    className="del-btn-cart"
-                    onClick={() => removeFromCartHandler(_id, qty)}
-                  >
-                    <i className="fa fa-trash"></i>
-                  </div>
-                  <h3 className="text-vibrant">{name}</h3>
-                  <p className="text-secondary ">{description}</p>
-                  <p className="item-price font3 mb-lg">₹{price} only</p>
-                  <div className="quantity mb-lg">
-                    <button
-                      onClick={() => productQtyDecreaseHandler(_id)}
-                      disabled={qty === 1}
-                    >
-                      -
-                    </button>
-                    <input type="text" disabled value={qty} />
-                    <button onClick={() => productQtyIncreaseHandler(_id)}>
-                      +
-                    </button>
-                  </div>
-                  <button className="wishlist-btn">Move to WishList</button>
+              <div className="cart-product-detail">
+                <div
+                  className="del-btn-cart"
+                  onClick={() => removeFromCartHandler(item._id, item.qty)}
+                >
+                  <i className="fa fa-trash"></i>
                 </div>
+                <h3 className="text-vibrant">{item.name}</h3>
+                <p className="text-secondary ">{item.description}</p>
+                <p className="item-price font3 mb-lg">₹{item.price} only</p>
+                <div className="quantity mb-lg">
+                  <button
+                    onClick={() => productQtyDecreaseHandler(item._id)}
+                    disabled={item.qty === 1}
+                  >
+                    -
+                  </button>
+                  <input type="text" disabled value={item.qty} />
+                  <button onClick={() => productQtyIncreaseHandler(item._id)}>
+                    +
+                  </button>
+                </div>
+                <button
+                  className="wishlist-btn"
+                  onClick={() => {
+                    addToWishlistHandler(item);
+                    removeFromCartHandler(item._id, item.qty);
+                  }}
+                >
+                  {" "}
+                  Move to WishList
+                </button>
               </div>
-            );
-          }
-        )}
+            </div>
+          );
+        })}
       </div>
       <div className="cart-right-pane">
         <div className="bill-card">
