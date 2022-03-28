@@ -8,7 +8,7 @@ const WishlistProvider = ({ children }) => {
   const [wishlistState, wishDispatch] = useReducer(wishlistReducer, {
     wishlistData: [],
   });
-  const { setToastMsg, setToastState, setToastBg } = useToast();
+  const { setToastVal } = useToast();
 
   const addToWishlistHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
@@ -26,10 +26,16 @@ const WishlistProvider = ({ children }) => {
       );
       if (response.status === 201) {
         setWishCount((count) => count + 1);
-        setToastState(true);
-        setToastMsg("Successfully added to Wishlist");
-        setToastBg("purple");
-        setTimeout(() => setToastState(false), 1500);
+        setToastVal((prevVal) => ({
+          ...prevVal,
+          bg: "purple",
+          isOpen: true,
+          msg: "Successfully added to Wishlist",
+        }));
+        setTimeout(
+          () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
+          1500
+        );
         wishDispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
       }
     } catch (err) {
@@ -47,11 +53,16 @@ const WishlistProvider = ({ children }) => {
       console.log(response.data.wishlist);
       if (response.status === 200) {
         setWishCount((count) => count - 1);
-        console.log("abc");
-        setToastState(true);
-        setToastMsg("Removed from Wishlist successfully");
-        setToastBg("red");
-        setTimeout(() => setToastState(false), 1500);
+        setToastVal((prevVal) => ({
+          ...prevVal,
+          msg: "Successfully removed from wishlist",
+          isOpen: true,
+          bg: "red",
+        }));
+        setTimeout(
+          () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
+          1500
+        );
         wishDispatch({
           type: "SET_WISHLIST",
           payload: response.data.wishlist,

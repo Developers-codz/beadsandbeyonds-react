@@ -3,18 +3,16 @@ import { createContext, useContext, useState } from "react";
 const ToastContext = createContext();
 
 const ToastProvider = ({ children }) => {
-  const [toastMsg, setToastMsg] = useState("");
-  const [toastState, setToastState] = useState(false);
-  const [toastBg, setToastBg] = useState("");
+  const [toastVal, setToastVal] = useState({
+    msg: "",
+    isOpen: false,
+    bg: "",
+  });
   return (
     <ToastContext.Provider
       value={{
-        toastMsg,
-        setToastMsg,
-        toastState,
-        setToastState,
-        toastBg,
-        setToastBg,
+        toastVal,
+        setToastVal,
       }}
     >
       {children}

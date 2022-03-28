@@ -4,7 +4,7 @@ import axios from "axios";
 import { useToast } from "./toast-context";
 const CartContext = createContext();
 const CartProvider = ({ children }) => {
-  const { setToastMsg, setToastState, setToastBg } = useToast();
+  const { setToastVal } = useToast();
   const [cartCount, setCartCount] = useState(0);
   const [cartState, cartDispatch] = useReducer(cartReducer, {
     cartData: [],
@@ -27,10 +27,16 @@ const CartProvider = ({ children }) => {
       );
       if (response.status === 201) {
         setCartCount((count) => count + 1);
-        setToastState(true);
-        setToastMsg("Successfully added to cart");
-        setToastBg("green");
-        setTimeout(() => setToastState(false), 1500);
+        setToastVal((prevVal) => ({
+          ...prevVal,
+          bg: "green",
+          isOpen: true,
+          msg: "Successfully Added to cart",
+        }));
+        setTimeout(
+          () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
+          1500
+        );
         cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
@@ -47,10 +53,16 @@ const CartProvider = ({ children }) => {
       });
       if (response.status === 200) {
         setCartCount((count) => count - qty);
-        setToastState(true);
-        setToastMsg("Removed from cart successfully");
-        setToastBg("red");
-        setTimeout(() => setToastState(false), 1500);
+        setToastVal((prevVal) => ({
+          ...prevVal,
+          bg: "red",
+          isOpen: true,
+          msg: "Successfully Removed from cart",
+        }));
+        setTimeout(
+          () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
+          1500
+        );
         cartDispatch({ type: "SET_CART", payload: response.data.cart });
       }
     } catch (err) {
