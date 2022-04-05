@@ -50,7 +50,6 @@ const WishlistProvider = ({ children }) => {
           authorization: encodedToken,
         },
       });
-      console.log(response.data.wishlist);
       if (response.status === 200) {
         setWishCount((count) => count - 1);
         setToastVal((prevVal) => ({

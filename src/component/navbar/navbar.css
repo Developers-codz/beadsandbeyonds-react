@@ -32,8 +32,9 @@ header {
 .page-link:hover {
   font-weight: 700;
 }
-.active-item {
+.active {
   color: var(--primary);
+  font-weight: 600;
 }
 .badge-container {
   margin: auto 2rem auto 0rem;
