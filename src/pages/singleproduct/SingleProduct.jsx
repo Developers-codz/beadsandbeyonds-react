@@ -2,7 +2,7 @@ import "./singleproduct.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "context/product-context";
 import { FastDelivery, InStock, ReturnPolicy } from "assets/icons";
-import { useWishlist } from "context/wishlist-context";
+import { Toast } from "component";
 import { useCart } from "context/cart-context";
 import { useToast } from "context/toast-context";
 import { Link } from "react-router-dom";
@@ -17,7 +17,6 @@ export const SingleProduct = () => {
   const product = getProduct(productId, 10);
   const {
     _id,
-    categoryName,
     description,
     image,
     name,
@@ -31,11 +30,6 @@ export const SingleProduct = () => {
     addToCartHandler,
     cartState: { cartData },
   } = useCart();
-  const {
-    wishlistState: { wishlistData },
-    addToWishlistHandler,
-    removeFromWishlistHandler,
-  } = useWishlist();
 
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   const clickHandler = (product) => {
@@ -44,6 +38,7 @@ export const SingleProduct = () => {
 
   return (
     <>
+    <Toast />
       <div className="shadow-box product_wrapper">
         <div className="image_wrapper ">
           <ReactImageMagnify
@@ -67,7 +62,6 @@ export const SingleProduct = () => {
               },
             }}
           />
-          {/* <img src={image} alt={name} /> */}
         </div>
         <div className="detail_wrapper vertical-direction">
           <h1 className="text-primary">{name}</h1>
@@ -78,7 +72,9 @@ export const SingleProduct = () => {
                 <span key={ind}>
                   <i
                     className={
-                      ratings >= ind + 1 ? "fa fa-star fa-lg" : "far fa-star fa-lg"
+                      ratings >= ind + 1
+                        ? "fa fa-star fa-lg"
+                        : "far fa-star fa-lg"
                     }
                   ></i>
                 </span>
