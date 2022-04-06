@@ -20,7 +20,6 @@ const Category = () => {
       <div className="category-wrapper">
         <h2 className="category-header font1">Featured Category</h2>
         {categoryList.map((item) => {
-          console.log(item.categoryName.toUpperCase());
           return (
             <div
               onClick={() =>

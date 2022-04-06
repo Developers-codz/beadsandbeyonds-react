@@ -1,19 +1,6 @@
 @import url("https://beadsui.netlify.app/css/main.css");
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-  font-size: 100%;
-}
-:root {
-  --bg-off-white: #f1e9e7;
-  --primary: #ca2535;
-  --dark: #000;
-}
+
 body {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

@@ -1,7 +1,7 @@
 import { useWishlist } from "context/wishlist-context";
 import { useCart } from "context/cart-context";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useAside } from "context/aside-context";
 import "./navbar.css";
 const Navbar = () => {
@@ -26,14 +26,14 @@ const Navbar = () => {
         <div className="mr-auto page-link-wrapper font3">
           <ul className="style-list-none">
             <li className="inline-block">
-              <Link to="/" className="page-link decor-none active-item">
+              <NavLink exact={true} className="page-link decor-none " to="/">
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="inline-block">
-              <Link to="/products" className="page-link decor-none">
+              <NavLink className="page-link decor-none" to="/products">
                 Shop
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

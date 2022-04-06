@@ -15,6 +15,7 @@ import {
   Login,
   Signup,
   Profile,
+  SingleProduct,
 } from "pages";
 import { Routes, Route } from "react-router-dom";
 import Mockman from "mockman-js";
@@ -27,7 +28,11 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Product />} />
+          <Route path="/products">
+            <Route path="/products" index element={<Product />} />
+
+            <Route path=":productId" element={<SingleProduct />} />
+          </Route>
 
           <Route element={<ProtectedRoute />}>
             <Route path="/wishlist" element={<Wishlist />} />
