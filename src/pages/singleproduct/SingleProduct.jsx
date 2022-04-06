@@ -38,17 +38,16 @@ export const SingleProduct = () => {
 
   return (
     <>
-    <Toast />
+      <Toast />
       <div className="shadow-box product_wrapper">
         <div className="image_wrapper ">
           <ReactImageMagnify
             {...{
               smallImage: {
                 alt: { name },
-
                 src: image,
-                width: 500,
-                height: 500,
+                width: 450,
+                height: 450,
               },
 
               largeImage: {
@@ -57,7 +56,7 @@ export const SingleProduct = () => {
                 height: 1800,
               },
               enlargedImageContainerDimensions: {
-                width: "170%",
+                width: "180%",
                 height: "100%",
               },
             }}
