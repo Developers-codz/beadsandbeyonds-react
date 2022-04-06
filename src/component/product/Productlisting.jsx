@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from "context/auth-context";
 import { useCart } from "context/cart-context";
 import { useToast } from "context/toast-context";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Productlisting = ({ product }) => {
   const {
     authState: { isAuthTokenPresent },
@@ -29,9 +29,15 @@ const Productlisting = ({ product }) => {
     addToCartHandler(product);
   };
 
+
   return (
-    <div className="card card-simple reset margin-md" key={product._id}>
-      <img src={product.image} alt={product.name} className="card-img" />
+    <div
+      className="card card-simple reset margin-md decor-none"
+      key={product._id}
+    >
+      <Link to={`/products/${product._id}`}>
+        <img src={product.image} alt={product.name} className="card-img" />
+      </Link>
       <div className="card-textarea">
         <div className="left-pane evenly-padding-sm">
           <h2 className="card-heading">{product.name}</h2>
