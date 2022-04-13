@@ -7,3 +7,4 @@ export { Productlisting } from "./product/Productlisting";
 export { ProtectedRoute } from "./ProtectedRoute";
 export { NonAuthenticatedRoute } from "./NonAuthenticatedRoute";
 export { Toast } from "./toast/Toast";
+export {Modal} from "./modal/Modal"

@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useReducer,
+  useEffect,
+} from "react";
 import { cartReducer } from "reducer";
 import axios from "axios";
 import { useToast } from "./toast-context";
@@ -6,6 +12,11 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const { setToastVal } = useToast();
   const [cartCount, setCartCount] = useState(0);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [couponDiscount, setCouponDiscount] = useState({
+    selected: false,
+    discount: 0,
+  });
   const [cartState, cartDispatch] = useReducer(cartReducer, {
     cartData: [],
   });
@@ -119,6 +130,38 @@ const CartProvider = ({ children }) => {
       console.log(err);
     }
   };
+  const total = cartState.cartData.reduce(
+    (acc, curr) => acc + curr.price * curr.qty,
+    0
+  );
+  console.log(total);
+  useEffect(() => {
+    if (total < 1000) {
+      couponDiscount.discount === 300
+        ? setCouponDiscount((disc) => ({
+            ...disc,
+            discount: 0,
+            selected: false,
+          }))
+        : setCouponDiscount((disc) => ({ ...disc, selected: false }));
+    }
+    if (total > 1000 && total < 1500) {
+      couponDiscount.discount === 500
+        ? setCouponDiscount((disc) => ({
+            ...disc,
+            discount: 0,
+            selected: false,
+          }))
+        : setCouponDiscount((disc) => ({ ...disc, selected: false }));
+    }
+    // total < 1000
+    //   ? setCouponDiscount((disc) => ({
+    //       ...disc,
+    //       discount: 0,
+    //       selected: false,
+    //     }))
+    //   : setCouponDiscount((disc) => ({...disc,selected:false}));
+  }, [total]);
 
   return (
     <CartContext.Provider
@@ -130,6 +173,10 @@ const CartProvider = ({ children }) => {
         removeFromCartHandler,
         productQtyIncreaseHandler,
         productQtyDecreaseHandler,
+        isModalOpen,
+        setModalOpen,
+        couponDiscount,
+        setCouponDiscount,
       }}
     >
       {children}
