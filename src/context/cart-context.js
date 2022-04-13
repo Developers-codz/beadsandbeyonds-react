@@ -154,13 +154,6 @@ const CartProvider = ({ children }) => {
           }))
         : setCouponDiscount((disc) => ({ ...disc, selected: false }));
     }
-    // total < 1000
-    //   ? setCouponDiscount((disc) => ({
-    //       ...disc,
-    //       discount: 0,
-    //       selected: false,
-    //     }))
-    //   : setCouponDiscount((disc) => ({...disc,selected:false}));
   }, [total]);
 
   return (
