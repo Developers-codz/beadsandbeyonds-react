@@ -154,7 +154,6 @@ strike {
   background-color: var(--bg-secondary);
   width: 800px;
   min-height: 300px;
-  display: none;
   z-index: 3;
 }
 
