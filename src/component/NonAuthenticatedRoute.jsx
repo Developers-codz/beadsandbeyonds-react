@@ -6,7 +6,6 @@ export const NonAuthenticatedRoute = () => {
     authState: { isAuthTokenPresent },
   } = useAuth();
   const location = useLocation();
-  console.log(location);
 
   return isAuthTokenPresent ? (
     <Navigate to={location.state.from.pathname} replace />

@@ -134,7 +134,7 @@ const CartProvider = ({ children }) => {
     (acc, curr) => acc + curr.price * curr.qty,
     0
   );
-  console.log(total);
+
   useEffect(() => {
     if (total < 1000) {
       couponDiscount.discount === 300
