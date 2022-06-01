@@ -13,6 +13,8 @@ const Cart = () => {
     cartCount,
     productQtyIncreaseHandler,
     productQtyDecreaseHandler,
+    setModalOpen,
+    couponDiscount: { discount },
   } = useCart();
   const { addToWishlistHandler } = useWishlist();
   return cartData.length === 0 ? (
@@ -80,6 +82,14 @@ const Cart = () => {
       </div>
       <div className="cart-right-pane">
         <div className="bill-card">
+          <h4 class="mb-lg text-vibrant">COUPONS</h4>
+          <button
+            class="mb-lg coupon"
+            id="coupon-btn"
+            onClick={() => setModalOpen(true)}
+          >
+            <i class="fa fa-tag"></i>Apply Coupon
+          </button>
           <h4 className="mb-lg text-vibrant">
             PRICE DETAILS: ({cartCount} items)
           </h4>
@@ -90,6 +100,12 @@ const Cart = () => {
                 {cartData.reduce((acc, curr) => acc + curr.price * curr.qty, 0)}
               </span>
             </div>
+            {discount > 0 && (
+              <div className="price-breakdown">
+                <h5 className="mb-lg">Coupon Discount: </h5>{" "}
+                <span>{discount}</span>
+              </div>
+            )}
             <div className="price-breakdown">
               <h5 className="mb-lg">Discount on MRP: </h5> <span> ₹99</span>
             </div>
@@ -105,9 +121,11 @@ const Cart = () => {
               <h5 className="">Total Amount</h5>
               <span>
                 {cartData.reduce(
-                  (acc, curr) => acc + curr.price * curr.qty - 99,
+                  (acc, curr) => acc + curr.price * curr.qty,
                   0
-                )}
+                ) -
+                  99 -
+                  discount}
               </span>
             </div>
             <button className="mb-lg place-order-btn">Place Order</button>
