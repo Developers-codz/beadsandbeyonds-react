@@ -35,7 +35,7 @@ const Product = () => {
           <button
             className="clear-btn"
             onClick={() =>
-              dispatch({ type: "FILTER", payload: "CLEAR_ALL_FILTER" })
+              dispatch({ type: "CLEAR", payload: "CLEAR_ALL_FILTER" })
             }
           >
             Clear All
@@ -73,44 +73,52 @@ const Product = () => {
             <h4 className="mb-lg">CATEGORY</h4>
             <div className="sort-by-category">
               <input
-                type="radio"
+                type="checkbox"
                 name="category"
                 id="painting"
-                onClick={() =>
-                  dispatch({ type: "FILTER", payload: "FILTER_BY_PAINTING" })
+                value="painting"
+                checked={state.categoryBy.find(cat => cat === "painting")}
+                onClick={(e) =>
+                  dispatch({ type: "FILTER", payload: e.target.value })
                 }
               />
               <label htmlFor="painting">Paintings</label>
             </div>
             <div className="sort-by-category">
               <input
-                type="radio"
+                type="checkbox"
                 name="category"
                 id="decoration"
-                onClick={() =>
-                  dispatch({ type: "FILTER", payload: "FILTER_BY_DECORATIONS" })
+                value="decorations"
+                checked={state.categoryBy.find(cat => cat === "decorations")}
+                onClick={(e) =>
+                  dispatch({ type: "FILTER", payload:e.target.value })
                 }
               />
               <label htmlFor="decoration">Decorations</label>
             </div>
             <div className="sort-by-category">
               <input
-                type="radio"
+                type="checkbox"
                 name="category"
                 id="toys"
-                onClick={() =>
-                  dispatch({ type: "FILTER", payload: "FILTER_BY_TOYS" })
+                value="toys"
+                checked={state.categoryBy.find(cat => cat === "toys")}
+                onClick={(e) =>
+                  dispatch({ type: "FILTER", payload: e.target.value })
                 }
               />
               <label htmlFor="toys">Toys</label>
             </div>
             <div className="sort-by-category">
               <input
-                type="radio"
+                type="checkbox"
                 name="category"
                 id="home-decor"
-                onClick={() =>
-                  dispatch({ type: "FILTER", payload: "FILTER_BY_HOME" })
+                value="home"
+                checked={state.categoryBy.find(cat => cat === "home")}
+                onClick={(e) =>
+                  dispatch({ type: "FILTER", payload: e.target.value })
                 }
               />
               <label htmlFor="home-decor">Home Decors</label>

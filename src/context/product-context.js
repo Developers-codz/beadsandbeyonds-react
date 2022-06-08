@@ -14,7 +14,7 @@ const ProductProvider = ({ children }) => {
   const [productList, setProductList] = useState([]);
   const [state, dispatch] = useReducer(productReducer, {
     sortBy: null,
-    categoryBy: null,
+    categoryBy: [],
     ratings: 2,
     clear: null,
     price:99
