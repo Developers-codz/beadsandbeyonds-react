@@ -6,6 +6,9 @@ import {
   image8,
   image9,
   image10,
+  item7,
+  item8, 
+  item9
 } from "assets/images/index";
 
 export const products = [
@@ -75,4 +78,38 @@ export const products = [
     description: "Made from Marbles",
     categoryName: "decorations",
   },
+  {
+    _id: uuid(),
+    name: "4 mini decor set",
+    image: item7,
+    ratings: 4,
+    price: 299,
+    original: 499,
+    discounted: 45,
+    description: "Wild Artificial pot Plant ",
+    categoryName: "home",
+  },
+  {
+    _id: uuid(),
+    name: "LED tree Lamp",
+    image: item8,
+    ratings: 4,
+    price: 949,
+    original: 1999,
+    discounted: 50,
+    description: "Pearl LED Lights for Home",
+    categoryName: "home",
+  },
+  {
+    _id: uuid(),
+    name: "Horse Framed Wall Art",
+    image: item9,
+    ratings: 5,
+    price: 699,
+    original: 1299,
+    discounted: 50,
+    description: "Arabian horses art",
+    categoryName: "painting",
+  },
+
 ];
