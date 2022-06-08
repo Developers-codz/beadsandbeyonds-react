@@ -7,6 +7,8 @@ const productReducer = (state, action) => {
       return { ...state, categoryBy: action.payload };
     case "RATINGS":
       return { ...state, ratings: action.payload };
-  }
+      case "PRICE" :
+      return {...state,price:action.payload};
+    }
 };
 export { productReducer };

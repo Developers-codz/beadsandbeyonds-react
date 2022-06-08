@@ -17,6 +17,7 @@ const ProductProvider = ({ children }) => {
     categoryBy: null,
     ratings: 2,
     clear: null,
+    price:99
   });
   useEffect(async () => {
     const res = await axios.get("/api/products");

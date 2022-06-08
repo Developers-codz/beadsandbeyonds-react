@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [authState, authDispatch] = useReducer(authReducer, userInitialState);
-  // const { setToastMsg, setToastState, setToastBg } = useToast();
+ 
   const { toastVal, setToastVal } = useToast();
   //  While login
   const loginHandler = async (e, formData) => {
