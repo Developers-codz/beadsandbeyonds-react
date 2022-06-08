@@ -1,8 +1,10 @@
 .main {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: "aside shop shop shop";
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "aside shop shop shop shop";
+  grid-gap:40px;
 }
+
 
 .filters-wrapper {
   grid-area: aside;
@@ -119,9 +121,11 @@ input[type="radio"] {
 
 @media only screen and (max-width: 768px) {
   .main {
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
       "aside aside aside aside"
       "shop shop shop shop";
+
   }
 
   .filters-wrapper {

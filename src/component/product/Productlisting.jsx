@@ -32,7 +32,7 @@ const Productlisting = ({ product }) => {
 
   return (
     <div
-      className="card card-simple reset margin-md decor-none"
+      className="card card-simple margin-sm reset decor-none"
       key={product._id}
     >
       <Link to={`/products/${product._id}`}>
