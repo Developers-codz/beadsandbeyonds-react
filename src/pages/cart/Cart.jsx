@@ -5,6 +5,7 @@ import { shoppingImage } from "assets/svgs";
 import { useCart } from "context/cart-context";
 import { useWishlist } from "context/wishlist-context";
 import { Toast } from "component";
+
 const Cart = () => {
   useDocumentTitle("Cart");
   const {
@@ -17,6 +18,7 @@ const Cart = () => {
     couponDiscount: { discount },
   } = useCart();
   const { addToWishlistHandler } = useWishlist();
+  
   return cartData.length === 0 ? (
     <>
       <Toast />
@@ -128,7 +130,11 @@ const Cart = () => {
                   discount}
               </span>
             </div>
-            <button className="mb-lg place-order-btn">Place Order</button>
+            <button className="mb-lg place-order-btn">
+              <Link to="/checkout" className="decor-none text-secondary ">
+                Place Order
+              </Link>
+            </button>
           </div>
         </div>
       </div>

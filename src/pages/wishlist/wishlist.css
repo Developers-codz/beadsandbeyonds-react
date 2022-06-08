@@ -51,7 +51,8 @@
 }
 
 .btn-to-cart,
-.btn-to-product {
+.btn-to-product,
+.add-address-btn{
   width: inherit;
   padding: 0.5rem 3rem 0.5rem 3rem;
   background-color: var(--bg-off-white);
@@ -68,7 +69,11 @@
   color: var(--primary);
   transform: scale(1.03, 1.03);
 }
-.btn-to-product {
+.add-address-btn:hover{
+  transform: scale(1.03, 1.03);
+}
+.btn-to-product,
+.add-address-btn {
   color: var(--dark);
   font-size: large;
 }

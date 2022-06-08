@@ -4,7 +4,6 @@ header {
   min-height: 10vh;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
 }
 .bottom-shadow{
 -webkit-box-shadow: 2px 15px 5px -14px rgba(0,0,0,0.75);

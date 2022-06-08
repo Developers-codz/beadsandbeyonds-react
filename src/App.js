@@ -6,6 +6,7 @@ import {
   ProtectedRoute,
   NonAuthenticatedRoute,
   Modal,
+  AddressModal,
 } from "component";
 import {
   Home,
@@ -17,19 +18,23 @@ import {
   Signup,
   Profile,
   SingleProduct,
+  Checkout
 } from "pages";
 import { Routes, Route } from "react-router-dom";
 import { useCart } from "context/cart-context";
 import Mockman from "mockman-js";
+import { useAddress } from "context/address-context";
 
 function App() {
   const { isModalOpen } = useCart();
+  const {isAddModalOpen} = useAddress();
   return (
     <>
       <Modal />
+      <AddressModal />
       <div
         style={
-          isModalOpen
+          isModalOpen || isAddModalOpen
             ? { pointerEvents: "none", opacity: ".6" }
             : { pointerEvents: "auto", opacity: "1" }
         }
@@ -50,6 +55,7 @@ function App() {
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/checkout" element={<Checkout />} />
               </Route>
 
               <Route element={<NonAuthenticatedRoute />}>

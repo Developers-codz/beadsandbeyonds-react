@@ -115,7 +115,8 @@ strike {
 }
 
 .place-order-btn,
-.apply-coupon-btn {
+.apply-coupon-btn
+ {
   background-color: var(--bg-off-white);
   color: var(--primary);
   border: none;
@@ -124,12 +125,18 @@ strike {
   margin: 1rem 0rem;
   font-weight: 600;
   border: 2px solid transparent;
+white-space: nowrap;
 }
 
 .place-order-btn:hover,
 .apply-coupon-btn:hover {
   border: 2px solid var(--primary);
   transform: scale(1.03, 1.03);
+}
+
+
+.place-order-btn > Link :hover{
+  color:var(--primary)
 }
 
 .del-btn-cart {
