@@ -25,7 +25,7 @@ const Category = () => {
               onClick={() =>
                 dispatch({
                   type: "FILTER",
-                  payload: `FILTER_BY_${item.categoryName.toUpperCase()}`,
+                  payload: `${item.categoryName}`,
                 })
               }
               style={{ display: "inline-block" }}

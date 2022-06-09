@@ -1,0 +1,32 @@
+.address-modal{
+    text-align: center;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--bg-secondary);
+    width: 400px;
+    min-height: 570px;
+    z-index: 3;
+}
+.address-form > input ,
+.name-input-wrapper > input {
+    padding:.3rem 1rem;
+    margin:1rem .5rem;
+    width:95%;
+}
+.name-input-wrapper > input {
+    
+    width:45%;
+}
+.address-form > select {
+    width:95%;
+    padding:.3rem 1rem;
+    margin:1rem .5rem;
+}
+@media only screen and (max-width: 768px) {
+   
+    .address-modal {
+      width: 250px;
+    }
+  }

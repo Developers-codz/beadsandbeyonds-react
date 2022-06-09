@@ -1,7 +1,7 @@
 import { useWishlist } from "context/wishlist-context";
 import { useCart } from "context/cart-context";
 import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link,useLocation } from "react-router-dom";
 import { useAside } from "context/aside-context";
 import "./navbar.css";
 const Navbar = () => {
@@ -9,9 +9,11 @@ const Navbar = () => {
   const { setActiveAside } = useAside();
   const { wishCount } = useWishlist();
   const { cartCount } = useCart();
+  const location = useLocation();
+  const path = location.pathname;
   return (
     <>
-      <header>
+      <header className={path !== "/" ? "bottom-shadow":""} >
         <div
           className="hamburger-wrapper"
           id="hamburger-btn"
@@ -52,12 +54,12 @@ const Navbar = () => {
             to="/wishlist"
             className="avatar avatar-badge text-primary reset"
           >
-            <i className="fas fa-lg fa-heart cart"> </i>
-            <div className="status-circle icon-top-badge-sm">{wishCount}</div>
+          <i className="fas fa-lg fa-heart cart"> </i>
+          { wishCount >0 &&<div className="status-circle icon-top-badge-sm">{wishCount}</div>}
           </Link>
           <Link to="/cart" className="avatar avatar-badge text-primary reset">
             <i className="fas fa-lg fa-shopping-cart cart"> </i>
-            <div className="status-circle icon-top-badge-sm">{cartCount}</div>
+            {cartCount>0 && <div className="status-circle icon-top-badge-sm">{cartCount}</div>}
           </Link>
         </div>
       </header>

@@ -1,15 +1,19 @@
 .main {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: "aside shop shop shop";
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "aside shop shop shop shop";
+  grid-gap:40px;
 }
+
 
 .filters-wrapper {
   grid-area: aside;
+  margin-top:2rem;
 }
 
 .shopping-wrapper {
   grid-area: shop;
+  margin-top:2rem;
 }
 
 .item-price {
@@ -34,7 +38,7 @@
   color: var(--primary);
   transform: scale(1.05, 1.05);
 }
-
+.price-section,
 .sort-section,
 .category-section,
 .rating-section {
@@ -53,7 +57,7 @@
   justify-content: space-between;
 }
 
-input[type="radio"] {
+input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 
@@ -119,9 +123,11 @@ input[type="radio"] {
 
 @media only screen and (max-width: 768px) {
   .main {
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
       "aside aside aside aside"
       "shop shop shop shop";
+
   }
 
   .filters-wrapper {

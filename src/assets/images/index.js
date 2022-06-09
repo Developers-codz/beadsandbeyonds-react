@@ -8,6 +8,9 @@ import image7 from "./painting2.webp";
 import image8 from "./item2.jpg";
 import image9 from "./windchime2.jpeg";
 import image10 from "./item3.jfif";
+import item7 from "./item7.jpg"
+import item8 from "./item8.jpg"
+import item9 from "./item9.webp"
 export {
   image1,
   image2,
@@ -19,4 +22,7 @@ export {
   image8,
   image9,
   image10,
+  item7,
+  item8,
+  item9
 };

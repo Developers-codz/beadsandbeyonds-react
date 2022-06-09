@@ -1,9 +1,14 @@
 header {
-  padding: 1.2rem 0.5rem;
+  padding: 1rem 0.5rem;
   grid-area: nav;
   min-height: 10vh;
   display: flex;
   justify-content: space-between;
+}
+.bottom-shadow{
+-webkit-box-shadow: 2px 15px 5px -14px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 15px 5px -14px rgba(0,0,0,0.75);
+box-shadow: -4px 15px 6px -15px rgba(0,0,0,0.75);
 }
 .hamburger-wrapper {
   display: none;
