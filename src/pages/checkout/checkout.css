@@ -48,4 +48,8 @@
         "address"
         "bill";
     }
+    .add-address-btn{
+        font-size: small;
+        margin-right:.5rem;
+    }
   }
