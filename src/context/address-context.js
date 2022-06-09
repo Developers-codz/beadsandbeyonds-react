@@ -1,4 +1,4 @@
-import {useContext,createContext,useState} from "react"
+import {useContext,createContext,useState,useEffect} from "react"
 import axios from "axios";
 
 
@@ -6,25 +6,44 @@ const AddressContext = createContext();
 
 const AddressProvider = ({children}) =>{
     const [isAddModalOpen,setAddModalOpen] = useState(false);
-    const [addresses,setAddresses] = useState({
-        address : [],
-    })
+    const [addresses,setAddresses] = useState([])
 
-    const setNewAddress = async (address) =>{
+
+    useEffect(() => {
         const encodedToken = localStorage.getItem("token")
-        try{
-            const response = await axios.post("/api/user/address/",
-            { address },
-            { headers: { authorization: encodedToken } })
-            console.log(response)
+        if (encodedToken) {
+          (async () => {
+            const encodedToken = localStorage.getItem("token")
+            try {
+              const response = await axios.get("/api/user/address", {
+                headers: { authorization: encodedToken },
+              });
+              const defaultAddress = response.data.addressList;
+              setAddresses([...defaultAddress])
+            } catch (err) {
+              console.error(err);
+            }
+          })();
+        }
+      }, []);
 
-        }
-        catch(err){
-            console.log(err)
-        }
+    const setNewAddress = async (address) => {
+      const encodedToken = localStorage.getItem("token")
+      try{
+        const response = await axios.post("/api/user/address/", 
+        { address },
+        { headers: { authorization: encodedToken } })
+        console.log(response)
+        const newAddress = response.data.addressList
+        setAddresses([...newAddress])
+
+      }
+      catch(err){
+          console.log(err)
+      }
     }
     return (
-        <AddressContext.Provider value={{isAddModalOpen,setAddModalOpen,setNewAddress}}>
+        <AddressContext.Provider value={{isAddModalOpen,setAddModalOpen,setNewAddress,addresses}}>
             {children}
         </AddressContext.Provider>
     )

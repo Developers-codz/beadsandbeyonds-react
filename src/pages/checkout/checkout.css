@@ -14,8 +14,38 @@
 .address-head{
     margin:0 1rem 1rem 2rem
 }
-.left-head{
+.left-head,
+.each-address{
     display:flex;
     justify-content: space-around;
     align-items: center;
 }
+.left-body{
+    width:70%;
+    margin: 3rem ;
+}
+.each-address{
+    justify-content: start;
+    margin:1rem 0;
+    padding:1rem;
+    border:1px solid black;
+}
+.each-address > input {
+    margin: 1rem;
+}
+.saving-text{
+   text-align: center;
+    margin-top: .7rem;
+    width: 100%;
+  
+}
+
+
+@media only screen and (max-width: 768px) {
+    .checkoutmain {
+      grid-template-areas:
+        "header"
+        "address"
+        "bill";
+    }
+  }

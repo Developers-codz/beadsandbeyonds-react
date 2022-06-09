@@ -12,7 +12,8 @@ export const Checkout = () => {
         cartCount,
         couponDiscount: { discount },
       } = useCart();
-      const {setAddModalOpen} = useAddress();
+      const {setAddModalOpen,addresses} = useAddress();
+      console.log(addresses)
   return (
     <div className='checkoutmain'>
          <div className="wishlist-head-wrapper">
@@ -24,8 +25,22 @@ export const Checkout = () => {
 
          <h3 className="address-head">Select Delivery Address</h3>
          <button className="decor-none add-address-btn  shadow-box" onClick={()=>{
-           console.log("I clicked")
            setAddModalOpen(true)}}>Add New Address</button>
+         </div>
+         <div className="left-body">
+          {addresses.map((add,i) => {
+            return (
+              <div className="each-address" key={add._id}>
+              <input type="radio" name="address" id={add._id} />
+              <label htmlFor={add._id}>
+                <h3>{add.firstname}{" "}{add.lastname}</h3>
+                <h4>{add.street}</h4>
+                <h4>{add.city}, {add.state} {add.country}, {add.pincode}</h4>
+                <h4>Phone - {add.phone}</h4>
+              </label>
+            </div>
+            )
+          })}
          </div>
     </div>
     <div className="checkout-right-pane">
@@ -68,7 +83,9 @@ export const Checkout = () => {
                   99 -
                   discount}
               </span>
+           
             </div>
+            <div className="text-success font6 saving-text">* You will save  { 99 + discount}  on this order</div>
             <button className="mb-lg place-order-btn">
               
                 Proceed To Pay

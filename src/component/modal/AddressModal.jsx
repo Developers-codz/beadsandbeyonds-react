@@ -7,7 +7,6 @@ export const AddressModal = () => {
   const { isAddModalOpen, setAddModalOpen,setNewAddress } = useAddress();
   const {authState} = useAuth();
   const [address,setAddress] = useState({
-      _id:authState.id,
       firstname:"",
       lastname:"",
       street:"",
@@ -15,7 +14,7 @@ export const AddressModal = () => {
       state:"",
       pincode:"",
       phone:"",
-      country:""
+      country:"India"
   })
   const changeHandler = (e) =>{
     setAddress(prev => ({...prev,[e.target.name]:e.target.value }))

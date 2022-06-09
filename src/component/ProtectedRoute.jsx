@@ -5,7 +5,6 @@ const ProtectedRoute = () => {
     authState: { isAuthTokenPresent },
   } = useAuth();
   const location = useLocation();
-  console.log(location);
   return isAuthTokenPresent ? (
     <Outlet />
   ) : (

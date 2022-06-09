@@ -24,6 +24,9 @@
     padding:.3rem 1rem;
     margin:1rem .5rem;
 }
-.save-add-btn{
-
-}
+@media only screen and (max-width: 768px) {
+   
+    .address-modal {
+      width: 250px;
+    }
+  }
