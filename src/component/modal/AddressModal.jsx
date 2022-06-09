@@ -4,24 +4,45 @@ import { useAddress } from "context/address-context";
 import { useAuth } from "context/auth-context";
 
 export const AddressModal = () => {
-  const { isAddModalOpen, setAddModalOpen,setNewAddress } = useAddress();
-  const {authState} = useAuth();
-  const [address,setAddress] = useState({
-      firstname:"",
-      lastname:"",
-      street:"",
-      city:"",
-      state:"",
-      pincode:"",
-      phone:"",
-      country:"India"
-  })
-  const changeHandler = (e) =>{
-    setAddress(prev => ({...prev,[e.target.name]:e.target.value }))
-  }
+  const { isAddModalOpen, setAddModalOpen, setNewAddress } = useAddress();
+  const initState = {
+    firstname: "",
+    lastname: "",
+    street: "",
+    city: "",
+    state: "",
+    pincode: "",
+    phone: "",
+    country: "India",
+  };
+  const [address, setAddress] = useState(initState);
+  const [errormsg, setErrorMsg] = useState("");
+  const changeHandler = (e) => {
+    setAddress((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
   const clickHandler = (e) => {
     e.preventDefault();
-    setNewAddress(address)
+    const { firstname, lastname, street, city, state, pincode, phone } =
+      address;
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      street === "" ||
+      city === "" ||
+      state === "" ||
+      pincode === "" ||
+      phone === ""
+    ) {
+      setErrorMsg("Please enter all the fields");
+      setTimeout(()=>{
+        setErrorMsg("")
+      },1000)
+      return;
+    }
+    setErrorMsg("")
+    setNewAddress(address);
+    setAddress(initState);
+    setAddModalOpen(false);
   };
   return (
     <div
@@ -68,24 +89,32 @@ export const AddressModal = () => {
             type="text"
             name="state"
             value={address.state}
-            placeholder="Enter your State" onChange={changeHandler}
+            placeholder="Enter your State"
+            onChange={changeHandler}
           />
           <input
             type="number"
             name="pincode"
             value={address.pincode}
-            placeholder="Enter your pincode" onChange={changeHandler}
+            placeholder="Enter your pincode"
+            onChange={changeHandler}
           />
           <input
             type="tel"
             name="phone"
             value={address.phone}
-            placeholder="Enter your Phone number" onChange={changeHandler}
+            placeholder="Enter your Phone number"
+            onChange={changeHandler}
           />
-          <select name="country" value={address.country} onChange={changeHandler}>
+          <select
+            name="country"
+            value={address.country}
+            onChange={changeHandler}
+          >
             <option value="India">India</option>
             <option value="Nepal">Nepal</option>
           </select>
+          <div>{errormsg}</div>
           <button className="apply-coupon-btn" onClick={clickHandler}>
             Save
           </button>
