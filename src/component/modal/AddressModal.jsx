@@ -4,7 +4,7 @@ import { useAddress } from "context/address-context";
 import { useAuth } from "context/auth-context";
 
 export const AddressModal = () => {
-  const { isAddModalOpen, setAddModalOpen, setNewAddress } = useAddress();
+  const { isAddressModalOpen, setAddressModalOpen, setNewAddress } = useAddress();
   const initState = {
     firstname: "",
     lastname: "",
@@ -39,17 +39,25 @@ export const AddressModal = () => {
       },1000)
       return;
     }
+    if(phone.length <10 || phone.length >10){
+      setErrorMsg("Phone number must be of 10 digits");
+      setTimeout(()=>{
+        setErrorMsg("")
+      },1000)
+      return;
+    }
+ 
     setErrorMsg("")
     setNewAddress(address);
     setAddress(initState);
-    setAddModalOpen(false);
+    setAddressModalOpen(false);
   };
   return (
     <div
-      style={isAddModalOpen ? { display: "block" } : { display: "none" }}
+      style={isAddressModalOpen ? { display: "block" } : { display: "none" }}
       className="address-modal shadow-box"
     >
-      <div className="modal-close-btn" onClick={() => setAddModalOpen(false)}>
+      <div className="modal-close-btn" onClick={() => setAddressModalOpen(false)}>
         <i className="fa fa-times fa-lg" id="modal-closer-btn"></i>
       </div>
       <div className="modal-body">
@@ -100,7 +108,7 @@ export const AddressModal = () => {
             onChange={changeHandler}
           />
           <input
-            type="tel"
+            type="number"
             name="phone"
             value={address.phone}
             placeholder="Enter your Phone number"

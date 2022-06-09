@@ -12,7 +12,7 @@ export const Checkout = () => {
         cartCount,
         couponDiscount: { discount },
       } = useCart();
-      const {setAddModalOpen,addresses} = useAddress();
+      const {setAddressModalOpen,addresses} = useAddress();
   return (
     <div className='checkoutmain'>
          <div className="wishlist-head-wrapper">
@@ -24,7 +24,7 @@ export const Checkout = () => {
 
          <h3 className="address-head">Select Delivery Address</h3>
          <button className="decor-none add-address-btn  shadow-box" onClick={()=>{
-           setAddModalOpen(true)}}>Add New Address</button>
+           setAddressModalOpen(true)}}>Add New Address</button>
          </div>
          <div className="left-body">
           {addresses.map((add,i) => {

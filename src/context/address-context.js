@@ -5,7 +5,7 @@ import axios from "axios";
 const AddressContext = createContext();
 
 const AddressProvider = ({children}) =>{
-    const [isAddModalOpen,setAddModalOpen] = useState(false);
+    const [isAddressModalOpen,setAddressModalOpen] = useState(false);
     const [addresses,setAddresses] = useState([])
 
 
@@ -43,7 +43,7 @@ const AddressProvider = ({children}) =>{
       }
     }
     return (
-        <AddressContext.Provider value={{isAddModalOpen,setAddModalOpen,setNewAddress,addresses}}>
+        <AddressContext.Provider value={{isAddressModalOpen,setAddressModalOpen,setNewAddress,addresses}}>
             {children}
         </AddressContext.Provider>
     )

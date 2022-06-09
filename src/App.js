@@ -27,14 +27,14 @@ import { useAddress } from "context/address-context";
 
 function App() {
   const { isModalOpen } = useCart();
-  const {isAddModalOpen} = useAddress();
+  const {isAddressModalOpen} = useAddress();
   return (
     <>
       <Modal />
       <AddressModal />
       <div
         style={
-          isModalOpen || isAddModalOpen
+          isModalOpen || isAddressModalOpen
             ? { pointerEvents: "none", opacity: ".6" }
             : { pointerEvents: "auto", opacity: "1" }
         }
