@@ -13,7 +13,6 @@ export const Checkout = () => {
         couponDiscount: { discount },
       } = useCart();
       const {setAddModalOpen,addresses} = useAddress();
-      console.log(addresses)
   return (
     <div className='checkoutmain'>
          <div className="wishlist-head-wrapper">
