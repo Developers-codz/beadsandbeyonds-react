@@ -21,7 +21,8 @@ const productReducer = (state, action) => {
           categoryBy: [],
           ratings: 2,
           clear: null,
-          price:99}
+          price:1000,
+          searchText:""}
       }
   }
 };

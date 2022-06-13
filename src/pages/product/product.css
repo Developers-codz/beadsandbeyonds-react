@@ -155,7 +155,7 @@ input[type="checkbox"] {
     z-index: 1;
     width: 100%;
     background-color: var(--bg-secondary);
-    transform: translateY(-40rem);
+    transform: translateY(-50rem);
     transition: all 500ms linear;
   }
 
