@@ -4,9 +4,8 @@ import { wishlistReducer } from "reducer/wishlist-reducer";
 import { useToast } from "./toast-context";
 const WishlistContext = createContext();
 const WishlistProvider = ({ children }) => {
-  const [wishCount, setWishCount] = useState(0);
   const [wishlistState, wishDispatch] = useReducer(wishlistReducer, {
-    wishlistData: [],
+    wishlistData: [],wishCount:0
   });
   const { setToastVal } = useToast();
 
@@ -25,7 +24,7 @@ const WishlistProvider = ({ children }) => {
         }
       );
       if (response.status === 201) {
-        setWishCount((count) => count + 1);
+       
         setToastVal((prevVal) => ({
           ...prevVal,
           bg: "purple",
@@ -36,7 +35,7 @@ const WishlistProvider = ({ children }) => {
           () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
           1500
         );
-        wishDispatch({ type: "SET_WISHLIST", payload: response.data.wishlist });
+        wishDispatch({ type: "ADD_TO_WISHLIST", payload: response.data.wishlist });
       }
     } catch (err) {
       console.log(err);
@@ -51,7 +50,6 @@ const WishlistProvider = ({ children }) => {
         },
       });
       if (response.status === 200) {
-        setWishCount((count) => count - 1);
         setToastVal((prevVal) => ({
           ...prevVal,
           msg: "Successfully removed from wishlist",
@@ -63,7 +61,7 @@ const WishlistProvider = ({ children }) => {
           1500
         );
         wishDispatch({
-          type: "SET_WISHLIST",
+          type: "REMOVE_FROM_WISHLIST",
           payload: response.data.wishlist,
         });
       }
@@ -71,13 +69,18 @@ const WishlistProvider = ({ children }) => {
       console.log(err);
     }
   };
+
+  const truncateWish = () =>{
+    wishDispatch({type:"TRUNCATE"})
+  }
   return (
     <WishlistContext.Provider
       value={{
-        wishCount,
+        // wishCount,
         wishlistState,
         addToWishlistHandler,
         removeFromWishlistHandler,
+        truncateWish
       }}
     >
       {children}

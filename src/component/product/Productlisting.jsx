@@ -1,5 +1,6 @@
 import { useWishlist } from "context/wishlist-context";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "context/auth-context";
 import { useCart } from "context/cart-context";
 import { useToast } from "context/toast-context";
@@ -10,6 +11,7 @@ const Productlisting = ({ product }) => {
   } = useAuth();
   const { setToastVal } = useToast();
   const [liked, setLiked] = useState(true);
+  const navigate = useNavigate()
 
   const {
     setCartCount,
@@ -26,7 +28,9 @@ const Productlisting = ({ product }) => {
   var classNames = require("classnames");
 
   const clickHandler = (e, product) => {
-    addToCartHandler(product);
+    const token = localStorage.getItem("token")
+    if(token) addToCartHandler(product);
+    else navigate("/login")
   };
 
 
@@ -74,12 +78,14 @@ const Productlisting = ({ product }) => {
             { fa: liked === false }
           )}
           onClick={() => {
+            const token = localStorage.getItem("token")
             if (isInWishList(product._id)) {
-              setLiked(true);
+              if(token) setLiked(true);
               removeFromWishlistHandler(product._id);
             } else {
-              setLiked(false);
-              addToWishlistHandler(product);
+              if(token) setLiked(false);
+             addToWishlistHandler(product);
+            if(!token) navigate("/login")
             }
           }}
         ></i>

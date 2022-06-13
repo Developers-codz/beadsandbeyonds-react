@@ -25,7 +25,6 @@ const Product = () => {
   const rateFilteredData = getRateFilteredData(sortedData, state.ratings);
   const filteredData = getFilteredData(rateFilteredData, state.categoryBy);
   const searchedData = getSearchedData(filteredData,state.searchText)
-  console.log(searchedData)
 
 
   return (

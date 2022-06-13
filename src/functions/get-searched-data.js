@@ -1,5 +1,4 @@
 export const getSearchedData = (products,itemToSearch) => {
-    console.log(itemToSearch)
     if(itemToSearch === ""){
         return products;
     }

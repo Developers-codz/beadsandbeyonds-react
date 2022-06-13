@@ -10,8 +10,8 @@ const Navbar = () => {
   const [searchBar,setSearchBar] = useState(false)
   const [searchText,setSearchText] = useState("")
   const { setActiveAside } = useAside();
-  const { wishCount } = useWishlist();
-  const { cartCount } = useCart();
+  const { wishlistState } = useWishlist();
+  const {cartState  } = useCart();
   const {dispatch} = useProduct();
   const location = useLocation();
   const navigate = useNavigate()
@@ -71,11 +71,11 @@ const Navbar = () => {
             className="avatar avatar-badge text-primary reset"
           >
           <i className="fas fa-lg fa-heart cart"> </i>
-          { wishCount >0 &&<div className="status-circle icon-top-badge-sm">{wishCount}</div>}
+          { wishlistState.wishCount >0 &&<div className="status-circle icon-top-badge-sm">{wishlistState.wishCount}</div>}
           </Link>
           <Link to="/cart" className="avatar avatar-badge text-primary reset">
             <i className="fas fa-lg fa-shopping-cart cart"> </i>
-            {cartCount>0 && <div className="status-circle icon-top-badge-sm">{cartCount}</div>}
+            {cartState.cartCount>0 && <div className="status-circle icon-top-badge-sm">{cartState.cartCount}</div>}
           </Link>
         </div>
       </header>

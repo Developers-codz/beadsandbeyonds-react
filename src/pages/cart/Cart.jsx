@@ -9,9 +9,9 @@ import { Toast } from "component";
 const Cart = () => {
   useDocumentTitle("Cart");
   const {
-    cartState: { cartData },
+    cartState: { cartData,cartCount },
     removeFromCartHandler,
-    cartCount,
+    
     productQtyIncreaseHandler,
     productQtyDecreaseHandler,
     setModalOpen,
