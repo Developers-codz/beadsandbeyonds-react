@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     loginHandler(e, formData);
   };
-  console.log(msg);
+
 
   return (
     <>

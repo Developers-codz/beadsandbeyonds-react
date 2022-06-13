@@ -4,13 +4,16 @@ import { useAuth } from "context/auth-context";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
 import { Toast } from "component";
+import { useWishlist } from "context/wishlist-context";
+import { useCart } from "context/cart-context";
 const Profile = () => {
   useDocumentTitle("Profile");
   const {
     logoutHandler,
     authState: { firstName },
   } = useAuth();
-
+  const {truncateWish} = useWishlist();
+  const {truncateCart} = useCart();
   return (
     <>
       <Toast />
@@ -25,7 +28,10 @@ const Profile = () => {
 
         <button
           className="btn-to-cart margin-md"
-          onClick={() => logoutHandler()}
+          onClick={() => {logoutHandler()
+          truncateWish()
+          truncateCart()
+          }}
         >
           Log out
         </button>

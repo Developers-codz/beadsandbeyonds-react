@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
 import { formatDate } from "../utils/authUtils";
+import jwt_decode from "jwt-decode";
 const sign = require("jwt-encode");
 /**
  * All the routes related to Auth are present here.
@@ -96,3 +97,4 @@ export const loginHandler = function (schema, request) {
     );
   }
 };
+

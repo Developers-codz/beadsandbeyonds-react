@@ -29,6 +29,7 @@ export const SingleProduct = () => {
   const {
     addToCartHandler,
     cartState: { cartData },
+    isFetching
   } = useCart();
 
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
@@ -110,6 +111,7 @@ export const SingleProduct = () => {
               </Link>
             ) : (
               <button
+              disabled={isFetching}
                 className="btn btn-primary btn_product_action text-secondary btn-cart"
                 onClick={() => clickHandler(product)}
               >
@@ -120,8 +122,13 @@ export const SingleProduct = () => {
             <button
               className="btn btn-outline btn_product_action"
               onClick={() => {
-                clickHandler(product);
-                navigate("/cart");
+                if(isInCartList(_id)){
+                  navigate("/cart");
+                }
+                else{
+                  clickHandler(product);
+                  navigate("/cart")
+                }
               }}
             >
               Buy Now

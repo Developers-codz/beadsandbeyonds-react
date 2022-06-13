@@ -30,6 +30,9 @@
 .btn_product_action:hover {
   transform: scale(1.06, 1.06);
 }
+.btn_product_action:disabled{
+  cursor: not-allowed;
+}
 
 .features {
   padding: 1rem 0 1rem 0;

@@ -11,20 +11,42 @@ import { useToast } from "./toast-context";
 const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const { setToastVal } = useToast();
-  const [cartCount, setCartCount] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
   const [couponDiscount, setCouponDiscount] = useState({
     selected: false,
     discount: 0,
   });
   const [cartState, cartDispatch] = useReducer(cartReducer, {
-    cartData: [],
+    cartData: [],cartCount:0
   });
-  const encodedToken = localStorage.getItem("token");
+  const [isFetching,setIsFetching] = useState(false)
+
+  const encodedToken = localStorage.getItem("token")
+  useEffect(()=>{
+    const encodedToken = localStorage.getItem("token")
+    if(encodedToken){
+      ( async () =>{
+        const encodedToken = localStorage.getItem("token")
+        try{
+          const response = await axios.get("/api/user/cart",{
+            headers:{
+              authorization:encodedToken
+            }
+          });
+          cartDispatch({type:"SET_CART",payload:response.data.cart})
+        }
+        catch(err){
+          console.log(err)
+        }
+      })()
+    }
+  },[encodedToken])
+  
 
   const addToCartHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.post(
         "/api/user/cart",
         {
@@ -36,8 +58,8 @@ const CartProvider = ({ children }) => {
           },
         }
       );
+      setIsFetching(false)
       if (response.status === 201) {
-        setCartCount((count) => count + 1);
         setToastVal((prevVal) => ({
           ...prevVal,
           bg: "green",
@@ -48,7 +70,7 @@ const CartProvider = ({ children }) => {
           () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
           1500
         );
-        cartDispatch({ type: "SET_CART", payload: response.data.cart });
+        cartDispatch({ type: "ADD_TO_CART", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
@@ -57,13 +79,15 @@ const CartProvider = ({ children }) => {
   const removeFromCartHandler = async (_id, qty) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.delete(`/api/user/cart/${_id}`, {
         headers: {
           authorization: encodedToken,
         },
       });
+      setIsFetching(false)
       if (response.status === 200) {
-        setCartCount((count) => count - qty);
+        // setCartCount((count) => count - qty);
         setToastVal((prevVal) => ({
           ...prevVal,
           bg: "red",
@@ -74,7 +98,7 @@ const CartProvider = ({ children }) => {
           () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
           1500
         );
-        cartDispatch({ type: "SET_CART", payload: response.data.cart });
+        cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart ,qty:qty});
       }
     } catch (err) {
       console.log(err);
@@ -84,6 +108,7 @@ const CartProvider = ({ children }) => {
   const productQtyIncreaseHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.post(
         `/api/user/cart/${_id}`,
         {
@@ -97,9 +122,9 @@ const CartProvider = ({ children }) => {
           },
         }
       );
+      setIsFetching(false)
       if (response.status === 200) {
-        setCartCount((count) => count + 1);
-        cartDispatch({ type: "SET_CART", payload: response.data.cart });
+        cartDispatch({ type: "INCREASE_CART_ITEM", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
@@ -108,6 +133,7 @@ const CartProvider = ({ children }) => {
   const productQtyDecreaseHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.post(
         `/api/user/cart/${_id}`,
         {
@@ -121,10 +147,9 @@ const CartProvider = ({ children }) => {
           },
         }
       );
-      console.log(response);
+      setIsFetching(false)
       if (response.status === 200) {
-        setCartCount((count) => count - 1);
-        cartDispatch({ type: "SET_CART", payload: response.data.cart });
+        cartDispatch({ type: "DECREASE_CART_ITEM", payload: response.data.cart });
       }
     } catch (err) {
       console.log(err);
@@ -156,10 +181,13 @@ const CartProvider = ({ children }) => {
     }
   }, [total]);
 
+  const truncateCart = () =>{
+    cartDispatch({type:"TRUNCATE"})
+  }
+
   return (
     <CartContext.Provider
       value={{
-        cartCount,
         cartState,
         cartDispatch,
         addToCartHandler,
@@ -170,6 +198,8 @@ const CartProvider = ({ children }) => {
         setModalOpen,
         couponDiscount,
         setCouponDiscount,
+        truncateCart,
+        isFetching
       }}
     >
       {children}

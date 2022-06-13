@@ -120,6 +120,22 @@ input[type="checkbox"] {
 .cartBtn {
   margin-left: 43px;
 }
+.wishlist-icon,
+.rm-wishlist-icon{
+  cursor: pointer;
+  height:3rem;
+  background-color: transparent;
+  border: none;
+}
+.rm-wishlist-icon{
+  height:1rem
+}
+.cartBtn:disabled,
+.wishlist-icon:disabled,
+.rm-wishlist-icon:disabled{
+  cursor: not-allowed;
+}
+
 
 @media only screen and (max-width: 768px) {
   .main {
@@ -139,7 +155,7 @@ input[type="checkbox"] {
     z-index: 1;
     width: 100%;
     background-color: var(--bg-secondary);
-    transform: translateY(-40rem);
+    transform: translateY(-50rem);
     transition: all 500ms linear;
   }
 

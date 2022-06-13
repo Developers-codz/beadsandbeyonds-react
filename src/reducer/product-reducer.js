@@ -14,12 +14,15 @@ const productReducer = (state, action) => {
       return { ...state, ratings: action.payload };
     case "PRICE":
       return { ...state, price: action.payload };
+      case "SEARCH":
+        return {...state,searchText:action.payload};
       case "CLEAR" :{
         return {...state,sortBy: null,
           categoryBy: [],
           ratings: 2,
           clear: null,
-          price:99}
+          price:1000,
+          searchText:""}
       }
   }
 };

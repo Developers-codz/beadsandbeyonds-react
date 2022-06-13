@@ -65,6 +65,9 @@ body {
   border: 2px solid var(--primary);
   transform: scale(1.03, 1.03);
 }
+.quantity > button:disabled{
+  cursor: not-allowed;
+}
 
 .quantity > input {
   width: 2.5rem;
@@ -102,6 +105,9 @@ body {
   transform: scale(1.03, 1.03);
   color: var(--primary);
   border: 2px solid var(--primary);
+}
+.wishlist-btn:disabled{
+  cursor: not-allowed;
 }
 
 .bill-amount {
@@ -153,6 +159,8 @@ white-space: nowrap;
   transform: scale(1.03, 1.03);
   opacity: 1;
 }
+
+
 .coupon-modal {
   position: fixed;
   top: 50%;

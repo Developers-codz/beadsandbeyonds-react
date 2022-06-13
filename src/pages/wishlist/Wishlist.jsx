@@ -9,19 +9,19 @@ import { Toast } from "component";
 const Wishlist = () => {
   useDocumentTitle("WishList");
   const {
-    wishlistState: { wishlistData },
-    wishCount,
+    wishlistState: { wishlistData,wishCount },
     removeFromWishlistHandler,
+    isDisabled
   } = useWishlist();
   const {
     cartState: { cartData },
     addToCartHandler,
+    isFetching
   } = useCart();
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   const clickHandler = (product) => {
     addToCartHandler(product);
   };
-  // console.log(wishlistData);
   if (wishlistData.length > 0) {
     return (
       <>
@@ -40,10 +40,13 @@ const Wishlist = () => {
                   className="wishlist-img"
                 />
                 <div className="del-btn">
+                  <button disabled={isDisabled} className="rm-wishlist-icon">
+
                   <i
                     onClick={() => removeFromWishlistHandler(item._id)}
                     className="fa fa-trash"
                   ></i>
+                  </button>
                 </div>
                 <h2 className="card-heading ">{item.name}</h2>
                 <p className="text-secondary">{item.description}</p>
@@ -57,7 +60,7 @@ const Wishlist = () => {
                       <button className="reset btn-to-cart">Go to cart</button>
                     </Link>
                   ) : (
-                    <button
+                    <button disabled={isFetching}
                       className="reset btn-to-cart"
                       onClick={() => clickHandler(item)}
                     >

@@ -1,50 +1,112 @@
-import "./checkout.css"
-import React from 'react';
+import "./checkout.css";
+import React, { useState } from "react";
 import { useDocumentTitle } from "hooks";
 import { useCart } from "context/cart-context";
 import { useAddress } from "context/address-context";
 
-
 export const Checkout = () => {
-    useDocumentTitle("Checkout");
-    const {
-        cartState: { cartData },
-        cartCount,
-        couponDiscount: { discount },
-      } = useCart();
-      const {setAddressModalOpen,addresses} = useAddress();
+  useDocumentTitle("Checkout");
+  const {
+    cartState: { cartData },
+    cartCount,
+    couponDiscount: { discount },
+  } = useCart();
+  const { setAddressModalOpen, addresses } = useAddress();
+  const totalAmt =
+    cartData.reduce((acc, curr) => acc + curr.price * curr.qty, 0) -
+    99 -
+    discount;
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+
+      script.onload = () => {
+        resolve(true);
+      };
+
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_KEY,
+        currency: "INR",
+        amount: totalAmt * 100,
+        name: "Beads and Beyonds",
+        description: "Thanks for shopping with us!",
+        prefill: {
+          name: "Jane Doe",
+          email: "janedoe@gmail.com",
+          contact: "9934567890",
+        },
+        handler: function (response) {
+          alert(
+            `Payment Successful Payment Id ${response.razorpay_payment_id}`
+          );
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    });
+  };
+  const razorpayHandler = async () => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!res) {
+      console.log("you are offline");
+      return;
+    }
+  };
   return (
-    <div className='checkoutmain'>
-         <div className="wishlist-head-wrapper">
+    <div className="checkoutmain">
+      <div className="wishlist-head-wrapper">
         <h3 className="wishlist-head">Checkout : </h3>
         <span className="text-secondary font3"> {cartCount} Items</span>
       </div>
-     <div className="checkout-left-pane">
-         <div className="left-head">
-
-         <h3 className="address-head">Select Delivery Address</h3>
-         <button className="decor-none add-address-btn  shadow-box" onClick={()=>{
-           setAddressModalOpen(true)}}>Add New Address</button>
-         </div>
-         <div className="left-body">
-          {addresses.map((add,i) => {
+      <div className="checkout-left-pane">
+        <div className="left-head">
+          <h3 className="address-head">Select Delivery Address</h3>
+          <button
+            className="decor-none add-address-btn  shadow-box"
+            onClick={() => {
+              setAddressModalOpen(true);
+            }}
+          >
+            Add New Address
+          </button>
+        </div>
+        <div className="left-body">
+          {addresses.map((add, i) => {
             return (
               <div className="each-address" key={add._id}>
-              <input type="radio" name="address" id={add._id} />
-              <label htmlFor={add._id}>
-                <h3>{add.firstname}{" "}{add.lastname}</h3>
-                <h4>{add.street}</h4>
-                <h4>{add.city}, {add.state} {add.country}, {add.pincode}</h4>
-                <h4>Phone - {add.phone}</h4>
-              </label>
-            </div>
-            )
+                <input
+                  type="radio"
+                  name="address"
+                  id={add._id}
+                  
+                />
+                <label htmlFor={add._id}>
+                  <h3>
+                    {add.firstname} {add.lastname}
+                  </h3>
+                  <h4>{add.street}</h4>
+                  <h4>
+                    {add.city}, {add.state} {add.country}, {add.pincode}
+                  </h4>
+                  <h4>Phone - {add.phone}</h4>
+                </label>
+              </div>
+            );
           })}
-         </div>
-    </div>
-    <div className="checkout-right-pane">
-    <div className="bill-card">
-         
+        </div>
+      </div>
+      <div className="checkout-right-pane">
+        <div className="bill-card">
           <h4 className="mb-lg text-vibrant">
             Order Summary: ({cartCount} items)
           </h4>
@@ -82,17 +144,16 @@ export const Checkout = () => {
                   99 -
                   discount}
               </span>
-           
             </div>
-            <div className="text-success font6 saving-text">* You will save  { 99 + discount}  on this order</div>
-            <button className="mb-lg place-order-btn">
-              
-                Proceed To Pay
-          
+            <div className="text-success font6 saving-text">
+              * You will save {99 + discount} on this order
+            </div>
+            <button className="mb-lg place-order-btn" onClick={razorpayHandler}>
+              Proceed To Pay
             </button>
           </div>
         </div>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};

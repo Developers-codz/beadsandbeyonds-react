@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./product.css";
 import axios from "axios";
 import { useProduct } from "context/product-context";
-import { getSortedData, getFilteredData, getRateFilteredData ,getPriceFilteredData} from "functions";
+import { getSortedData, getFilteredData, getRateFilteredData ,getPriceFilteredData,getSearchedData} from "functions";
 import { Productlisting } from "component";
 import { useDocumentTitle } from "hooks";
 import { Toast } from "component";
@@ -24,6 +24,8 @@ const Product = () => {
   const sortedData = getSortedData(priceFiltered, state.sortBy);
   const rateFilteredData = getRateFilteredData(sortedData, state.ratings);
   const filteredData = getFilteredData(rateFilteredData, state.categoryBy);
+  const searchedData = getSearchedData(filteredData,state.searchText)
+
 
   return (
     <div className="main">
@@ -177,7 +179,7 @@ const Product = () => {
       </div>
       <div className="shopping-wrapper centered">
         <Toast />
-        {filteredData.map((item) => {
+        {searchedData.map((item) => {
           return (
             <>
               <Productlisting product={item} />
