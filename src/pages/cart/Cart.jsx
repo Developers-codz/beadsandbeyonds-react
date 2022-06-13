@@ -11,7 +11,7 @@ const Cart = () => {
   const {
     cartState: { cartData,cartCount },
     removeFromCartHandler,
-    
+    isFetching,
     productQtyIncreaseHandler,
     productQtyDecreaseHandler,
     setModalOpen,
@@ -47,7 +47,7 @@ const Cart = () => {
 
               <div className="cart-product-detail">
                 <div
-                  className="del-btn-cart"
+                  className="del-btn-cart" 
                   onClick={() => removeFromCartHandler(item._id, item.qty)}
                 >
                   <i className="fa fa-trash"></i>
@@ -58,17 +58,18 @@ const Cart = () => {
                 <div className="quantity mb-lg">
                   <button
                     onClick={() => productQtyDecreaseHandler(item._id)}
-                    disabled={item.qty === 1}
+                    disabled={isFetching ||item.qty === 1}
                   >
                     -
                   </button>
                   <input type="text" disabled value={item.qty} />
-                  <button onClick={() => productQtyIncreaseHandler(item._id)}>
+                  <button onClick={() => productQtyIncreaseHandler(item._id)} disabled={isFetching}>
                     +
                   </button>
                 </div>
                 <button
                   className="wishlist-btn"
+                  disabled={isFetching}
                   onClick={() => {
                     addToWishlistHandler(item);
                     removeFromCartHandler(item._id, item.qty);

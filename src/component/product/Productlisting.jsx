@@ -14,14 +14,15 @@ const Productlisting = ({ product }) => {
   const navigate = useNavigate()
 
   const {
-    setCartCount,
     addToCartHandler,
     cartState: { cartData },
+    isFetching
   } = useCart();
   const {
     wishlistState: { wishlistData },
     addToWishlistHandler,
     removeFromWishlistHandler,
+    isDisabled
   } = useWishlist();
   const isInWishList = (id) => wishlistData.find(({ _id }) => _id == id);
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
@@ -62,7 +63,7 @@ const Productlisting = ({ product }) => {
           ) : (
             <div className="move-to-cart-btn-wrapper">
               <button
-                className="reset btn-to-cart cartBtn"
+                className="reset btn-to-cart cartBtn" disabled={isFetching}
                 onClick={(e) => clickHandler(e, product)}
               >
                 Add to cart
@@ -70,13 +71,17 @@ const Productlisting = ({ product }) => {
             </div>
           )}
         </div>
+        <button className="wishlist-icon"  disabled={isDisabled}>
+
         <i
+       
           className={classNames(
-            "fa-heart fa-lg evenly-padding-sm card-icon border-round text-primary",
+            "fa-heart fa-lg evenly-padding-sm card-icon border-round text-primary ",
             { far: liked },
             { fa: isInWishList(product._id) },
             { fa: liked === false }
-          )}
+            )}
+            
           onClick={() => {
             const token = localStorage.getItem("token")
             if (isInWishList(product._id)) {
@@ -89,6 +94,7 @@ const Productlisting = ({ product }) => {
             }
           }}
         ></i>
+        </button>
       </div>
     </div>
   );

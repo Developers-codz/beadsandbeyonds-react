@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer,useState } from "react";
 import { wishlistReducer } from "reducer/wishlist-reducer";
 import { useToast } from "./toast-context";
 const WishlistContext = createContext();
@@ -8,6 +8,7 @@ const WishlistProvider = ({ children }) => {
     wishlistData: [],
     wishCount: 0,
   });
+  const [isDisabled,setDisabled] = useState(false)
   const { setToastVal } = useToast();
 
   const encodedToken = localStorage.getItem("token");
@@ -35,7 +36,13 @@ const WishlistProvider = ({ children }) => {
 
   const addToWishlistHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
+    const isinWish = wishlistState.wishlistData.find(wishlist => wishlist._id === item._id)
+
+   if(isinWish){
+     return;
+   }
     try {
+      setDisabled(true)
       const response = await axios.post(
         "api/user/wishlist",
         {
@@ -47,6 +54,7 @@ const WishlistProvider = ({ children }) => {
           },
         }
       );
+      setDisabled(false)
       if (response.status === 201) {
         setToastVal((prevVal) => ({
           ...prevVal,
@@ -70,11 +78,13 @@ const WishlistProvider = ({ children }) => {
   const removeFromWishlistHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setDisabled(true)
       const response = await axios.delete(`/api/user/wishlist/${_id}`, {
         headers: {
           authorization: encodedToken,
         },
       });
+      setDisabled(false)
       if (response.status === 200) {
         setToastVal((prevVal) => ({
           ...prevVal,
@@ -102,11 +112,11 @@ const WishlistProvider = ({ children }) => {
   return (
     <WishlistContext.Provider
       value={{
-        // wishCount,
         wishlistState,
         addToWishlistHandler,
         removeFromWishlistHandler,
         truncateWish,
+        isDisabled
       }}
     >
       {children}

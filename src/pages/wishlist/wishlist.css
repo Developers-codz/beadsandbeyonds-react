@@ -69,6 +69,9 @@
   color: var(--primary);
   transform: scale(1.03, 1.03);
 }
+.btn-to-cart:disabled{
+  cursor:not-allowed
+}
 .add-address-btn:hover{
   transform: scale(1.03, 1.03);
 }

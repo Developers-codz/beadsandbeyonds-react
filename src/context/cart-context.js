@@ -19,6 +19,7 @@ const CartProvider = ({ children }) => {
   const [cartState, cartDispatch] = useReducer(cartReducer, {
     cartData: [],cartCount:0
   });
+  const [isFetching,setIsFetching] = useState(false)
 
   const encodedToken = localStorage.getItem("token")
   useEffect(()=>{
@@ -45,6 +46,7 @@ const CartProvider = ({ children }) => {
   const addToCartHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.post(
         "/api/user/cart",
         {
@@ -56,6 +58,7 @@ const CartProvider = ({ children }) => {
           },
         }
       );
+      setIsFetching(false)
       if (response.status === 201) {
         setToastVal((prevVal) => ({
           ...prevVal,
@@ -76,11 +79,13 @@ const CartProvider = ({ children }) => {
   const removeFromCartHandler = async (_id, qty) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.delete(`/api/user/cart/${_id}`, {
         headers: {
           authorization: encodedToken,
         },
       });
+      setIsFetching(false)
       if (response.status === 200) {
         // setCartCount((count) => count - qty);
         setToastVal((prevVal) => ({
@@ -103,6 +108,7 @@ const CartProvider = ({ children }) => {
   const productQtyIncreaseHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.post(
         `/api/user/cart/${_id}`,
         {
@@ -116,6 +122,7 @@ const CartProvider = ({ children }) => {
           },
         }
       );
+      setIsFetching(false)
       if (response.status === 200) {
         cartDispatch({ type: "INCREASE_CART_ITEM", payload: response.data.cart });
       }
@@ -126,6 +133,7 @@ const CartProvider = ({ children }) => {
   const productQtyDecreaseHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
+      setIsFetching(true)
       const response = await axios.post(
         `/api/user/cart/${_id}`,
         {
@@ -139,7 +147,7 @@ const CartProvider = ({ children }) => {
           },
         }
       );
-      console.log(response);
+      setIsFetching(false)
       if (response.status === 200) {
         cartDispatch({ type: "DECREASE_CART_ITEM", payload: response.data.cart });
       }
@@ -191,6 +199,7 @@ const CartProvider = ({ children }) => {
         couponDiscount,
         setCouponDiscount,
         truncateCart,
+        isFetching
       }}
     >
       {children}
