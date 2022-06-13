@@ -20,6 +20,28 @@ const CartProvider = ({ children }) => {
     cartData: [],cartCount:0
   });
 
+  const encodedToken = localStorage.getItem("token")
+  useEffect(()=>{
+    const encodedToken = localStorage.getItem("token")
+    if(encodedToken){
+      ( async () =>{
+        const encodedToken = localStorage.getItem("token")
+        try{
+          const response = await axios.get("/api/user/cart",{
+            headers:{
+              authorization:encodedToken
+            }
+          });
+          cartDispatch({type:"SET_CART",payload:response.data.cart})
+        }
+        catch(err){
+          console.log(err)
+        }
+      })()
+    }
+  },[encodedToken])
+  
+
   const addToCartHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
     try {
@@ -168,7 +190,7 @@ const CartProvider = ({ children }) => {
         setModalOpen,
         couponDiscount,
         setCouponDiscount,
-        truncateCart
+        truncateCart,
       }}
     >
       {children}

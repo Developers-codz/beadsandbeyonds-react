@@ -1,5 +1,10 @@
 export const cartReducer = (state, action) => {
   switch (action.type) {
+    case "SET_CART" :
+      return {
+        ...state,cartData:action.payload,
+        cartCount:action.payload.reduce((acc,curr) =>acc+=curr.qty,  0)
+      }
     case "ADD_TO_CART":
       return {
         ...state,

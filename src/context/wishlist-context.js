@@ -1,13 +1,37 @@
 import axios from "axios";
-import { createContext, useContext, useState, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { wishlistReducer } from "reducer/wishlist-reducer";
 import { useToast } from "./toast-context";
 const WishlistContext = createContext();
 const WishlistProvider = ({ children }) => {
   const [wishlistState, wishDispatch] = useReducer(wishlistReducer, {
-    wishlistData: [],wishCount:0
+    wishlistData: [],
+    wishCount: 0,
   });
   const { setToastVal } = useToast();
+
+  const encodedToken = localStorage.getItem("token");
+  useEffect(() => {
+    const encodedToken = localStorage.getItem("token");
+    if (encodedToken) {
+      (async () => {
+        const encodedToken = localStorage.getItem("token");
+        try {
+          const response = await axios.get("/api/user/wishlist", {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
+          wishDispatch({
+            type: "SET_WISHLIST",
+            payload: response.data.wishlist,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      })();
+    }
+  }, [encodedToken]);
 
   const addToWishlistHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
@@ -24,7 +48,6 @@ const WishlistProvider = ({ children }) => {
         }
       );
       if (response.status === 201) {
-       
         setToastVal((prevVal) => ({
           ...prevVal,
           bg: "purple",
@@ -35,7 +58,10 @@ const WishlistProvider = ({ children }) => {
           () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
           1500
         );
-        wishDispatch({ type: "ADD_TO_WISHLIST", payload: response.data.wishlist });
+        wishDispatch({
+          type: "ADD_TO_WISHLIST",
+          payload: response.data.wishlist,
+        });
       }
     } catch (err) {
       console.log(err);
@@ -70,9 +96,9 @@ const WishlistProvider = ({ children }) => {
     }
   };
 
-  const truncateWish = () =>{
-    wishDispatch({type:"TRUNCATE"})
-  }
+  const truncateWish = () => {
+    wishDispatch({ type: "TRUNCATE" });
+  };
   return (
     <WishlistContext.Provider
       value={{
@@ -80,7 +106,7 @@ const WishlistProvider = ({ children }) => {
         wishlistState,
         addToWishlistHandler,
         removeFromWishlistHandler,
-        truncateWish
+        truncateWish,
       }}
     >
       {children}
