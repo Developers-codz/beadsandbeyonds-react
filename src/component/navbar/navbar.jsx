@@ -1,16 +1,32 @@
 import { useWishlist } from "context/wishlist-context";
+import {useState,useEffect} from "react"
 import { useCart } from "context/cart-context";
-import { useState } from "react";
-import { NavLink, Link,useLocation } from "react-router-dom";
+import { NavLink, Link,useLocation,useNavigate } from "react-router-dom";
 import { useAside } from "context/aside-context";
+import {useProduct} from "context/product-context"
 import "./navbar.css";
+import {debounce} from "functions"
 const Navbar = () => {
-  const [searchBar, setSearchBar] = useState(false);
+  const [searchBar,setSearchBar] = useState(false)
+  const [searchText,setSearchText] = useState("")
   const { setActiveAside } = useAside();
   const { wishCount } = useWishlist();
   const { cartCount } = useCart();
+  const {dispatch} = useProduct();
   const location = useLocation();
+  const navigate = useNavigate()
   const path = location.pathname;
+
+ 
+  const changeHandler = () =>{
+      dispatch({type:"SEARCH",payload: searchText}) 
+  }
+
+  const getOptimisedVersion = debounce(changeHandler,1000);
+
+  useEffect(()=>{
+    getOptimisedVersion()
+  },[searchText])
   return (
     <>
       <header className={path !== "/" ? "bottom-shadow":""} >
@@ -72,6 +88,12 @@ const Navbar = () => {
             type="text"
             className="search_input font2"
             placeholder="SEARCH...."
+            value={searchText}
+            onChange={(e)=>{
+              setSearchText(e.target.value.toLowerCase())
+              navigate("/products")
+            }
+            }
           />
           <i
             className="fa fa-times fa-2x search-close"
