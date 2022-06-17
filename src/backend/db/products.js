@@ -13,7 +13,7 @@ import {
 
 export const products = [
   {
-    _id: uuid(),
+    _id:"3704667f-4abc-4c22-bbdd-0a4bdbd52d99",
     name: "Madhubani Art",
     image: image7,
     ratings: 5,
@@ -24,7 +24,7 @@ export const products = [
     categoryName: "painting",
   },
   {
-    _id: uuid(),
+    _id: "ee46b756-2402-4002-b158-2243b5bd7e8d",
     name: "Toy Car",
     image: image1,
     ratings: 3,
@@ -35,7 +35,7 @@ export const products = [
     categoryName: "toys",
   },
   {
-    _id: uuid(),
+    _id:"bb86bda0-a2c5-43e7-8c98-997ce95817fc",
     name: "Wind Chyme",
     image: image6,
     ratings: 4,
@@ -46,7 +46,7 @@ export const products = [
     categoryName: "decorations",
   },
   {
-    _id: uuid(),
+    _id: "4ae7a696-fd18-4061-8309-f07002277bdc",
     name: "Basket",
     image: image8,
     ratings: 4,
@@ -57,7 +57,7 @@ export const products = [
     categoryName: "home",
   },
   {
-    _id: uuid(),
+    _id: "ebb61bb1-7cf9-4303-aab5-1015e213145d",
     name: "Wind Chyme",
     image: image9,
     ratings: 3.5,
@@ -68,7 +68,7 @@ export const products = [
     categoryName: "decorations",
   },
   {
-    _id: uuid(),
+    _id: "c0d14ede-8bd0-46fe-95e2-46baf3269107",
     name: "Marble Pot",
     image: image10,
     ratings: 5,
@@ -79,7 +79,7 @@ export const products = [
     categoryName: "decorations",
   },
   {
-    _id: uuid(),
+    _id: "49af1064-72d0-45f3-96a9-582d2742de6a",
     name: "4 mini decor set",
     image: item7,
     ratings: 4,
@@ -90,7 +90,7 @@ export const products = [
     categoryName: "home",
   },
   {
-    _id: uuid(),
+    _id: "d5c427cc-e05b-4075-ba46-8692c10cd8d7",
     name: "LED tree Lamp",
     image: item8,
     ratings: 4,
@@ -101,7 +101,7 @@ export const products = [
     categoryName: "home",
   },
   {
-    _id: uuid(),
+    _id: "6d511572-5acd-44fa-ba1c-5d5f75753e0e",
     name: "Horse Framed Wall Art",
     image: item9,
     ratings: 5,
