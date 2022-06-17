@@ -1,8 +1,10 @@
 import "./checkout.css";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDocumentTitle } from "hooks";
 import { useCart } from "context/cart-context";
 import { useAddress } from "context/address-context";
+import { useToast } from "context/toast-context";
+import { Toast } from "component";
 
 export const Checkout = () => {
   useDocumentTitle("Checkout");
@@ -11,11 +13,16 @@ export const Checkout = () => {
     cartCount,
     couponDiscount: { discount },
   } = useCart();
-  const { setAddressModalOpen, addresses } = useAddress();
+  const { setAddressModalOpen, addresses,getAddress } = useAddress();
+  const {setToastVal} = useToast()
+  useEffect(()=>{
+    getAddress()
+  },[])
   const totalAmt =
     cartData.reduce((acc, curr) => acc + curr.price * curr.qty, 0) -
     99 -
     discount;
+    const [selectedAddress,setSelectedAddress] = useState("")
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -54,6 +61,19 @@ export const Checkout = () => {
     });
   };
   const razorpayHandler = async () => {
+    if(selectedAddress === ""){
+      setToastVal((prevVal) => ({
+        ...prevVal,
+        bg: "red",
+        isOpen: true,
+        msg: "Please select a delivery Address",
+      }));
+      setTimeout(
+        () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
+        1500
+      );
+      return ;
+    }
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -63,6 +83,8 @@ export const Checkout = () => {
     }
   };
   return (
+  <>
+  <Toast />
     <div className="checkoutmain">
       <div className="wishlist-head-wrapper">
         <h3 className="wishlist-head">Checkout : </h3>
@@ -88,7 +110,8 @@ export const Checkout = () => {
                   type="radio"
                   name="address"
                   id={add._id}
-                  
+                  value={add._id}
+                  onChange={(e)=>setSelectedAddress(e.target.value)}
                 />
                 <label htmlFor={add._id}>
                   <h3>
@@ -155,5 +178,6 @@ export const Checkout = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };

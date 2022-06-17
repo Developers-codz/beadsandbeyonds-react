@@ -111,6 +111,23 @@ const AuthProvider = ({ children }) => {
     );
     authDispatch({ type: "logOut" });
   };
+  const checkTokenHandler = async () =>{
+    const encodedToken = localStorage.getItem("token")
+    if(encodedToken) {
+      try{
+        const response = await axios.post("/api/auth/verify",{
+          encodedToken,
+        });
+        console.log(response.data.user)
+        authDispatch({type:"loggedIn",payload:response.data.user})
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+    
+  
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -119,6 +136,7 @@ const AuthProvider = ({ children }) => {
         loginHandler,
         signupHandler,
         logoutHandler,
+        checkTokenHandler
       }}
     >
       {children}

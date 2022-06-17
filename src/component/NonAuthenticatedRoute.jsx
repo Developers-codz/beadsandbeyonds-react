@@ -3,12 +3,12 @@ import { useAuth } from "context/auth-context";
 
 export const NonAuthenticatedRoute = () => {
   const {
-    authState: { isAuthTokenPresent },
+    authState: { authToken },
   } = useAuth();
   const location = useLocation();
   const path = location?.state?.from?.pathname
 
-  return isAuthTokenPresent ? (
+  return authToken !== "" ? (
     <Navigate to={path === undefined ? "/products" : path} replace />
   ) : (
     <Outlet />

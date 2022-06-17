@@ -1,4 +1,5 @@
 import "App.css";
+import {useEffect} from "react"
 import {
   Navbar,
   Footer,
@@ -24,10 +25,14 @@ import { Routes, Route } from "react-router-dom";
 import { useCart } from "context/cart-context";
 import Mockman from "mockman-js";
 import { useAddress } from "context/address-context";
-
+import {useAuth} from "context/auth-context"
 function App() {
   const { isModalOpen } = useCart();
   const {isAddressModalOpen} = useAddress();
+  const {checkTokenHandler} = useAuth();
+  useEffect(()=>{
+    checkTokenHandler()
+  },[])
   return (
     <>
       <Modal />
