@@ -85,13 +85,13 @@ const Cart = () => {
       </div>
       <div className="cart-right-pane">
         <div className="bill-card">
-          <h4 class="mb-lg text-vibrant">COUPONS</h4>
+          <h4 className="mb-lg text-vibrant">COUPONS</h4>
           <button
-            class="mb-lg coupon"
+            className="mb-lg coupon"
             id="coupon-btn"
             onClick={() => setModalOpen(true)}
           >
-            <i class="fa fa-tag"></i>Apply Coupon
+            <i className="fa fa-tag"></i>Apply Coupon
           </button>
           <h4 className="mb-lg text-vibrant">
             PRICE DETAILS: ({cartCount} items)

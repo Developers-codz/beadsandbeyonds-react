@@ -14,7 +14,6 @@ export const Checkout = () => {
     cartState: { cartData },
     cartCount,
     couponDiscount: { discount },
-    truncateCart,
     clearCartAtServer
   } = useCart();
   const {
@@ -70,7 +69,6 @@ export const Checkout = () => {
               deliveryAddress: deliveryAddress,
             },
           ]);
-          truncateCart();
           clearCartAtServer()
           navigate("/profile/orders");
         },

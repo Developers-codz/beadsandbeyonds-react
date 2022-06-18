@@ -188,7 +188,7 @@ const CartProvider = ({ children }) => {
         }
       })
       if (response.status === 200) {
-        console.log(response.data)
+        cartDispatch({type:"TRUNCATE"})
         return response.data;
       }
     }
@@ -198,9 +198,6 @@ const CartProvider = ({ children }) => {
 
   }
 
-  const truncateCart = () =>{
-    cartDispatch({type:"TRUNCATE"})
-  }
 
   return (
     <CartContext.Provider
@@ -215,7 +212,7 @@ const CartProvider = ({ children }) => {
         setModalOpen,
         couponDiscount,
         setCouponDiscount,
-        truncateCart,
+      
         isFetching,
         clearCartAtServer
       }}

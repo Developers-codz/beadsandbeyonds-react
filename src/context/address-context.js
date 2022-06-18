@@ -30,7 +30,6 @@ const AddressProvider = ({ children }) => {
         { address },
         { headers: { authorization: encodedToken } }
       );
-      console.log(response);
       const newAddress = response.data.addressList;
       setAddresses([...newAddress]);
     } catch (err) {

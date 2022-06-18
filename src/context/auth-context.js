@@ -118,7 +118,6 @@ const AuthProvider = ({ children }) => {
         const response = await axios.post("/api/auth/verify",{
           encodedToken,
         });
-        console.log(response.data.user)
         authDispatch({type:"loggedIn",payload:response.data.user})
       }
       catch(err){
