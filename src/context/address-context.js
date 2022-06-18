@@ -6,6 +6,8 @@ const AddressContext = createContext();
 const AddressProvider = ({ children }) => {
   const [isAddressModalOpen, setAddressModalOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
+  const [orders,setOrders] = useState([])
+
 
   const getAddress = async () => {
     const encodedToken = localStorage.getItem("token");
@@ -19,24 +21,7 @@ const AddressProvider = ({ children }) => {
       console.error(err);
     }
   };
-  // useEffect(() => {
-  //     const encodedToken = localStorage.getItem("token")
-  //     if (encodedToken) {
-  //       (async () => {
-  //         const encodedToken = localStorage.getItem("token")
-  //         try {
-  //           const response = await axios.get("/api/user/address", {
-  //             headers: { authorization: encodedToken },
-  //           });
-  //           const defaultAddress = response.data.addressList;
-  //           setAddresses([...defaultAddress])
-  //         } catch (err) {
-  //           console.error(err);
-  //         }
-  //       })();
-  //     }
-  //   }, [encodedToken]);
-
+ 
   const setNewAddress = async (address) => {
     const encodedToken = localStorage.getItem("token");
     try {
@@ -60,6 +45,8 @@ const AddressProvider = ({ children }) => {
         setNewAddress,
         addresses,
         getAddress,
+        orders,
+        setOrders
       }}
     >
       {children}

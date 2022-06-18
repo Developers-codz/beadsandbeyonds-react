@@ -34,6 +34,10 @@ import {
   removeAddressHandler,
   updateAddressHandler,
 } from "./backend/controllers/AddressController";
+import {
+  getOrdersHandler,
+  addItemToOrdersHandler,
+} from "./backend/controllers/OrdersController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
@@ -53,6 +57,7 @@ export function makeServer({ environment = "development" } = {}) {
       wishlist: Model,
       carousel: Model,
       address: Model,
+      orders: Model,
     },
 
     // Runs on the start of the server
@@ -128,6 +133,9 @@ export function makeServer({ environment = "development" } = {}) {
    this.post("/user/address", addAddressHandler.bind(this));
    this.post("/user/address/:addressId", updateAddressHandler.bind(this));
    this.delete("/user/address/:addressId", removeAddressHandler.bind(this));
+
+   this.get("/user/orders", getOrdersHandler.bind(this));
+   this.post("/user/orders", addItemToOrdersHandler.bind(this));
     },
   });
 }

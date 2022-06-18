@@ -87,7 +87,6 @@ const CartProvider = ({ children }) => {
       });
       setIsFetching(false)
       if (response.status === 200) {
-        // setCartCount((count) => count - qty);
         setToastVal((prevVal) => ({
           ...prevVal,
           bg: "red",
