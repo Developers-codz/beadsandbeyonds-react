@@ -4,5 +4,23 @@
   align-items: center;
   min-height: 20vh;
   flex-direction: column;
-  margin: 1rem;
+  margin: 1rem 1rem;
+  
 }
+.tabs{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.tabLinks{
+  padding:1rem;
+  font-size: 1.3rem;
+  border-bottom: 3px solid var(--primary);
+}
+.profile-table > tr > div>th{
+  border-bottom: 1px solid black;
+}
+.profile-table > tr > div {
+  margin: 1rem 0;
+}
+

@@ -18,6 +18,7 @@ export const Checkout = () => {
   useEffect(()=>{
     getAddress()
   },[])
+
   const totalAmt =
     cartData.reduce((acc, curr) => acc + curr.price * curr.qty, 0) -
     99 -

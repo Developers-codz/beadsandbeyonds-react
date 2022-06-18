@@ -8,3 +8,6 @@ export { Login } from "./login/Login";
 export { Profile } from "./profile/Profile";
 export { SingleProduct } from "./singleproduct/SingleProduct";
 export {Checkout} from "./checkout/Checkout"
+export {OrdersTab} from "./profile/tabs/OrdersTab"
+export {AddressTab} from "./profile/tabs/AddressTab"
+export {ProfileTab} from "./profile/tabs/ProfileTab"
