@@ -15,6 +15,7 @@ export const Checkout = () => {
     cartCount,
     couponDiscount: { discount },
     truncateCart,
+    clearCartAtServer
   } = useCart();
   const {
     setAddressModalOpen,
@@ -70,6 +71,7 @@ export const Checkout = () => {
             },
           ]);
           truncateCart();
+          clearCartAtServer()
           navigate("/profile/orders");
         },
       };

@@ -179,6 +179,24 @@ const CartProvider = ({ children }) => {
         : setCouponDiscount((disc) => ({ ...disc, selected: false }));
     }
   }, [total]);
+  const clearCartAtServer = async () =>{
+    const encodedToken = localStorage.getItem("token")
+    try{
+      const response = await axios.delete("/api/user/cart/all",{
+        headers:{
+          authorization:encodedToken
+        }
+      })
+      if (response.status === 200) {
+        console.log(response.data)
+        return response.data;
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
+
+  }
 
   const truncateCart = () =>{
     cartDispatch({type:"TRUNCATE"})
@@ -198,7 +216,8 @@ const CartProvider = ({ children }) => {
         couponDiscount,
         setCouponDiscount,
         truncateCart,
-        isFetching
+        isFetching,
+        clearCartAtServer
       }}
     >
       {children}

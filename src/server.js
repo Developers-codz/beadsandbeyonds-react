@@ -10,6 +10,7 @@ import {
   getCartItemsHandler,
   removeItemFromCartHandler,
   updateCartItemHandler,
+  clearCartHandler,
 } from "./backend/controllers/CartController";
 import {
   getAllCategoriesHandler,
@@ -34,10 +35,6 @@ import {
   removeAddressHandler,
   updateAddressHandler,
 } from "./backend/controllers/AddressController";
-import {
-  getOrdersHandler,
-  addItemToOrdersHandler,
-} from "./backend/controllers/OrdersController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
@@ -119,6 +116,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/cart/:productId",
         removeItemFromCartHandler.bind(this)
       );
+      this.delete("/user/cart/all", clearCartHandler.bind(this));
 
       // wishlist routes (private)
       this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
@@ -134,8 +132,6 @@ export function makeServer({ environment = "development" } = {}) {
    this.post("/user/address/:addressId", updateAddressHandler.bind(this));
    this.delete("/user/address/:addressId", removeAddressHandler.bind(this));
 
-   this.get("/user/orders", getOrdersHandler.bind(this));
-   this.post("/user/orders", addItemToOrdersHandler.bind(this));
     },
   });
 }
