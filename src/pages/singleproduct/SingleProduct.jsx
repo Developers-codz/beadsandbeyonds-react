@@ -15,16 +15,6 @@ export const SingleProduct = () => {
   let productId = param.productId;
   const getProduct = (id) => productList.find(({ _id }) => id === _id);
   const product = getProduct(productId, 10);
-  // const {
-  //   _id,
-  //   description,
-  //   image,
-  //   name,
-  //   price,
-  //   ratings,
-  //   discounted,
-  //   original,
-  // } = product;
 
   const {
     addToCartHandler,
