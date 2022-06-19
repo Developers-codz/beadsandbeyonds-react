@@ -156,6 +156,7 @@ const Product = () => {
                 type="radio"
                 name="sort-by-price"
                 id="low-to-high"
+                checked={state.sortBy === "LOW_TO_HIGH" }
                 onClick={() =>
                   dispatch({ type: "SORT", payload: "LOW_TO_HIGH" })
                 }
@@ -167,6 +168,7 @@ const Product = () => {
                 type="radio"
                 name="sort-by-price"
                 id="high-to-low"
+                checked={state.sortBy === "HIGH_TO_LOW" }
                 onClick={() =>
                   dispatch({ type: "SORT", payload: "HIGH_TO_LOW" })
                 }

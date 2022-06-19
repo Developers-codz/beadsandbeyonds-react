@@ -5,12 +5,13 @@ export const userInitialState = {
   isAuthTokenPresent: false,
   authToken: "",
   msg: "",
+  email:""
 };
 
 export const authReducer = (state, action) => {
   switch (action.type) {
     case "loggedIn": {
-      const { firstName, lastName, _id } = action.payload;
+      const { firstName, lastName, _id,email } = action.payload;
       const token = action.token;
       return {
         ...state,
@@ -19,10 +20,11 @@ export const authReducer = (state, action) => {
         lastName: lastName,
         isAuthTokenPresent: true,
         authToken: token,
+        email:email
       };
     }
     case "signup": {
-      const { firstName, lastName, _id } = action.payload;
+      const { firstName, lastName, _id,email } = action.payload;
       const token = action.token;
       return {
         ...state,
@@ -31,6 +33,7 @@ export const authReducer = (state, action) => {
         lastName: lastName,
         isAuthTokenPresent: true,
         authToken: token,
+        email:email
       };
     }
     case "error":

@@ -15,16 +15,6 @@ export const SingleProduct = () => {
   let productId = param.productId;
   const getProduct = (id) => productList.find(({ _id }) => id === _id);
   const product = getProduct(productId, 10);
-  const {
-    _id,
-    description,
-    image,
-    name,
-    price,
-    ratings,
-    discounted,
-    original,
-  } = product;
 
   const {
     addToCartHandler,
@@ -45,14 +35,14 @@ export const SingleProduct = () => {
           <ReactImageMagnify
             {...{
               smallImage: {
-                alt: { name },
-                src: image,
+                alt:"product",
+                src: product?.image,
                 width: 450,
                 height: 450,
               },
 
               largeImage: {
-                src: image,
+                src: product?.image,
                 width: 1500,
                 height: 1800,
               },
@@ -61,18 +51,19 @@ export const SingleProduct = () => {
                 height: "100%",
               },
             }}
+            isActivatedOnTouch 
           />
         </div>
         <div className="detail_wrapper vertical-direction">
-          <h1 className="text-primary">{name}</h1>
-          <p className="mb-lg">{description}</p>
+          <h1 className="text-primary">{product?.name}</h1>
+          <p className="mb-lg">{product?.description}</p>
           <div className="mb-lg text-primary">
             {[...Array(5)].map((a, ind) => {
               return (
                 <span key={ind}>
                   <i
                     className={
-                      ratings >= ind + 1
+                      product?.ratings >= ind + 1
                         ? "fa fa-star fa-lg"
                         : "far fa-star fa-lg"
                     }
@@ -82,10 +73,10 @@ export const SingleProduct = () => {
             })}
           </div>
           <h2 className="inline-block">
-            Rs. {price} <small>only</small>
+            Rs. {product?.price} <small>only</small>
           </h2>{" "}
-          <strike className="text-danger">₹{original}</strike>
-          <h3 className="text-success">({discounted}% off)</h3>
+          <strike className="text-danger">₹{product?.original}</strike>
+          <h3 className="text-success">({product?.discounted}% off)</h3>
           <small className="mb-lg">Inclusive of all taxes</small>
           <div className="features">
             <div className="feature">
@@ -102,7 +93,7 @@ export const SingleProduct = () => {
             </div>
           </div>
           <div className="btn_wrapper">
-            {isInCartList(_id) ? (
+            {isInCartList(product?._id) ? (
               <Link
                 to="/cart"
                 className="btn btn-primary btn_product_action text-secondary btn-cart decor-none"
@@ -122,7 +113,7 @@ export const SingleProduct = () => {
             <button
               className="btn btn-outline btn_product_action"
               onClick={() => {
-                if(isInCartList(_id)){
+                if(isInCartList(product?._id)){
                   navigate("/cart");
                 }
                 else{

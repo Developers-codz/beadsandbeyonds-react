@@ -33,6 +33,7 @@ box-shadow: -4px 15px 6px -15px rgba(0,0,0,0.75);
 }
 .page-link {
   color: var(--text-color);
+  background-color:transparent !important;
 }
 .page-link:hover {
   font-weight: 700;

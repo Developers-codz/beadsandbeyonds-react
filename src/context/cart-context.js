@@ -8,6 +8,7 @@ import {
 import { cartReducer } from "reducer";
 import axios from "axios";
 import { useToast } from "./toast-context";
+
 const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const { setToastVal } = useToast();
@@ -17,36 +18,35 @@ const CartProvider = ({ children }) => {
     discount: 0,
   });
   const [cartState, cartDispatch] = useReducer(cartReducer, {
-    cartData: [],cartCount:0
+    cartData: [],
+    cartCount: 0,
   });
-  const [isFetching,setIsFetching] = useState(false)
+  const [isFetching, setIsFetching] = useState(false);
 
-  const encodedToken = localStorage.getItem("token")
-  useEffect(()=>{
-    const encodedToken = localStorage.getItem("token")
-    if(encodedToken){
-      ( async () =>{
-        const encodedToken = localStorage.getItem("token")
-        try{
-          const response = await axios.get("/api/user/cart",{
-            headers:{
-              authorization:encodedToken
-            }
+  const encodedToken = localStorage.getItem("token");
+  useEffect(() => {
+    const encodedToken = localStorage.getItem("token");
+    if (encodedToken) {
+      (async () => {
+        const encodedToken = localStorage.getItem("token");
+        try {
+          const response = await axios.get("/api/user/cart", {
+            headers: {
+              authorization: encodedToken,
+            },
           });
-          cartDispatch({type:"SET_CART",payload:response.data.cart})
+          cartDispatch({ type: "SET_CART", payload: response.data.cart });
+        } catch (err) {
+          console.log(err);
         }
-        catch(err){
-          console.log(err)
-        }
-      })()
+      })();
     }
-  },[encodedToken])
-  
+  }, [encodedToken]);
 
   const addToCartHandler = async (item) => {
     const encodedToken = localStorage.getItem("token");
     try {
-      setIsFetching(true)
+      setIsFetching(true);
       const response = await axios.post(
         "/api/user/cart",
         {
@@ -58,7 +58,6 @@ const CartProvider = ({ children }) => {
           },
         }
       );
-      setIsFetching(false)
       if (response.status === 201) {
         setToastVal((prevVal) => ({
           ...prevVal,
@@ -75,19 +74,21 @@ const CartProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+    finally{
+      setIsFetching(false);
+    }
   };
   const removeFromCartHandler = async (_id, qty) => {
     const encodedToken = localStorage.getItem("token");
     try {
-      setIsFetching(true)
+      setIsFetching(true);
       const response = await axios.delete(`/api/user/cart/${_id}`, {
         headers: {
           authorization: encodedToken,
         },
       });
-      setIsFetching(false)
+    
       if (response.status === 200) {
-        // setCartCount((count) => count - qty);
         setToastVal((prevVal) => ({
           ...prevVal,
           bg: "red",
@@ -98,17 +99,24 @@ const CartProvider = ({ children }) => {
           () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
           1500
         );
-        cartDispatch({ type: "REMOVE_FROM_CART", payload: response.data.cart ,qty:qty});
+        cartDispatch({
+          type: "REMOVE_FROM_CART",
+          payload: response.data.cart,
+          qty: qty,
+        });
       }
     } catch (err) {
       console.log(err);
+    }
+     finally{
+      setIsFetching(false);
     }
   };
 
   const productQtyIncreaseHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
-      setIsFetching(true)
+      setIsFetching(true);
       const response = await axios.post(
         `/api/user/cart/${_id}`,
         {
@@ -122,18 +130,23 @@ const CartProvider = ({ children }) => {
           },
         }
       );
-      setIsFetching(false)
       if (response.status === 200) {
-        cartDispatch({ type: "INCREASE_CART_ITEM", payload: response.data.cart });
+        cartDispatch({
+          type: "INCREASE_CART_ITEM",
+          payload: response.data.cart,
+        });
       }
     } catch (err) {
       console.log(err);
+    }
+    finally{
+      setIsFetching(false);
     }
   };
   const productQtyDecreaseHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
     try {
-      setIsFetching(true)
+      setIsFetching(true);
       const response = await axios.post(
         `/api/user/cart/${_id}`,
         {
@@ -147,12 +160,17 @@ const CartProvider = ({ children }) => {
           },
         }
       );
-      setIsFetching(false)
       if (response.status === 200) {
-        cartDispatch({ type: "DECREASE_CART_ITEM", payload: response.data.cart });
+        cartDispatch({
+          type: "DECREASE_CART_ITEM",
+          payload: response.data.cart,
+        });
       }
     } catch (err) {
       console.log(err);
+    }
+    finally{
+      setIsFetching(false);
     }
   };
   const total = cartState.cartData.reduce(
@@ -180,10 +198,22 @@ const CartProvider = ({ children }) => {
         : setCouponDiscount((disc) => ({ ...disc, selected: false }));
     }
   }, [total]);
-
-  const truncateCart = () =>{
-    cartDispatch({type:"TRUNCATE"})
-  }
+  const clearCartAtServer = async () => {
+    const encodedToken = localStorage.getItem("token");
+    try {
+      const response = await axios.delete("/api/user/cart/all", {
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response.status === 200) {
+        cartDispatch({ type: "TRUNCATE" });
+        return response.data;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <CartContext.Provider
@@ -198,8 +228,9 @@ const CartProvider = ({ children }) => {
         setModalOpen,
         couponDiscount,
         setCouponDiscount,
-        truncateCart,
-        isFetching
+
+        isFetching,
+        clearCartAtServer,
       }}
     >
       {children}

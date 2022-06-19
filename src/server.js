@@ -3,12 +3,14 @@ import { v4 as uuid } from "uuid";
 import {
   loginHandler,
   signupHandler,
+  verifyUser
 } from "./backend/controllers/AuthController";
 import {
   addItemToCartHandler,
   getCartItemsHandler,
   removeItemFromCartHandler,
   updateCartItemHandler,
+  clearCartHandler,
 } from "./backend/controllers/CartController";
 import {
   getAllCategoriesHandler,
@@ -52,6 +54,7 @@ export function makeServer({ environment = "development" } = {}) {
       wishlist: Model,
       carousel: Model,
       address: Model,
+      orders: Model,
     },
 
     // Runs on the start of the server
@@ -91,6 +94,7 @@ export function makeServer({ environment = "development" } = {}) {
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
+      this.post("/auth/verify", verifyUser.bind(this));
 
       // products routes (public)
       this.get("/products", getAllProductsHandler.bind(this));
@@ -112,6 +116,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/cart/:productId",
         removeItemFromCartHandler.bind(this)
       );
+      this.delete("/user/cart/all", clearCartHandler.bind(this));
 
       // wishlist routes (private)
       this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
@@ -126,6 +131,7 @@ export function makeServer({ environment = "development" } = {}) {
    this.post("/user/address", addAddressHandler.bind(this));
    this.post("/user/address/:addressId", updateAddressHandler.bind(this));
    this.delete("/user/address/:addressId", removeAddressHandler.bind(this));
+
     },
   });
 }
