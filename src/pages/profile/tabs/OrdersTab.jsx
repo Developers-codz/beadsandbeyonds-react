@@ -19,13 +19,13 @@ const reversedOrders = orders.reverse()
           {reversedOrders.map((order) => {
             const {firstname,lastname,street,city,state,country,pincode,phone} = order.deliveryAddress
             return (
-              <div className="centered vertical-direction no-order-wrapper">
-                <div className="text-success mb-lg">Order Confirmed</div>
-                <div className="mb-lg">
+              <div className="centered vertical-direction order-wrapper">
+                <div className="text-success">Order Confirmed</div>
+                <div className="mb-lg text-secondary payment-text">
                   Payment Id: <span>{order?.paymentId}</span>
                 </div>
                 <div className="text-success">Delivery Address</div>
-                <div className='margin-lg' >
+                <div className='margin-lg text-secondary' >
               <div>  {firstname} {lastname}</div>
               <div>{street}</div>
               <div>{city}, {state} {country}, {pincode}</div>

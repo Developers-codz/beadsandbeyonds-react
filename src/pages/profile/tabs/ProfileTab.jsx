@@ -19,13 +19,13 @@ export const ProfileTab = () => {
         <th>Account Details</th>
         </div>
       </tr>
-      <tr>
+      <tr className="text-secondary">
         <td>
           Name:
         </td>
         <td>{firstName}{" "}{lastName}</td>
       </tr>
-      <tr>
+      <tr className="text-secondary">
         <td>Email:</td>
         <td>{email}</td>
       </tr>
