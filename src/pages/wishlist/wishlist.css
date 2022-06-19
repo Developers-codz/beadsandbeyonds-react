@@ -60,6 +60,7 @@
   opacity: 0.8;
   text-align: center;
   border: 2px solid transparent;
+  white-space: nowrap;
 }
 
 .btn-to-cart:hover,
@@ -83,4 +84,9 @@
 .btn-to-product-wrapper {
   height: 25vh;
   margin: 2rem auto;
+}
+@media only screen and  (max-width:768px){
+  .btn-to-cart{
+    padding: 0.5rem;
+  }
 }

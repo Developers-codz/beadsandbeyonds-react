@@ -54,7 +54,6 @@ const WishlistProvider = ({ children }) => {
           },
         }
       );
-      setDisabled(false)
       if (response.status === 201) {
         setToastVal((prevVal) => ({
           ...prevVal,
@@ -74,6 +73,9 @@ const WishlistProvider = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+    finally{
+      setDisabled(false)
+    }
   };
   const removeFromWishlistHandler = async (_id) => {
     const encodedToken = localStorage.getItem("token");
@@ -84,7 +86,6 @@ const WishlistProvider = ({ children }) => {
           authorization: encodedToken,
         },
       });
-      setDisabled(false)
       if (response.status === 200) {
         setToastVal((prevVal) => ({
           ...prevVal,
@@ -103,6 +104,9 @@ const WishlistProvider = ({ children }) => {
       }
     } catch (err) {
       console.log(err);
+    }
+    finally{
+      setDisabled(false)
     }
   };
 
