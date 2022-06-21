@@ -46,7 +46,7 @@ const Carousel = () => {
                     <img
                       src={item.image}
                       alt="painting"
-                      className="img-responsive"
+                      className="responsive-img"
                     />
                   </div>
                   <div className="right-pane centered vertical-direction">
