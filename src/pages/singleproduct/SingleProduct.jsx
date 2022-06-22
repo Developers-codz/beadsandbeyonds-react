@@ -4,7 +4,6 @@ import { useProduct } from "context/product-context";
 import { FastDelivery, InStock, ReturnPolicy } from "assets/icons";
 import { Toast } from "component";
 import { useCart } from "context/cart-context";
-import { useToast } from "context/toast-context";
 import { Link } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
 
@@ -24,7 +23,11 @@ export const SingleProduct = () => {
 
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   const clickHandler = (product) => {
+    const token = localStorage.getItem("token")
+    if(token)
     addToCartHandler(product);
+    else 
+    navigate("/login")
   };
 
   return (
