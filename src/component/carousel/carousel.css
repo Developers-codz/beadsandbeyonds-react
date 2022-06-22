@@ -34,4 +34,22 @@
 }
 .responsive-img {
   object-fit: cover;
+  width:50rem;
+  height:65vh;
+  margin-top: 1rem;
+}
+@media only screen and (max-width:1000px){
+  .responsive-img{
+    width:30rem;
+  }
+}
+@media only screen and (max-width:768px) {
+  .carousel{
+    height:70vh
+  }
+  .responsive-img{
+    width:100%;
+    height:40vh
+  }
+  
 }

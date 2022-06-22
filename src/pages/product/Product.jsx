@@ -53,9 +53,10 @@ const Product = () => {
         >
             <div className="price-section">
             <h4 className="mb-lg">PRICE</h4>
+            <div>Rs 99 to Rs {state.price}</div>
             <input
               type="range"
-              min="10"
+              min="99"
               max="1000"
               value={state.price}
               className="slider"
@@ -179,7 +180,7 @@ const Product = () => {
        
         </div>
       </div>
-      <div className="shopping-wrapper centered">
+      <div className="shopping-wrapper">
         <Toast />
         {searchedData.map((item) => {
           return (

@@ -11,7 +11,7 @@ const Footer = () => {
             <a
               className="footer-link"
               target="_blank"
-              href="httlps://github.com/developers-codz"
+              href="https://github.com/developers-codz"
             >
               <i className="fab fa-github fa-lg"></i>
             </a>

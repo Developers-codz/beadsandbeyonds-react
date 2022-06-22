@@ -214,7 +214,9 @@ const CartProvider = ({ children }) => {
       console.log(err);
     }
   };
-
+const truncateCart = async () =>{
+  cartDispatch({ type: "TRUNCATE" });
+}
   return (
     <CartContext.Provider
       value={{
@@ -227,8 +229,8 @@ const CartProvider = ({ children }) => {
         isModalOpen,
         setModalOpen,
         couponDiscount,
+        truncateCart,
         setCouponDiscount,
-
         isFetching,
         clearCartAtServer,
       }}

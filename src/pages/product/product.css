@@ -137,6 +137,14 @@ input[type="checkbox"] {
 }
 
 
+@media only screen and (max-width: 1320px) {
+  .shopping-wrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
 @media only screen and (max-width: 768px) {
   .main {
     grid-template-columns: repeat(4, 1fr);
@@ -145,6 +153,7 @@ input[type="checkbox"] {
       "shop shop shop shop";
 
   }
+
 
   .filters-wrapper {
     position: relative;
