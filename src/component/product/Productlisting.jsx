@@ -45,8 +45,10 @@ const Productlisting = ({ product }) => {
       </Link>
       <div className="card-textarea">
         <div className="left-pane evenly-padding-sm">
+        <Link to={`/products/${product._id}`} className="decor-none">
           <h2 className="card-heading">{product.name}</h2>
           <p className="text-secondary">{product.description}</p>
+          </Link>
           <div className="stars">
             <span className="font4">
               {product.ratings}{" "}

@@ -30,13 +30,16 @@ const Category = () => {
               }
               style={{ display: "inline-block" }}
             >
-              <Link to={`/products#${item.categoryName}`}>
+              <Link to={`/products#${item.categoryName}`} className="decor-none">
+                <div className="category-card">
                 <img
                   src={item.image}
                   alt={item.name}
                   key={item._id}
                   className="border-square category-item"
                 />
+                <div className="category-name font3">{item.categoryName.toUpperCase()}</div>
+                </div>
               </Link>
             </div>
           );
