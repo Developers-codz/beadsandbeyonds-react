@@ -179,7 +179,7 @@ const Product = () => {
        
         </div>
       </div>
-      <div className="shopping-wrapper centered">
+      <div className="shopping-wrapper">
         <Toast />
         {searchedData.map((item) => {
           return (

@@ -36,6 +36,7 @@
   object-fit: cover;
   width:50rem;
   height:65vh;
+  margin-top: 1rem;
 }
 @media only screen and (max-width:1000px){
   .responsive-img{
