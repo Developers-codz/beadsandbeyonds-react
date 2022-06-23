@@ -56,5 +56,4 @@ describe("testing product filters" ,()=>{
         }
         expect(state).toEqual(expectedState)
     })
-
 })

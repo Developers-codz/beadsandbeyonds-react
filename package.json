@@ -26,6 +26,16 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest":{
+     "collectCoverageFrom" :[
+      "src/reducer/*"
+     ],
+     "coverageThreshold":{
+       "global":{
+         "lines":20
+       }
+     }
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
