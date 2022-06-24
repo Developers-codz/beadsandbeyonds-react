@@ -59,9 +59,9 @@ const Productlisting = ({ product }) => {
           </div>
           <p className="item-price font3">₹{product.price}</p>
           {isInCartList(product._id) ? (
-            <Link to="/cart" className="move-to-cart-btn-wrapper">
-              <button className="reset btn-to-cart cartBtn">Go to cart</button>
-            </Link>
+            <div className="move-to-cart-btn-wrapper">
+              <button onClick={()=>navigate("/cart")} className="reset btn-to-cart cartBtn">Go to cart</button>
+            </div>
           ) : (
             <div className="move-to-cart-btn-wrapper">
               <button
@@ -73,17 +73,7 @@ const Productlisting = ({ product }) => {
             </div>
           )}
         </div>
-        <button className="wishlist-icon"  disabled={isDisabled}>
-
-        <i
-       
-          className={classNames(
-            "fa-heart fa-lg evenly-padding-sm card-icon border-round text-primary ",
-            { far: liked },
-            { fa: isInWishList(product._id) },
-            { fa: liked === false }
-            )}
-            
+        <button className="wishlist-icon"  disabled={isDisabled}
           onClick={() => {
             const token = localStorage.getItem("token")
             if (isInWishList(product._id)) {
@@ -95,6 +85,15 @@ const Productlisting = ({ product }) => {
             if(!token) navigate("/login")
             }
           }}
+        >
+        <i
+       
+          className={classNames(
+            "fa-heart fa-lg  card-icon border-round text-primary heart-icon",
+            { far: liked },
+            { fa: isInWishList(product._id) },
+            { fa: liked === false }
+            )}
         ></i>
         </button>
       </div>

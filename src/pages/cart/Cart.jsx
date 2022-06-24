@@ -22,7 +22,7 @@ const Cart = () => {
   return cartData.length === 0 ? (
     <>
       <Toast />
-      <div style={{ textAlign: "center" }}>
+      <div className="wishlist-head-wrapper center-text">
         <h1>Oops, Your Cart is Empty ☹️</h1>
         <img src={shoppingImage} />
         <div className="btn-to-product-wrapper">

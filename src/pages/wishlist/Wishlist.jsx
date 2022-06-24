@@ -78,7 +78,7 @@ const Wishlist = () => {
     return (
       <>
         <Toast />
-        <div style={{ textAlign: "center" }}>
+        <div className="wishlist-head-wrapper center-text">
           <h1>Oops, Your WishList is Empty ☹️</h1>
           <img src={shoppingImage} />
           <div className="btn-to-product-wrapper">
