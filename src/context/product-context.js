@@ -6,20 +6,13 @@ import {
   useReducer,
 } from "react";
 import axios from "axios";
-import { productReducer } from "reducer";
+import { productReducer,initProductState } from "reducer";
 
 const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [productList, setProductList] = useState([]);
-  const [state, dispatch] = useReducer(productReducer, {
-    sortBy: null,
-    categoryBy: [],
-    ratings: 2,
-    clear: null,
-    price:1000,
-    searchText:""
-  });
+  const [state, dispatch] = useReducer(productReducer, initProductState);
   useEffect(async () => {
     const res = await axios.get("/api/products");
     setProductList(res.data.products);

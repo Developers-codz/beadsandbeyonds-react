@@ -1,3 +1,11 @@
+export const initProductState = {
+  sortBy: null,
+  categoryBy: [],
+  ratings: 2,
+  clear: null,
+  price:1000,
+  searchText:""
+}
 const productReducer = (state, action) => {
   switch (action.type) {
     case "SORT": {
