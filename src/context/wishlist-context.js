@@ -8,7 +8,6 @@ const WishlistProvider = ({ children }) => {
     wishlistData: [],
     wishCount: 0,
   });
-  const [isDisabled,setDisabled] = useState(false)
   const { setToastVal } = useToast();
 
   const encodedToken = localStorage.getItem("token");
@@ -34,7 +33,7 @@ const WishlistProvider = ({ children }) => {
     }
   }, [encodedToken]);
 
-  const addToWishlistHandler = async (item) => {
+  const addToWishlistHandler = async (item,setDisabled) => {
     const encodedToken = localStorage.getItem("token");
     const isinWish = wishlistState.wishlistData.find(wishlist => wishlist._id === item._id)
 
@@ -77,7 +76,7 @@ const WishlistProvider = ({ children }) => {
       setDisabled(false)
     }
   };
-  const removeFromWishlistHandler = async (_id) => {
+  const removeFromWishlistHandler = async (_id,setDisabled) => {
     const encodedToken = localStorage.getItem("token");
     try {
       setDisabled(true)
@@ -120,7 +119,6 @@ const WishlistProvider = ({ children }) => {
         addToWishlistHandler,
         removeFromWishlistHandler,
         truncateWish,
-        isDisabled
       }}
     >
       {children}

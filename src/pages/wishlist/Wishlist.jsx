@@ -1,4 +1,5 @@
 import "./wishlist.css";
+import { useState } from "react";
 import { useWishlist } from "context/wishlist-context";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
@@ -8,19 +9,19 @@ import { Toast } from "component";
 
 const Wishlist = () => {
   useDocumentTitle("WishList");
+  const [isDisabled,setDisabled] = useState(false)
+  const [isCartBtnDisabled,setCartBtnDisabled] = useState(false)
   const {
-    wishlistState: { wishlistData,wishCount },
+    wishlistState: { wishlistData, wishCount },
     removeFromWishlistHandler,
-    isDisabled
   } = useWishlist();
   const {
     cartState: { cartData },
     addToCartHandler,
-    isFetching
   } = useCart();
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   const clickHandler = (product) => {
-    addToCartHandler(product);
+    addToCartHandler(product,setCartBtnDisabled);
   };
   if (wishlistData.length > 0) {
     return (
@@ -40,12 +41,12 @@ const Wishlist = () => {
                   className="wishlist-img"
                 />
                 <div className="del-btn">
-                  <button disabled={isDisabled} className="rm-wishlist-icon">
-
-                  <i
-                    onClick={() => removeFromWishlistHandler(item._id)}
-                    className="fa fa-trash"
-                  ></i>
+                  <button
+                    disabled={isDisabled}
+                    className="rm-wishlist-icon"
+                    onClick={() => removeFromWishlistHandler(item._id,setDisabled)}
+                  >
+                    <i className="fa fa-trash"></i>
                   </button>
                 </div>
                 <h2 className="card-heading ">{item.name}</h2>
@@ -60,7 +61,8 @@ const Wishlist = () => {
                       <button className="reset btn-to-cart">Go to cart</button>
                     </Link>
                   ) : (
-                    <button disabled={isFetching}
+                    <button
+                      disabled={isCartBtnDisabled}
                       className="reset btn-to-cart"
                       onClick={() => clickHandler(item)}
                     >

@@ -17,7 +17,7 @@ const Cart = () => {
     setModalOpen,
     couponDiscount: { discount },
   } = useCart();
-  const { addToWishlistHandler } = useWishlist();
+  const { addToWishlistHandler,isDisabled } = useWishlist();
   
   return cartData.length === 0 ? (
     <>
@@ -69,7 +69,7 @@ const Cart = () => {
                 </div>
                 <button
                   className="wishlist-btn"
-                  disabled={isFetching}
+                  disabled={isDisabled}
                   onClick={() => {
                     addToWishlistHandler(item);
                     removeFromCartHandler(item._id, item.qty);

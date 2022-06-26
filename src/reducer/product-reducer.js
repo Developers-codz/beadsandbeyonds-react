@@ -13,6 +13,7 @@ const productReducer = (state, action) => {
     }
     case "FILTER": {
       console.log(action.payload)
+      console.log(state.categoryBy)
       if (state.categoryBy.find((item) => item === action.payload))
       return { ...state,categoryBy: [...state.categoryBy.filter((i) => i != action.payload) ]};
       else

@@ -9,20 +9,19 @@ const Productlisting = ({ product }) => {
   const {
     authState: { isAuthTokenPresent },
   } = useAuth();
-  const { setToastVal } = useToast();
+  const [isDisabled,setDisabled] = useState(false)
+  const [isCartBtnDisabled,setCartBtnDisabled] = useState(false)
   const [liked, setLiked] = useState(true);
   const navigate = useNavigate()
 
   const {
     addToCartHandler,
     cartState: { cartData },
-    isFetching
   } = useCart();
   const {
     wishlistState: { wishlistData },
     addToWishlistHandler,
     removeFromWishlistHandler,
-    isDisabled
   } = useWishlist();
   const isInWishList = (id) => wishlistData.find(({ _id }) => _id == id);
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
@@ -30,7 +29,7 @@ const Productlisting = ({ product }) => {
 
   const clickHandler = (e, product) => {
     const token = localStorage.getItem("token")
-    if(token) addToCartHandler(product);
+    if(token) addToCartHandler(product,setCartBtnDisabled);
     else navigate("/login")
   };
 
@@ -65,7 +64,7 @@ const Productlisting = ({ product }) => {
           ) : (
             <div className="move-to-cart-btn-wrapper">
               <button
-                className="reset btn-to-cart cartBtn" disabled={isFetching}
+                className="reset btn-to-cart cartBtn" disabled={isCartBtnDisabled}
                 onClick={(e) => clickHandler(e, product)}
               >
                 Add to cart
@@ -78,10 +77,10 @@ const Productlisting = ({ product }) => {
             const token = localStorage.getItem("token")
             if (isInWishList(product._id)) {
               if(token) setLiked(true);
-              removeFromWishlistHandler(product._id);
+              removeFromWishlistHandler(product._id,setDisabled);
             } else {
               if(token) setLiked(false);
-             addToWishlistHandler(product);
+             addToWishlistHandler(product,setDisabled);
             if(!token) navigate("/login")
             }
           }}

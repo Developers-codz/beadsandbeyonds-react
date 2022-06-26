@@ -30,7 +30,7 @@ const Category = () => {
               }
               style={{ display: "inline-block" }}
             >
-              <Link to={`/products#${item.categoryName}`} className="decor-none">
+              <Link to={`/products`} className="decor-none">
                 <div className="category-card">
                 <img
                   src={item.image}
