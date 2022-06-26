@@ -1,9 +1,12 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { useProduct } from "context/product-context";
+import { CategoryList } from "./CategoryList";
 
 export const Filters = () => {
-    const [filter, setFilter] = useState(false);
+const [filter, setFilter] = useState(false);
 const { state, dispatch } = useProduct();
+const categoriesArr = ["painting","decorations","toys","home"]
+
 
   return (
     <>
@@ -52,58 +55,10 @@ const { state, dispatch } = useProduct();
 
           <div className="category-section">
             <h4 className="mb-lg">CATEGORY</h4>
-            <div className="sort-by-category">
-              <input
-                type="checkbox"
-                name="category"
-                id="painting"
-                value="painting"
-                checked={state.categoryBy.find((cat) => cat === "painting")}
-                onClick={(e) =>
-                  dispatch({ type: "FILTER", payload: e.target.value })
-                }
-              />
-              <label htmlFor="painting">Paintings</label>
-            </div>
-            <div className="sort-by-category">
-              <input
-                type="checkbox"
-                name="category"
-                id="decoration"
-                value="decorations"
-                checked={state.categoryBy.find((cat) => cat === "decorations")}
-                onClick={(e) =>
-                  dispatch({ type: "FILTER", payload: e.target.value })
-                }
-              />
-              <label htmlFor="decoration">Decorations</label>
-            </div>
-            <div className="sort-by-category">
-              <input
-                type="checkbox"
-                name="category"
-                id="toys"
-                value="toys"
-                checked={state.categoryBy.find((cat) => cat === "toys")}
-                onClick={(e) =>
-                  dispatch({ type: "FILTER", payload: e.target.value })
-                }
-              />
-              <label htmlFor="toys">Toys</label>
-            </div>
-            <div className="sort-by-category">
-              <input
-                type="checkbox"
-                name="category"
-                id="home-decor"
-                value="home"
-                checked={state.categoryBy.find((cat) => cat === "home")}
-                onClick={(e) =>
-                  dispatch({ type: "FILTER", payload: e.target.value })
-                }
-              />
-              <label htmlFor="home-decor">Home Decors</label>
-            </div>
+           {categoriesArr.map((category,i )=>  (
+               <CategoryList category={category} key={i}/>
+           ))}
+        
           </div>
           <hr />
           <div className="rating-section">

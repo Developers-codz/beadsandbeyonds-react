@@ -23,10 +23,13 @@ const Category = () => {
           return (
             <div
               onClick={() =>
-                dispatch({
+               { dispatch({ type: "CLEAR", payload: "CLEAR_ALL_FILTER" })
+                 dispatch({
                   type: "FILTER",
                   payload: `${item.categoryName}`,
-                })
+                });
+                
+              }
               }
               style={{ display: "inline-block" }}
             >

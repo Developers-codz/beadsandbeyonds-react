@@ -102,7 +102,7 @@ export const products = [
   },
   {
     _id: "6d511572-5acd-44fa-ba1c-5d5f75753e0e",
-    name: "Horse Framed Wall Art",
+    name: "Horse Framed Art",
     image: item9,
     ratings: 5,
     price: 699,
