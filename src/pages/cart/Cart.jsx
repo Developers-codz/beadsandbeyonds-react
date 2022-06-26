@@ -1,4 +1,5 @@
 import "./cart.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
@@ -17,7 +18,8 @@ const Cart = () => {
     setModalOpen,
     couponDiscount: { discount },
   } = useCart();
-  const { addToWishlistHandler,isDisabled } = useWishlist();
+  const { addToWishlistHandler } = useWishlist();
+  const [isDisabled,setDisabled] = useState(false)
   
   return cartData.length === 0 ? (
     <>
@@ -71,7 +73,7 @@ const Cart = () => {
                   className="wishlist-btn"
                   disabled={isDisabled}
                   onClick={() => {
-                    addToWishlistHandler(item);
+                    addToWishlistHandler(item,setDisabled);
                     removeFromCartHandler(item._id, item.qty);
                   }}
                 >
