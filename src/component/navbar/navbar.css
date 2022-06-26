@@ -17,9 +17,11 @@ box-shadow: -4px 15px 6px -15px rgba(0,0,0,0.75);
   text-align: start;
 }
 .header-logo {
-  color: var(--primary);
   padding-bottom: 0;
   margin-bottom: 0;
+}
+.header-logo > * {
+  color: var(--primary);
 }
 .slogan {
   padding-top: 0;

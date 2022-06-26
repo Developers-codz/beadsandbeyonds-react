@@ -38,7 +38,7 @@ const Navbar = () => {
           <i className="fa fa-bars fa-2x"></i>
         </div>
         <div className="logo">
-          <h1 className="header-logo">Beads & Beyonds....</h1>
+          <h1 className="header-logo"><Link to="/" className="decor-none">Beads & Beyonds....</Link></h1>
           <small className="slogan">Decorate your world with us</small>
         </div>
         <div className="mr-auto page-link-wrapper font3">
