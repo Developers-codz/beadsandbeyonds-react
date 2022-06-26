@@ -1,2 +1,3 @@
 import shoppingImage from "./shopping.svg";
-export { shoppingImage };
+import  noProduct  from "./noProduct.svg";
+export { shoppingImage,noProduct };

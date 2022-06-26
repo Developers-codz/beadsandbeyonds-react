@@ -146,6 +146,9 @@ input[type="checkbox"] {
   padding:0 .5rem;
 
 }
+.no-product-wrapper{
+  height: 50vh;
+}
 
 
 @media only screen and (max-width: 1320px) {
@@ -182,5 +185,8 @@ input[type="checkbox"] {
   .show-filter-body {
     transform: translateY(-1rem);
     transition: all 500ms linear;
+  }
+  .no-product-wrapper{
+    height: 54vh;
   }
 }
