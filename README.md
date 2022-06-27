@@ -21,38 +21,31 @@ This website is a open source website. This repository is all about how I made t
 
 ## features
 
-1. This website is completely responsive
-2. Have simple but elegant design
-3. Have login and sign up functionality
-4. Have protected and public routes
-5. Have single product page
-6. Have add to wishlist and cart functionality 
-7. Have remove from wishlist and cart functionality
-8. Can increase and decrease the items quantity 
-9. user friendly message using toast implementation
-10. profile page
+1. Cart Management
+2. Wishlist Management
+3. Product Listing page with several filters and sort by price
+4. Search implementation with debounce
+5. Single Product Page
+6. Login signup facility with User persistence 
+7. Apply coupon 
+8. Address management
+9. Payment integration through Razorpay 
+10. Image magnifier for product 
+11. Profile page with order and address tab
+12. completely responsive
+
+
+## Live 
+
+
+https://user-images.githubusercontent.com/50793296/175877184-4caded42-ba08-4780-ba20-91b71b292f39.mp4
+
+
 
 ## Visit the website here
 
-## [Beads & beyonds](https://beads-and-beyonds.netlify.app/)
+## [Beads & beyonds](https://beadsandbeyonds.vercel.app/)
 
-## New Updates
-
-Some newly feature added are as follows- 
-1. Single Product page
-2. Product Magnifies like Amazon products in single product page using react-image-magnify
-3. Discount coupon modal with functionality 
-4. Some improvement in auth, now after login user will be redirected to page where he/she was going
-
-## Can be checked here
-
-## [Beads & beyonds updated link](https://beadsandbeyondsupdated.netlify.app/)
-
-## ScreenShots
-
-![Screenshot_2022-04-26_22-57-17](https://user-images.githubusercontent.com/50793296/165358274-a4b0f7c9-ffc6-45de-8dfe-3aa5482139af.png)
-
-![Screenshot_2022-04-26_22-57-55](https://user-images.githubusercontent.com/50793296/165358305-a7516241-8583-425c-b2b1-2663e799030d.png)
 
 
 ## Connect
