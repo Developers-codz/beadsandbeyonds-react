@@ -1,5 +1,4 @@
 import "./wishlist.css";
-import { useState } from "react";
 import { useWishlist } from "context/wishlist-context";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
