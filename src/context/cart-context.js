@@ -43,10 +43,10 @@ const CartProvider = ({ children }) => {
     }
   }, [encodedToken]);
 
-  const addToCartHandler = async (item) => {
+  const addToCartHandler = async (item,setCartBtnDisabled) => {
     const encodedToken = localStorage.getItem("token");
     try {
-      setIsFetching(true);
+      setCartBtnDisabled(true);
       const response = await axios.post(
         "/api/user/cart",
         {
@@ -75,7 +75,7 @@ const CartProvider = ({ children }) => {
       console.log(err);
     }
     finally{
-      setIsFetching(false);
+      setCartBtnDisabled(false);
     }
   };
   const removeFromCartHandler = async (_id, qty) => {

@@ -9,20 +9,19 @@ const Productlisting = ({ product }) => {
   const {
     authState: { isAuthTokenPresent },
   } = useAuth();
-  const { setToastVal } = useToast();
+  const [isDisabled,setDisabled] = useState(false)
+  const [isCartBtnDisabled,setCartBtnDisabled] = useState(false)
   const [liked, setLiked] = useState(true);
   const navigate = useNavigate()
 
   const {
     addToCartHandler,
     cartState: { cartData },
-    isFetching
   } = useCart();
   const {
     wishlistState: { wishlistData },
     addToWishlistHandler,
     removeFromWishlistHandler,
-    isDisabled
   } = useWishlist();
   const isInWishList = (id) => wishlistData.find(({ _id }) => _id == id);
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
@@ -30,7 +29,7 @@ const Productlisting = ({ product }) => {
 
   const clickHandler = (e, product) => {
     const token = localStorage.getItem("token")
-    if(token) addToCartHandler(product);
+    if(token) addToCartHandler(product,setCartBtnDisabled);
     else navigate("/login")
   };
 
@@ -59,13 +58,13 @@ const Productlisting = ({ product }) => {
           </div>
           <p className="item-price font3">₹{product.price}</p>
           {isInCartList(product._id) ? (
-            <Link to="/cart" className="move-to-cart-btn-wrapper">
-              <button className="reset btn-to-cart cartBtn">Go to cart</button>
-            </Link>
+            <div className="move-to-cart-btn-wrapper">
+              <button onClick={()=>navigate("/cart")} className="reset btn-to-cart cartBtn">Go to cart</button>
+            </div>
           ) : (
             <div className="move-to-cart-btn-wrapper">
               <button
-                className="reset btn-to-cart cartBtn" disabled={isFetching}
+                className="reset btn-to-cart cartBtn" disabled={isCartBtnDisabled}
                 onClick={(e) => clickHandler(e, product)}
               >
                 Add to cart
@@ -73,28 +72,27 @@ const Productlisting = ({ product }) => {
             </div>
           )}
         </div>
-        <button className="wishlist-icon"  disabled={isDisabled}>
-
-        <i
-       
-          className={classNames(
-            "fa-heart fa-lg evenly-padding-sm card-icon border-round text-primary ",
-            { far: liked },
-            { fa: isInWishList(product._id) },
-            { fa: liked === false }
-            )}
-            
+        <button className="wishlist-icon"  disabled={isDisabled}
           onClick={() => {
             const token = localStorage.getItem("token")
             if (isInWishList(product._id)) {
               if(token) setLiked(true);
-              removeFromWishlistHandler(product._id);
+              removeFromWishlistHandler(product._id,setDisabled);
             } else {
               if(token) setLiked(false);
-             addToWishlistHandler(product);
+             addToWishlistHandler(product,setDisabled);
             if(!token) navigate("/login")
             }
           }}
+        >
+        <i
+       
+          className={classNames(
+            "fa-heart fa-lg  card-icon border-round text-primary heart-icon",
+            { far: liked },
+            { fa: isInWishList(product._id) },
+            { fa: liked === false }
+            )}
         ></i>
         </button>
       </div>

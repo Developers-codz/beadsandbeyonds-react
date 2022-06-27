@@ -34,7 +34,7 @@ export const SingleProduct = () => {
     <>
       <Toast />
       <div className="shadow-box product_wrapper">
-        <div className="image_wrapper ">
+        <div className="image_wrapper">
           <ReactImageMagnify
             {...{
               smallImage: {

@@ -1,3 +1,11 @@
+export const initProductState = {
+  sortBy: null,
+  categoryBy: [],
+  ratings: 2,
+  clear: null,
+  price:1000,
+  searchText:""
+}
 const productReducer = (state, action) => {
   switch (action.type) {
     case "SORT": {
@@ -5,6 +13,7 @@ const productReducer = (state, action) => {
     }
     case "FILTER": {
       console.log(action.payload)
+      console.log(state.categoryBy)
       if (state.categoryBy.find((item) => item === action.payload))
       return { ...state,categoryBy: [...state.categoryBy.filter((i) => i != action.payload) ]};
       else

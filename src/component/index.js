@@ -9,3 +9,6 @@ export { NonAuthenticatedRoute } from "./NonAuthenticatedRoute";
 export { Toast } from "./toast/Toast";
 export {Modal} from "./modal/Modal";
 export {AddressModal} from "./modal/AddressModal";
+export {Filters} from "./filters/Filters"
+export {Loader} from "./loader/Loader"
+export {WishlistCard} from "./card/WishlistCard"

@@ -1,4 +1,5 @@
 import "./cart.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
 import { shoppingImage } from "assets/svgs";
@@ -18,11 +19,12 @@ const Cart = () => {
     couponDiscount: { discount },
   } = useCart();
   const { addToWishlistHandler } = useWishlist();
+  const [isDisabled,setDisabled] = useState(false)
   
   return cartData.length === 0 ? (
     <>
       <Toast />
-      <div style={{ textAlign: "center" }}>
+      <div className="wishlist-head-wrapper center-text">
         <h1>Oops, Your Cart is Empty ☹️</h1>
         <img src={shoppingImage} />
         <div className="btn-to-product-wrapper">
@@ -69,9 +71,9 @@ const Cart = () => {
                 </div>
                 <button
                   className="wishlist-btn"
-                  disabled={isFetching}
+                  disabled={isDisabled}
                   onClick={() => {
-                    addToWishlistHandler(item);
+                    addToWishlistHandler(item,setDisabled);
                     removeFromCartHandler(item._id, item.qty);
                   }}
                 >
