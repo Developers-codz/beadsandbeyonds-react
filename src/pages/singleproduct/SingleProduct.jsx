@@ -1,4 +1,5 @@
 import "./singleproduct.css";
+import {useState} from "react"
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "context/product-context";
 import { FastDelivery, InStock, ReturnPolicy } from "assets/icons";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 import ReactImageMagnify from "react-image-magnify";
 
 export const SingleProduct = () => {
+  const [isFetching, setFetching ]= useState(false);
   const { productList } = useProduct();
   const param = useParams();
   const navigate = useNavigate();
@@ -17,15 +19,14 @@ export const SingleProduct = () => {
 
   const {
     addToCartHandler,
-    cartState: { cartData },
-    isFetching
+    cartState: { cartData }
   } = useCart();
 
   const isInCartList = (id) => cartData.find(({ _id }) => _id == id);
   const clickHandler = (product) => {
     const token = localStorage.getItem("token")
     if(token)
-    addToCartHandler(product);
+    addToCartHandler(product,setFetching);
     else 
     navigate("/login")
   };
