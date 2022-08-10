@@ -47,39 +47,63 @@ export const Checkout = () => {
       };
 
       document.body.appendChild(script);
-      const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY,
-        currency: "INR",
-        amount: totalAmt * 100,
-        name: "Beads and Beyonds",
-        description: "Thanks for shopping with us!",
-        prefill: {
-          name: "Jane Doe",
-          email: "janedoe@gmail.com",
-          contact: "9934567890",
-        },
-        handler: function (response) {
-          const deliveryAddress = addresses.find(
-            ({ _id }) => _id === selectedAddress
-          );
-          setOrders((prev) => [
-            ...prev,
-            {
-              paymentId: response.razorpay_payment_id,
-              deliveryAddress: deliveryAddress,
-            },
-          ]);
-          clearCartAtServer()
-          navigate("/profile/orders");
-        },
-      };
+      // const options = {
+      //   key: process.env.REACT_APP_RAZORPAY_KEY,
+      //   currency: "INR",
+      //   amount: totalAmt * 100,
+      //   name: "Beads and Beyonds",
+      //   description: "Thanks for shopping with us!",
+      //   prefill: {
+      //     name: "Jane Doe",
+      //     email: "janedoe@gmail.com",
+      //     contact: "9934567890",
+      //   },
+      //   handler: function (response) {
+      //     const deliveryAddress = addresses.find(
+      //       ({ _id }) => _id === selectedAddress
+      //     );
+      //     setOrders((prev) => [
+      //       ...prev,
+      //       {
+      //         paymentId: response.razorpay_payment_id,
+      //         deliveryAddress: deliveryAddress,
+      //       },
+      //     ]);
+      //     clearCartAtServer()
+      //     navigate("/profile/orders");
+      //   },
+      // };
 
    
     });
   };
   const razorpayHandler = async () => {
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+    const options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY,
+      currency: "INR",
+      amount: totalAmt * 100,
+      name: "Beads and Beyonds",
+      description: "Thanks for shopping with us!",
+      prefill: {
+        name: "Jane Doe",
+        email: "janedoe@gmail.com",
+        contact: "9934567890",
+      },
+      handler: function (response) {
+        const deliveryAddress = addresses.find(
+          ({ _id }) => _id === selectedAddress
+        );
+        setOrders((prev) => [
+          ...prev,
+          {
+            paymentId: response.razorpay_payment_id,
+            deliveryAddress: deliveryAddress,
+          },
+        ]);
+        clearCartAtServer()
+        navigate("/profile/orders");
+      },
+    };
     if (selectedAddress === "") {
       setToastVal((prevVal) => ({
         ...prevVal,
@@ -100,6 +124,8 @@ export const Checkout = () => {
       console.log("you are offline");
       return;
     }
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
   };
   return (
     <>
