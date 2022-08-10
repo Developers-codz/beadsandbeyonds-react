@@ -47,37 +47,29 @@ export const Checkout = () => {
       };
 
       document.body.appendChild(script);
-      // const options = {
-      //   key: process.env.REACT_APP_RAZORPAY_KEY,
-      //   currency: "INR",
-      //   amount: totalAmt * 100,
-      //   name: "Beads and Beyonds",
-      //   description: "Thanks for shopping with us!",
-      //   prefill: {
-      //     name: "Jane Doe",
-      //     email: "janedoe@gmail.com",
-      //     contact: "9934567890",
-      //   },
-      //   handler: function (response) {
-      //     const deliveryAddress = addresses.find(
-      //       ({ _id }) => _id === selectedAddress
-      //     );
-      //     setOrders((prev) => [
-      //       ...prev,
-      //       {
-      //         paymentId: response.razorpay_payment_id,
-      //         deliveryAddress: deliveryAddress,
-      //       },
-      //     ]);
-      //     clearCartAtServer()
-      //     navigate("/profile/orders");
-      //   },
-      // };
-
-   
     });
   };
   const razorpayHandler = async () => {
+    if (selectedAddress === "") {
+      setToastVal((prevVal) => ({
+        ...prevVal,
+        bg: "red",
+        isOpen: true,
+        msg: "Please select a delivery Address",
+      }));
+      setTimeout(
+        () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
+        1500
+      );
+      return;
+    }
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!res) {
+      console.log("you are offline");
+      return;
+    }
     const options = {
       key: process.env.REACT_APP_RAZORPAY_KEY,
       currency: "INR",
@@ -104,26 +96,6 @@ export const Checkout = () => {
         navigate("/profile/orders");
       },
     };
-    if (selectedAddress === "") {
-      setToastVal((prevVal) => ({
-        ...prevVal,
-        bg: "red",
-        isOpen: true,
-        msg: "Please select a delivery Address",
-      }));
-      setTimeout(
-        () => setToastVal((prevVal) => ({ ...prevVal, isOpen: false })),
-        1500
-      );
-      return;
-    }
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
-    if (!res) {
-      console.log("you are offline");
-      return;
-    }
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
