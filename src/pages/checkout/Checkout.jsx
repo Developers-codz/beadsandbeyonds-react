@@ -74,11 +74,12 @@ export const Checkout = () => {
         },
       };
 
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
+   
     });
   };
   const razorpayHandler = async () => {
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
     if (selectedAddress === "") {
       setToastVal((prevVal) => ({
         ...prevVal,
